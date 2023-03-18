@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+  <link rel="stylesheet" href="CSS/estilos.css">
+</head>
+<body>
+<header>
+  <h1>HOJA DE REQUISITOS</h1>
+</header>
+<table>
+  <tr>
+    <th>Id</th>
+    <td>CU2</td>
+  </tr>
+  <tr>
+    <th>Nombre</th>
+    <td>Registro</td>
+  </tr>
+  <tr>
+    <th>Actores</th>
+    <td>Usuarios</td>
+  </tr>
+  <tr>
+    <th>Descripción</th>
+    <td>El usuario quiere registrarse en la aplicacion</td>
+  </tr>
+  <tr>
+    <th>Precondiciones</th>
+    <td>
+      <ul>
+        <li>El usuario debe de estar en la página de registro de usuario</li>
+        <li>El usuario si tiene una cuenta en la aplicacion no debee de tener ninguna sesion abierta, porque le redirigirá adentro de ella</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <th>Secuencia normal</th>
+    <td>
+      <ol>
+        <li>El usuario se encuentra en la página</li>
+        <li>El usuario introduce las credenciales que se piden:
+          <ul>
+            <li>Usuario</li>
+            <li>Contraseña (2 veces para evitar problemas)</li>
+            <li>Correo electónico</li>
+          </ul>
+        <li>El usuario le da a botón de registrarse</li>
+      </ol>
+    </td>
+  </tr>
+  <tr>
+    <th>Postcondiciones</th>
+    <td>
+      <ul>
+        <li>El usuario es registrado correctamente en la aplicación</li>
+        <li>Se redirigirá al inicio de la aplicación</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <th>Secuencia alternativa</th>
+    <td>
+      <ul>
+        <li>No puede registrar al usuario porque puede haber un fallo en la Base de Datos o en el servidor</li>
+        <li>No puede registrar al usuario porque ya hay uno con:
+          <ul>
+            <li>El mismo nombre de usuario (es únuico)</li>
+            <li>El mismo correo electrónico (es único)</li>
+          </ul>
+        </li>
+        </li>
+      </ul>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

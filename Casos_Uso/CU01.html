@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+  <link rel="stylesheet" href="CSS/estilos.css">
+</head>
+<body>
+<header>
+  <h1>HOJA DE REQUISITOS</h1>
+</header>
+<table>
+  <tr>
+    <th>Id</th>
+    <td>CU1</td>
+  </tr>
+  <tr>
+    <th>Nombre</th>
+    <td>Login</td>
+  </tr>
+  <tr>
+    <th>Actores</th>
+    <td>Usuario</td>
+  </tr>
+  <tr>
+    <th>Descripción</th>
+    <td>El usuario va a iniciar sesión en la aplicacion.</td>
+  </tr>
+  <tr>
+    <th>Precondiciones</th>
+    <td>
+      <ul>
+        <li>El usuario debe saber la página para iniciar sesion</li>
+        <li>El usuario no debe de tener sesiones activas en la aplicacion</li>
+
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <th>Secuencia normal</th>
+    <td>
+      <ol>
+        <li>El usuario debe de encontrarse en la pagina de inicio</li>
+        <li>El usuario se loguea correctamente introduciendo las credenciales:</li>
+        <ul>
+          <li>Usuario</li>
+          <li>Contraseña</li>
+        </ul>
+        <li>El usuario le da al boton de iniciar sesión</li>
+      </ol>
+    </td>
+  </tr>
+  <tr>
+    <th>Postcondiciones</th>
+    <td>
+      <ul>
+        <li>El usuario se loguea correctamente.</li>
+        <li>Se le mostrará la pantalla inicia de la aplicacion.</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <th>Secuencia alternativa</th>
+    <td>
+      <ul>
+        <li>El usuario no acceda porque ha fallado alguna de las credenciales.</li>
+        <li>Haya un fallo en el servidor/basede datos y no pueda conectarse.</li>
+      </ul>
+    </td>
+  </tr>
+</table>
+</body>
+</html>
