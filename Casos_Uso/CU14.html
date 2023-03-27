@@ -14,25 +14,25 @@
 <table>
   <tr>
     <th>Id</th>
-    <td>CU</td>
+    <td>CU14</td>
   </tr>
   <tr>
     <th>Nombre</th>
-    <td></td>
+    <td>Vetar usuarios</td>
   </tr>
   <tr>
     <th>Actores</th>
-    <td></td>
+    <td>Administradores</td>
   </tr>
   <tr>
     <th>Descripción</th>
-    <td></td>
+    <td>Los administradores podrán vetar a los usuarios que no tengan un comportamiento normal en la aplicación</td>
   </tr>
   <tr>
     <th>Precondiciones</th>
     <td>
       <ul>
-        <li> </li>
+        <li>El usuario que queramos vetar no exista o ya este vetado.</li>
       </ul>
     </td>
   </tr>
@@ -40,7 +40,9 @@
     <th>Secuencia normal</th>
     <td>
       <ol>
-        <li><li>
+        <li>Buscamos al usuario que queramos vetar.</li>
+        <li>Entramos en su perfil y le damos al botón de "vetar"</li>
+        <li>Confirmaremos la acción.</li>
       </ol>
     </td>
   </tr>
@@ -48,7 +50,8 @@
     <th>Postcondiciones</th>
     <td>
       <ul>
-        <li></li>
+        <li>El usuario ha sido vetado de la aplicación</li>
+        <li>Cuando quiera entrar ese usuario le saldrá un mensaje de que su cuenta ha sido suspendida temporalmente</li>
       </ul>
     </td>
   </tr>
@@ -56,7 +59,7 @@
     <th>Secuencia alternativa</th>
     <td>
       <ul>
-        <li> </li>
+        <li>No hayamos podido vetar al usuario por temas de permisos o de que ya estaba vetado anteriormente.</li>
       </ul>
     </td>
   </tr>

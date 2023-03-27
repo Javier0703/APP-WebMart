@@ -14,25 +14,25 @@
 <table>
   <tr>
     <th>Id</th>
-    <td>CU</td>
+    <td>CU9</td>
   </tr>
   <tr>
     <th>Nombre</th>
-    <td></td>
+    <td>Comprar producto</td>
   </tr>
   <tr>
     <th>Actores</th>
-    <td></td>
+    <td>Usuarios</td>
   </tr>
   <tr>
     <th>Descripción</th>
-    <td></td>
+    <td>Tendremos la opción de comprar un producto que se encuentre dentro de la app</td>
   </tr>
   <tr>
     <th>Precondiciones</th>
     <td>
       <ul>
-        <li> </li>
+        <li>Que ese producto no este "reservado" para un usuario y que este libre</li>
       </ul>
     </td>
   </tr>
@@ -40,7 +40,10 @@
     <th>Secuencia normal</th>
     <td>
       <ol>
-        <li><li>
+        <li>Buscamos el producto que queremos</li>
+        <li>Contactamos con el dueño de ese artículo si fuese necesario para concretar un precio y método de transporte del mismo</li>
+        <li>Dar al botón de comprar artículo</li>
+        <li>Esperar que el dueño acepte la compra nuestra</li>
       </ol>
     </td>
   </tr>
@@ -48,7 +51,8 @@
     <th>Postcondiciones</th>
     <td>
       <ul>
-        <li></li>
+        <li>El producto será guardado como una compra de ese usuario</li>
+        <li>Se añadirá en el apartado de compras de nuestro perfil</li>
       </ul>
     </td>
   </tr>
@@ -56,7 +60,7 @@
     <th>Secuencia alternativa</th>
     <td>
       <ul>
-        <li> </li>
+        <li>Que no lo podamos comprar porque el producto esté reservado.</li>
       </ul>
     </td>
   </tr>

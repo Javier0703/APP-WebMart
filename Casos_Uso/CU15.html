@@ -14,25 +14,26 @@
 <table>
   <tr>
     <th>Id</th>
-    <td>CU</td>
+    <td>CU15</td>
   </tr>
   <tr>
     <th>Nombre</th>
-    <td></td>
+    <td>Borrar usuarios</td>
   </tr>
   <tr>
     <th>Actores</th>
-    <td></td>
+    <td>Administradores</td>
   </tr>
   <tr>
     <th>Descripción</th>
-    <td></td>
+    <td>Los administradores podrán borrar usuarios de la aplicación. La mayoría de estos son los que se han creado para hacer pruebas de testeo de la app.</td>
   </tr>
   <tr>
     <th>Precondiciones</th>
     <td>
       <ul>
-        <li> </li>
+        <li>Tener permisos de administrador</li>
+        <li>Que el usuario que queramos eliminar no sea administrador (no se puede)</li>
       </ul>
     </td>
   </tr>
@@ -40,7 +41,9 @@
     <th>Secuencia normal</th>
     <td>
       <ol>
-        <li><li>
+        <li>Buscamos el usuario que queramos eliminar</li>
+        <li>Entramos a su perfil y le damos al botón de "Borrar"</li>
+        <li>Confirmamos la acción, ya que es irreversible.</li>
       </ol>
     </td>
   </tr>
@@ -48,7 +51,7 @@
     <th>Postcondiciones</th>
     <td>
       <ul>
-        <li></li>
+        <li>El usuario ha sido borrado correctamente</li>
       </ul>
     </td>
   </tr>
@@ -56,7 +59,7 @@
     <th>Secuencia alternativa</th>
     <td>
       <ul>
-        <li> </li>
+        <li>No podemos borrar un usuario por causas que se han comentado en las precondiciones ( permisos o que es administrador)</li>
       </ul>
     </td>
   </tr>

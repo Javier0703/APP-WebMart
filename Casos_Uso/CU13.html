@@ -14,25 +14,25 @@
 <table>
   <tr>
     <th>Id</th>
-    <td>CU</td>
+    <td>CU13</td>
   </tr>
   <tr>
     <th>Nombre</th>
-    <td></td>
+    <td>Modificación del usuario</td>
   </tr>
   <tr>
     <th>Actores</th>
-    <td></td>
+    <td>Administradores</td>
   </tr>
   <tr>
     <th>Descripción</th>
-    <td></td>
+    <td>Los administradores podrán convertir a un usuario de la app en administrador, pero debemos de tener cuidado porque es irreversible</td>
   </tr>
   <tr>
     <th>Precondiciones</th>
     <td>
       <ul>
-        <li> </li>
+        <li>Que el usuario que se quiera modificar no sea administrador, porque no nos dejará</li>
       </ul>
     </td>
   </tr>
@@ -40,7 +40,9 @@
     <th>Secuencia normal</th>
     <td>
       <ol>
-        <li><li>
+        <li>Ir al menu de "Usuarios" y buscar al usuario que queramos.</li>
+        <li>Seleccionar ese usuario y darle al botón de "Cambiar a Administrador".</li>
+        <li>Aceptar los cambios.</li>
       </ol>
     </td>
   </tr>
@@ -48,7 +50,7 @@
     <th>Postcondiciones</th>
     <td>
       <ul>
-        <li></li>
+        <li>El usuario a partir de ahora será administrador.</li>
       </ul>
     </td>
   </tr>
@@ -56,7 +58,7 @@
     <th>Secuencia alternativa</th>
     <td>
       <ul>
-        <li> </li>
+        <li>No se ha podido modificar su rol porque el usuario que lo ha hecho o no tiene permisos o ese usuario que queremos que sea modificado ya es administrador.</li>
       </ul>
     </td>
   </tr>
