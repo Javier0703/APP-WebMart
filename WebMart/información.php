@@ -13,8 +13,8 @@
     <a href="index.php"><img src="IMG/logoEntero.png" alt="Logo"></a>
     <nav>
         <ul>
-            <a href="index.php"><li class="liActive">Inicio</li></a>
-            <a href="información.php"><li>Información</li></a>
+            <a href="index.php"><li>Inicio</li></a>
+            <a href="información.php"><li class="liActive">Información</li></a>
             <a href="contacto.php"><li>Contacto</li></a>
         </ul>
     </nav>

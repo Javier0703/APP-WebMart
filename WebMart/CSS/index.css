@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
+
+:root{
+    --tam-img:45px;
+    --altura-header:90px;
+    --coloc-imagen: calc((var(--altura-header) - var(--tam-img)) / 2 );
+    --tam-logos:30px;
+    --tam-li: 20px;
+    --padding-li: calc(var(--altura-header) / 3);
+
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: lightgrey;
+}
+
+header{
+    display: flex;
+    top:0;
+    height: var(--altura-header);
+    position: fixed;
+    width: 100%;
+    background-color: white;
+}
+
+header>a>img{
+    height: var(--tam-img);
+    width: calc((1600px * var(--tam-img)) / 200);
+    padding-top: var(--coloc-imagen);
+    padding-left: var(--coloc-imagen);
+}
+
+header>nav{
+    width: 100%;
+}
+
+ul{
+    float: right;
+    list-style: none;
+    overflow: hidden;
+}
+
+ul>a{
+    background: white;
+    font-size: var(--tam-li);
+    padding: var(--padding-li);
+    float: left;
+}
+
+ul>a:hover{
+    cursor: pointer;
+    font-weight: bolder;
+}
+
+ul:hover > :not(:hover){
+    font-weight: normal;
+    border-top: none;
+    opacity: 0.5;
+}
+
+.liActive{
+    font-weight: bolder;
+}
+
+header>nav>ul>a{
+    text-decoration: none;
+    color: #2e3094;
+}
+
+/* Main */
+
+main{
+    display: grid;
+    flex-direction: column;
+    min-height: calc(100vh - var(--altura-header));
+    flex-grow: 1;
+    margin-top: var(--altura-header);
+}
+
+/* Footer */
+
+footer{
+    text-align: center;
+    clear: both;
+    background: #2e3094;
+    color: white;
+    width: 100%;
+}
+
+footer>div{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+footer #github{
+    width: 15px;
+}
