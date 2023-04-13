@@ -14,8 +14,8 @@
     <nav>
         <ul>
             <a href="index.php"><li>Inicio</li></a>
-            <a href="información.php"><li>Información</li></a>
-            <a href="contacto.php"><li class="liActive">Contacto</li></a>
+            <a href="información.html"><li>Información</li></a>
+            <a class="liActive" href="contacto.php"><li>Contacto</li></a>
         </ul>
     </nav>
 </header>

@@ -7,6 +7,7 @@
     --tam-logos:30px;
     --tam-li: 20px;
     --padding-li: calc(var(--altura-header) / 3);
+    --altura-footer: 80px;
 
 }
 
@@ -20,7 +21,10 @@ body {
     background-color: lightgrey;
 }
 
+/* header */
+
 header{
+    z-index: 100;
     display: flex;
     top:0;
     height: var(--altura-header);
@@ -58,6 +62,11 @@ ul>a:hover{
     font-weight: bolder;
 }
 
+ul>a:hover{
+    border-top: 3px solid #2e3094;
+    margin-bottom: -3px;
+}
+
 ul:hover > :not(:hover){
     font-weight: normal;
     border-top: none;
@@ -65,6 +74,8 @@ ul:hover > :not(:hover){
 }
 
 .liActive{
+    border-top: 3px solid #2e3094;
+    margin-bottom: -3px;
     font-weight: bolder;
 }
 
@@ -76,9 +87,8 @@ header>nav>ul>a{
 /* Main */
 
 main{
-    display: grid;
     flex-direction: column;
-    min-height: calc(100vh - var(--altura-header));
+    min-height: calc(100vh - var(--altura-header) - var(--altura-footer));
     flex-grow: 1;
     margin-top: var(--altura-header);
 }
@@ -86,18 +96,83 @@ main{
 /* Footer */
 
 footer{
+    display: grid;
     text-align: center;
     clear: both;
     background: #2e3094;
     color: white;
     width: 100%;
+    height: var(--altura-footer);
 }
 
 footer>div{
-    padding-top: 10px;
-    padding-bottom: 10px;
+    margin: auto;
 }
 
 footer #github{
     width: 15px;
+}
+
+footer table{
+margin:auto;
+}
+
+footer table td{
+    padding:5px 2px;
+    text-align: center;
+    place-items: center;
+}
+
+footer table td:first-child{
+    padding-top: 8px;
+}
+
+/* PÁGINA INDEX */
+
+.mIndex{
+    display: grid;
+}
+
+#indexDiv{
+    margin: auto;
+}
+
+.mIndex>p{
+    margin: 10px auto;
+    text-align: center;
+    left: 2.5%;
+    width: 95%;
+    position: absolute;
+    background: rgba(255, 127, 127, 1);
+}
+
+.mIndex>div>section{
+    background: white;
+    padding: 20px;
+    position: absolute;
+    z-index: 1;
+}
+
+#login{
+    z-index: 2;
+    margin-left: -100px;
+    margin-top:-100px;
+}
+
+#registro{
+    margin-left: -100px;
+    margin-top:-100px;
+}
+
+.atras{
+    background: rgba(255, 255, 255, 0.5) !important;
+    z-index: -1 !important;
+    transition: 1s;
+    margin-left: -50px !important;
+    margin-top: -50px !important;
+}
+
+.atras>form{
+    opacity: 0;
+    transition: 1s;
 }

@@ -13,21 +13,59 @@
     <a href="index.php"><img src="IMG/logoEntero.png" alt="Logo"></a>
     <nav>
         <ul>
-            <a href="index.php"><li class="liActive">Inicio</li></a>
-            <a href="información.php"><li>Información</li></a>
+            <a class="liActive" href="index.php"><li>Inicio</li></a>
+            <a href="información.html"><li>Información</li></a>
             <a href="contacto.php"><li>Contacto</li></a>
         </ul>
     </nav>
 </header>
 
-<main>
+<main class="mIndex" id="mIndex">
+    <div id="indexDiv">
+        <section id="login">
+            <form action="config.php" method="POST">
+                <label for="usu">Usuario o Email</label><br>
+                <input type="text" name="usu" id="usu"><br>
+                <label for="pass">Contraseña</label> <br>
+                <input type="password" name="pass" id="pass"> <br>
+                <input type="checkbox" name="sesion" id="sesion"> Mantener la sesión iniciada. <br>
+                <button>Iniciar Sesión</button>
+                <p id="pReg">Registrarse</p>
+            </form>
+        </section>
+
+        <section id="registro" class="atras">
+            <form action="config.php" method="POST">
+                <label for="usuR">Usuario</label><br>
+                <input type="text" name="usuR" id="usuR"><br>
+                <label for="passR">Contraseña</label> <br>
+                <input type="password" name="passR" id="passR"><br>
+                <input type="password" name="passR2" id="passR2"><br>
+                <input type="checkbox" name="sesionR" id="sesionR"> Mantener la sesión iniciada.<br>
+                <button>Registrarse</button>
+                <p id="pLog">Iniciar Sesion</p>
+            </form>
+        </section>
+    </div>
+    <?php
+    if (isset($_COOKIE["msg"])){
+        echo $_COOKIE["msg"];
+        setcookie("msg",false);
+    }
+    ?>
 </main>
 
 <footer>
     <div>
         <p>Creado por Javier Calvo Porro</p>
-        <img id="github" src="IMG/github.png" alt="Github"> Proyecto subido a Github
+        <table>
+            <tr>
+                <td><img id="github" src="IMG/github.png" alt="Github"></td>
+                <td>Github</td>
+            </tr>
+        </table>
     </div>
 </footer>
 </body>
+<script src="JS/index.js"></script>
 </html>
