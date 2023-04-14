@@ -176,3 +176,15 @@ footer table td:first-child{
     opacity: 0;
     transition: 1s;
 }
+
+/* PÁGINA ERROR */
+#mError{
+    display: grid;
+}
+
+#mError>div{
+    text-align: center;
+    justify-content: center;
+    padding: 10px 0;
+    margin: auto;
+}

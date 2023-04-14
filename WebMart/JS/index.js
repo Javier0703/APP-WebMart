@@ -4,40 +4,45 @@ window.addEventListener("DOMContentLoaded",function (e){
     let secReg= document.getElementById("registro");
     let pReg = secLog.firstElementChild.lastElementChild;
     let pLog = secReg.firstElementChild.lastElementChild;
-    let indexDiv= document.getElementById("indexDiv");
     let mIndex= document.getElementById("mIndex");
+    let nuevaP = mIndex.lastElementChild;
 
-    pReg.addEventListener("click",function (e){
-        secLog.classList.add("atras");
-        secReg.classList.remove("atras");
-        secReg.style.transition='1s';
+    //Inputs del Login
+    let usu= document.getElementById("usu");
+    let pass = document.getElementById("pass");
 
-    });
-
-    pLog.addEventListener("click",function (e){
-        secReg.classList.add("atras");
-        secLog.classList.remove("atras");
-        secLog.style.transition='1s';
-    });
+    //Inputs del Registro
+    let usuR = document.getElementById("usuR");
+    let passR = document.getElementById("passR");
+    let passR2 = document.getElementById("passR2");
 
     let butLogin=pReg.previousElementSibling;
     let butRegister= pLog.previousElementSibling;
 
-    //Boton de inicio de sesión
+    //Botón de inicio de sesión
     butLogin.addEventListener("click", function (event){
-        let usu= document.getElementById("usu");
-        let pass = document.getElementById("pass");
 
         if (usu.value.trim().length === 0){
-            //DAR COLOR ROJO
             event.preventDefault();
+            //DAR COLOR ROJO
+            nuevaP.textContent="Usuario se encuentra incompleto";
         }
+
         else{
             let regexUsuN= /^[a-zA-Z0-9_ñÑ]{5,30}$/;
             let regexUsuE= /^(?=.*[a-z])[a-zA-ZñÑ\d._-]+@[a-zA-Z0-9ñÑ]+\.[a-zA-ZñÑ]{5,40}$/;
-            if (regexUsuN.test(usu.value) === true || regexUsuE.test(usu.value) === true){
-                //Mostrar como debe de ir
+
+            if (regexUsuN.test(usu.value) === true){
+                //Login como usuario
+            }
+
+            else if (regexUsuE.test(usu.value) === true){
+                //Login como email
+            }
+
+            else{
                 event.preventDefault();
+                nuevaP.textContent="Se permiten mayúsculas, minúsculas, números y _ (de 5 a 30 caracteres para el usuario) y el correo hasta 40 caracteres";
             }
         }
 
@@ -45,6 +50,7 @@ window.addEventListener("DOMContentLoaded",function (e){
         if (pass.value.trim().length === 0){
             //DAR COLOR ROJO
             event.preventDefault();
+            nuevaP.textContent="Contraseña vacía";
         }
 
         else{
@@ -52,33 +58,32 @@ window.addEventListener("DOMContentLoaded",function (e){
             if (regexPass.test(pass.value) === false){
                 //Mostrar como debe de ir
                 event.preventDefault();
+                nuevaP.textContent="La contraseña debe tener mayúsculas, minúsculas, y números (8 caracteres mínimo)";
             }
+        }
+
+        if (usu.value.trim().length === 0 && pass.value.trim().length === 0){
+            //Dar color
+            nuevaP.textContent="Usuario y contraseña incompletos";
         }
     });
 
     //Botón de registro
-
     butRegister.addEventListener("click",function (event){
-        let usuR = document.getElementById("usuR");
-        let passR = document.getElementById("passR");
-        let passR2 = document.getElementById("passR2");
 
     //Comprobamos usuario
     if (usuR.value.trim().length === 0){
         event.preventDefault();
         //DAR COLOR ROJO AL INPUT
-        let nuevaP=document.createElement("p");
         nuevaP.textContent="Usuario se encuentra incompleto";
-        mIndex.append(nuevaP);
     }
     else{
         let regexUsu= /^[a-zA-Z0-9_ñÑ]{5,30}$/;
         if (regexUsu.test(usuR.value) === false){
             event.preventDefault();
             //DAR COLOR NARANJA AL INPUT
-            let nuevaP=document.createElement("p");
             nuevaP.textContent="El usuario solo puede tener mayúsculas, minúsculas, números y _ y de 5 a 30 caracteres";
-            mIndex.append(nuevaP);
+
         }
     }
 
@@ -86,9 +91,7 @@ window.addEventListener("DOMContentLoaded",function (e){
     if (passR.value.trim().length === 0){
         event.preventDefault();
         //DAR COLOR ROJO
-        let nuevaP=document.createElement("p");
         nuevaP.textContent="Alguna contraseña está incompleta";
-        mIndex.append(nuevaP);
     }
 
     else{
@@ -96,9 +99,7 @@ window.addEventListener("DOMContentLoaded",function (e){
         if (regexPass.test(passR.value) === false){
             event.preventDefault();
             //Mostrar como debe de ir
-            let nuevaP=document.createElement("p");
             nuevaP.textContent="La contraseña debe tener mayúsculas, minúsculas, y números (8 caracteres mínimo)";
-            mIndex.append(nuevaP);
         }
     }
 
@@ -106,18 +107,38 @@ window.addEventListener("DOMContentLoaded",function (e){
     if (passR.value !== passR2.value){
         event.preventDefault();
         //Decir que las pass están distintas
-        let nuevaP=document.createElement("p");
         nuevaP.textContent="Las contraseñas son distintas";
-        mIndex.append(nuevaP);
     }
 
     if (usuR.value.trim().length === 0 && passR.value.trim().length === 0){
         //Decir que pasa
-        let nuevaP=document.createElement("p");
         nuevaP.textContent="Usuario y contraseña incompletos";
-        mIndex.append(nuevaP);
     }
 
     });
 
-})
+    let inputs = document.querySelectorAll("#mIndex>div>section>form>input")
+    inputs.forEach(input =>{
+        input.addEventListener("click", function (e){
+            nuevaP.textContent="";
+        });
+    });
+
+    pReg.addEventListener("click",function (e){
+        usu.value='';
+        pass.value='';
+        secLog.classList.add("atras");
+        secReg.classList.remove("atras");
+        secReg.style.transition='1s';
+
+    });
+
+    pLog.addEventListener("click",function (e){
+        usuR.value='';
+        passR.value='';
+        passR2.value='';
+        secReg.classList.add("atras");
+        secLog.classList.remove("atras");
+        secLog.style.transition='1s';
+    });
+});

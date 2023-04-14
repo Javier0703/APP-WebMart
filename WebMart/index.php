@@ -1,3 +1,12 @@
+<?php
+session_start();
+if (isset($_COOKIE["error"])){setcookie("error", false);}
+
+if (isset($_SESSION["usu"]) && isset($_SESSION["pass"])){
+    header("Location:config.php");
+}
+?>
+
 <!doctype html>
 <html lang="es">
 <head>
@@ -47,9 +56,10 @@
             </form>
         </section>
     </div>
+    <p></p>
     <?php
     if (isset($_COOKIE["msg"])){
-        echo $_COOKIE["msg"];
+        echo "<p>".$_COOKIE["msg"]."</p>";
         setcookie("msg",false);
     }
     ?>
