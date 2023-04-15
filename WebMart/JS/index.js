@@ -30,7 +30,7 @@ window.addEventListener("DOMContentLoaded",function (e){
 
         else{
             let regexUsuN= /^[a-zA-Z0-9_ñÑ]{5,30}$/;
-            let regexUsuE= /^(?=.*[a-z])[a-zA-ZñÑ\d._-]+@[a-zA-Z0-9ñÑ]+\.[a-zA-ZñÑ]{5,40}$/;
+            let regexUsuE= /^(?=.{1,40}$)[\wñÑ-]+(\.[\wñÑ-]+)*@[\wñÑ-]+(\.[\wñÑ-]{2,})+$/;
 
             if (regexUsuN.test(usu.value) === true){
                 //Login como usuario

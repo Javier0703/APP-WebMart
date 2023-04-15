@@ -1,6 +1,8 @@
 <?php
 session_start();
 if (isset($_COOKIE["error"])){setcookie("error", false);}
+if (isset($_COOKIE["usu"])){setcookie("usu",false);}
+if (isset($_COOKIE["pass"])){setcookie("pass",false);}
 
 if (isset($_SESSION["usu"]) && isset($_SESSION["pass"])){
     header("Location:config.php");

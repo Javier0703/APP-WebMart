@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
+
+:root{
+    --altura-header:80px;
+    --tam-img:35px;
+    --coloc-imagen: calc((var(--altura-header) - var(--tam-img)) / 2 );
+    --tam-icon:30px;
+    --coloc-icon: calc(( var(--altura-header) - var(--tam-icon )) / 4);
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: lightgrey;
+}
+
+/*HEADER*/
+
+header{
+    height: var(--altura-header);
+    position: fixed;
+    width: 100%;
+    background: white;
+    display: flex;
+}
+
+header>a>img{
+    height: var(--tam-img);
+    padding-top: var(--coloc-imagen);
+    padding-left: var(--coloc-imagen);
+}
+
+header>nav{
+    width: 100%;
+}
+
+header>nav>ul{
+    right: var(--altura-header);
+    position: fixed;
+    list-style: none;
+    overflow: hidden;
+}
+
+header>nav>ul> img:hover{
+    background: lightgrey;
+}
+
+header>nav>ul{
+    right: var(--altura-header);
+    position: fixed;
+    list-style: none;
+    overflow: hidden;
+}
+
+header>nav>ul:hover > :not(:hover){
+    opacity: 0.75;
+}
+
+header>nav>ul>a{
+    float: left;
+    border-radius: 10px;
+    margin:var(--coloc-icon);
+    padding-top: var(--coloc-icon);
+    padding-left: var(--coloc-icon);
+    padding-right: var(--coloc-icon);
+    padding-bottom: calc( var(--coloc-icon) - 5px);
+}
+
+header>nav>ul>a:hover{
+    background: lightgrey;
+}
+
+
+header>nav>ul img{
+    height: var(--tam-icon);
+}
+
+header>div{
+    top: 0;
+    right: 0;
+    position: fixed;
+    display: grid;
+    width: var(--altura-header);
+    height: var(--altura-header);
+}
+
+header>div>img:hover{
+    background: lightgrey;
+    cursor: pointer;
+}
+
+header>div>img{
+    border-radius: 50%;
+    width: var(--tam-icon);
+    margin: auto;
+    padding: 10px;
+    outline: 2px lightgrey solid;
+}
+
+
