@@ -30,8 +30,8 @@ header{
 
 header>a>img{
     height: var(--tam-img);
-    padding-top: var(--coloc-imagen);
-    padding-left: var(--coloc-imagen);
+    margin-top: var(--coloc-imagen);
+    margin-left: var(--coloc-imagen);
 }
 
 header>nav{
@@ -57,7 +57,7 @@ header>nav>ul{
 }
 
 header>nav>ul:hover > :not(:hover){
-    opacity: 0.75;
+    opacity: 0.5;
 }
 
 header>nav>ul>a{
@@ -71,7 +71,7 @@ header>nav>ul>a{
 }
 
 header>nav>ul>a:hover{
-    background: lightgrey;
+    background: #2e3093;
 }
 
 
@@ -98,7 +98,7 @@ header>div>img{
     width: var(--tam-icon);
     margin: auto;
     padding: 10px;
-    outline: 2px lightgrey solid;
+    border: 2px lightgrey solid;
 }
 
 

@@ -153,6 +153,16 @@ footer table td:first-child{
     z-index: 1;
 }
 
+.mIndex form input{
+    outline: none;
+    border: none;
+}
+
+.mIndex form div{
+    border-bottom: 1px solid black;
+}
+
+
 #login{
     z-index: 2;
     margin-left: -100px;
@@ -177,7 +187,16 @@ footer table td:first-child{
     transition: 1s;
 }
 
+.colorRed{
+    border-bottom: 1px solid red !important;
+}
+
+.colorOrange{
+    border-bottom: 1px solid orange !important;
+}
+
 /* PÁGINA ERROR */
+
 #mError{
     display: grid;
 }

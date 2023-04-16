@@ -36,9 +36,13 @@ if (isset($_SESSION["usu"]) && isset($_SESSION["pass"])){
         <section id="login">
             <form action="config.php" method="POST">
                 <label for="usu">Usuario o Email</label><br>
-                <input type="text" name="usu" id="usu"><br>
+                <div>
+                    <input type="text" name="usu" id="usu">
+                </div>
                 <label for="pass">Contraseña</label> <br>
-                <input type="password" name="pass" id="pass"> <br>
+                <div>
+                    <input type="password" name="pass" id="pass">
+                </div>
                 <input type="checkbox" name="sesion" id="sesion"> Mantener la sesión iniciada. <br>
                 <button>Iniciar Sesión</button>
                 <p id="pReg">Registrarse</p>
@@ -48,13 +52,19 @@ if (isset($_SESSION["usu"]) && isset($_SESSION["pass"])){
         <section id="registro" class="atras">
             <form action="config.php" method="POST">
                 <label for="usuR">Usuario</label><br>
-                <input type="text" name="usuR" id="usuR"><br>
+                <div>
+                    <input type="text" name="usuR" id="usuR">
+                </div>
                 <label for="passR">Contraseña</label> <br>
-                <input type="password" name="passR" id="passR"><br>
-                <input type="password" name="passR2" id="passR2"><br>
+                <div>
+                    <input type="password" name="passR" id="passR">
+                </div>
+                <div>
+                    <input type="password" name="passR2" id="passR2">
+                </div>
                 <input type="checkbox" name="sesionR" id="sesionR"> Mantener la sesión iniciada.<br>
                 <button>Registrarse</button>
-                <p id="pLog">Iniciar Sesion</p>
+                <p id="pLog">Iniciar Sesión</p>
             </form>
         </section>
     </div>
