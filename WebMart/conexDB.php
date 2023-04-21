@@ -14,7 +14,7 @@ function conexAdmin(){
         return $con;
     }
     catch (mysqli_sql_exception $e){
-        return $e->getCode();
+        return 0;
     }
 }
 
@@ -30,7 +30,7 @@ function conexUsu(){
     }
 
     catch (mysqli_sql_exception $e){
-        return $e->getCode();
+        return 0;
     }
 
 }

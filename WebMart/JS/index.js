@@ -2,8 +2,8 @@ window.addEventListener("DOMContentLoaded",function (e){
 
     let secLog= document.getElementById("login");
     let secReg= document.getElementById("registro");
-    let pReg = secLog.firstElementChild.lastElementChild;
-    let pLog = secReg.firstElementChild.lastElementChild;
+    let pReg = document.getElementById("pReg");
+    let pLog = document.getElementById("pLog");
     let mIndex= document.getElementById("mIndex");
     let nuevaP = mIndex.lastElementChild;
 
@@ -16,8 +16,8 @@ window.addEventListener("DOMContentLoaded",function (e){
     let passR = document.getElementById("passR");
     let passR2 = document.getElementById("passR2");
 
-    let butLogin=pReg.previousElementSibling;
-    let butRegister= pLog.previousElementSibling;
+    let butLogin= document.getElementById("incSes");
+    let butRegister= document.getElementById("Reg");
 
     //Botón de inicio de sesión
     butLogin.addEventListener("click", function (event){
@@ -67,6 +67,7 @@ window.addEventListener("DOMContentLoaded",function (e){
     });
 
     //Botón de registro
+
     butRegister.addEventListener("click",function (event){
 
     //Comprobamos contraseña
@@ -121,13 +122,24 @@ window.addEventListener("DOMContentLoaded",function (e){
     });
 
     //Cada vez que demos al input si hay un mensaje de error se borre
-    let inputs = document.querySelectorAll("#mIndex form input")
+    let inputs = document.querySelectorAll("#mIndex form input[type='text'], #mIndex form input[type='password']");
+
     inputs.forEach(input =>{
+
         input.addEventListener("click", function (e){
+            input.parentElement.classList.remove("colorRed");
+            input.parentElement.classList.remove("colorOrange");
             nuevaP.textContent="";
+        });
+        input.addEventListener("keydown", function (e){
             input.parentElement.classList.remove("colorRed");
             input.parentElement.classList.remove("colorOrange");
         });
+
+        input.addEventListener("keydown",function (e){
+            nuevaP.textContent="";
+        })
+
     });
 
     pReg.addEventListener("click",function (e){
@@ -136,6 +148,12 @@ window.addEventListener("DOMContentLoaded",function (e){
         secLog.classList.add("atras");
         secReg.classList.remove("atras");
         secReg.style.transition='1s';
+
+        inputs.forEach(input =>{
+            nuevaP.textContent="";
+            input.parentElement.classList.remove("colorRed");
+            input.parentElement.classList.remove("colorOrange");
+        });
 
     });
 
@@ -146,5 +164,13 @@ window.addEventListener("DOMContentLoaded",function (e){
         secReg.classList.add("atras");
         secLog.classList.remove("atras");
         secLog.style.transition='1s';
+
+        inputs.forEach(input =>{
+            nuevaP.textContent="";
+            input.parentElement.classList.remove("colorRed");
+            input.parentElement.classList.remove("colorOrange");
+        });
+
     });
+
 });

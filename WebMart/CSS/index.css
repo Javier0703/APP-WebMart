@@ -147,42 +147,142 @@ footer table td:first-child{
 }
 
 .mIndex>div>section{
-    background: white;
-    padding: 20px;
+    outline: 1px solid #00adec;
+    border-radius: 0 15px 15px 0;
+    display: flex;
     position: absolute;
     z-index: 1;
 }
 
-.mIndex form input{
+.mIndex form{
+    background: white;
+    border-radius: 0 15px 15px 0;
+    padding:40px 40px 40px 30px;
+}
+
+.mIndex #login form{
+    padding: 48px 40px 48px 30px;
+}
+
+.mIndex form section{
+    text-align: center;
+}
+
+.mIndex form section img{
+    margin-bottom: 20px;
+    width: 100px;
+}
+
+.mIndex form input[type="text"], .mIndex form input[type="password"]{
+    margin-left: 5px;
+    height: 30px;
+    font-size: 16px;
+    width: 100%;
+    background: none;
     outline: none;
     border: none;
 }
 
-.mIndex form div{
-    border-bottom: 1px solid black;
+.marg20{
+    margin-bottom: 20px;
 }
 
+.mIndex input[type="checkbox"]{
+    accent-color: #00adec;
+    margin-top: 14px;
+}
+
+.mIndex form span{
+    margin-left: -3px;
+    color: #00adec;
+}
+
+.mIndex form a{
+    font-size: 12px;
+    text-decoration: none;
+    color: black;
+}
+
+.mIndex form a:hover{
+    color: #2e3093 ;
+    text-decoration: underline;
+}
+
+.mIndex form button{
+    cursor: pointer;
+    border-radius: 20px;
+    height: 40px;
+    width: 150px;
+    color: white;
+    margin-top: 15px;
+    background: #00adec;
+    border: none;
+}
+
+.mIndex form button:hover{
+    background: #2e3094;
+    transition: 1s;
+}
+
+#secName{
+    margin-bottom: 20px;
+}
+
+#secPass{
+    margin-bottom: 10px;
+}
+
+.mIndex form>div>div{
+    border-bottom: 1px solid black;
+    width: 100%;
+    display: flex;
+}
+
+.mIndex form div:focus-within > div>span{
+    color: #2e3094;
+    transition:.25s;
+}
+
+.mIndex form div:focus-within > div{
+    border-bottom: 1px solid #2e3094;
+    transition:.25s;
+}
+
+#indexDiv>section>aside {
+    background: #00adec;
+    color: white;
+    text-align: center;
+}
+
+#indexDiv>section>aside h3:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+#indexDiv>section>aside img{
+    width: 200px;
+    margin: 90px 30px 10px 30px;
+}
+
+#login, #registro{
+    margin-left: -285px;
+    margin-top:-200px;
+}
 
 #login{
     z-index: 2;
-    margin-left: -100px;
-    margin-top:-100px;
-}
-
-#registro{
-    margin-left: -100px;
-    margin-top:-100px;
 }
 
 .atras{
+    outline: 0 !important;
     background: rgba(255, 255, 255, 0.5) !important;
     z-index: -1 !important;
     transition: 1s;
-    margin-left: -50px !important;
-    margin-top: -50px !important;
+    margin-left: -270px !important;
+    margin-top: -185px !important;
 }
 
-.atras>form{
+.atras>form, .atras>aside{
     opacity: 0;
     transition: 1s;
 }

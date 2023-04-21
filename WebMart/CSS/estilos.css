@@ -38,44 +38,29 @@ header>nav{
     width: 100%;
 }
 
-header>nav>ul{
+header>nav>section{
     right: var(--altura-header);
     position: fixed;
-    list-style: none;
-    overflow: hidden;
 }
 
-header>nav>ul> img:hover{
-    background: lightgrey;
-}
-
-header>nav>ul{
-    right: var(--altura-header);
-    position: fixed;
-    list-style: none;
-    overflow: hidden;
-}
-
-header>nav>ul:hover > :not(:hover){
+header>nav>section:hover > :not(:hover){
     opacity: 0.5;
 }
 
-header>nav>ul>a{
+header>nav>section>a{
     float: left;
     border-radius: 10px;
     margin:var(--coloc-icon);
-    padding-top: var(--coloc-icon);
-    padding-left: var(--coloc-icon);
-    padding-right: var(--coloc-icon);
-    padding-bottom: calc( var(--coloc-icon) - 5px);
+    padding: var(--coloc-icon);
+    padding-bottom: calc(var(--coloc-icon) - 5px);
 }
 
-header>nav>ul>a:hover{
+header>nav>section>a:hover{
     background: #2e3093;
 }
 
 
-header>nav>ul img{
+header>nav>section img{
     height: var(--tam-icon);
 }
 
@@ -100,5 +85,6 @@ header>div>img{
     padding: 10px;
     border: 2px lightgrey solid;
 }
+
 
 

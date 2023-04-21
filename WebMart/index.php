@@ -16,6 +16,7 @@ if (isset($_SESSION["usu"]) && isset($_SESSION["pass"])){
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" href="IMG/logo.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0"/>
     <title>WebMart</title>
     <link rel="stylesheet" href="CSS/index.css">
 </head>
@@ -32,42 +33,86 @@ if (isset($_SESSION["usu"]) && isset($_SESSION["pass"])){
 </header>
 
 <main class="mIndex" id="mIndex">
+    
     <div id="indexDiv">
+
         <section id="login">
+
+            <aside>
+                <div>
+                    <img src="IMG/fondoLogin.svg" alt="Fondo">
+                </div>
+                <h3 id="pReg">¡Regístrate!</h3>
+            </aside>
+
             <form action="config.php" method="POST">
-                <label for="usu">Usuario o Email</label><br>
-                <div>
-                    <input type="text" name="usu" id="usu">
+                <section>
+                    <img src="IMG/logo.png" alt="Logo">
+                </section>
+                <label for="usu">Usuario o email</label>
+                <div class="marg20">
+                    <div>
+                        <span class="material-symbols-outlined">person</span>
+                        <input type="text" name="usu" id="usu">
+                    </div>
                 </div>
-                <label for="pass">Contraseña</label> <br>
+                <label for="pass">Contraseña</label>
                 <div>
-                    <input type="password" name="pass" id="pass">
+                    <div>
+                        <span class="material-symbols-outlined">lock</span>
+                        <input type="password" name="pass" id="pass">
+                    </div>
                 </div>
+                <a href="#">¿No te acuerdas?</a><br>
                 <input type="checkbox" name="sesion" id="sesion"> Mantener la sesión iniciada. <br>
-                <button>Iniciar Sesión</button>
-                <p id="pReg">Registrarse</p>
+                <section>
+                    <button id="incSes">Iniciar Sesión</button>
+                </section>
             </form>
+
         </section>
 
         <section id="registro" class="atras">
+
+            <aside>
+                <div>
+                    <img src="IMG/fondoLogin.svg" alt="Fondo">
+                </div>
+                <h3 id="pLog">Iniciar Sesión</h3>
+            </aside>
+
             <form action="config.php" method="POST">
-                <label for="usuR">Usuario</label><br>
-                <div>
-                    <input type="text" name="usuR" id="usuR">
+                <section>
+                    <img src="IMG/logo.png" alt="Logo">
+                </section>
+                <label for="usuR">Usuario</label>
+                <div class="marg20">
+                    <div>
+                        <span class="material-symbols-outlined">person</span>
+                        <input type="text" name="usuR" id="usuR">
+                    </div>
                 </div>
-                <label for="passR">Contraseña</label> <br>
+                <label for="passR">Contraseña</label>
                 <div>
-                    <input type="password" name="passR" id="passR">
+                    <div id="secPass">
+                        <span class="material-symbols-outlined">lock</span>
+                        <input type="password" name="passR" id="passR">
+                    </div>
                 </div>
                 <div>
-                    <input type="password" name="passR2" id="passR2">
+                    <div>
+                        <span class="material-symbols-outlined">lock</span>
+                        <input type="password" name="passR2" id="passR2">
+                    </div>
                 </div>
                 <input type="checkbox" name="sesionR" id="sesionR"> Mantener la sesión iniciada.<br>
-                <button>Registrarse</button>
-                <p id="pLog">Iniciar Sesión</p>
+                <section>
+                    <button id="Reg">Registrarse</button>
+                </section>
             </form>
         </section>
     </div>
+
     <p></p>
     <?php
     if (isset($_COOKIE["msg"])){
@@ -88,6 +133,7 @@ if (isset($_SESSION["usu"]) && isset($_SESSION["pass"])){
         </table>
     </div>
 </footer>
+
 </body>
 <script src="JS/index.js"></script>
 </html>

@@ -8,35 +8,51 @@ if (isset($_COOKIE["msg"])){setcookie("msg",false);}
 
 //Sesiones del usuario
 if(isset($_SESSION["usu"]) && $_SESSION["pass"]){
-    $con=conexUsu();
-    $sql="SELECT COUNT(*) AS NUM, ROL,ESTADO FROM usuarios WHERE USUARIO=? AND CONTRASEÑA=?";
-    $st=$con->prepare($sql);
-    $st->bind_param("ss",$_SESSION["usu"],$_SESSION["pass"]);
-    $st->execute();
-    $st->bind_result($count,$rol,$estado);
-    $st->fetch();
-    $st->close();
-    $con->close();
-    if($count==1){
-        if($estado==1){
-            if($rol==0){
-                header("Location: W_USER/index.php");
+
+    if (conexUsu()==0){
+        setcookie("error","Error, no se puede establecer conexión con la Base de Datos :(");
+        header("Location:error.php");
+    }
+
+    try {
+        $con=conexUsu();
+        $sql="SELECT COUNT(*) AS NUM, ROL,ESTADO FROM usuarios WHERE USUARIO=? AND CONTRASEÑA=?";
+        $st=$con->prepare($sql);
+        $st->bind_param("ss",$_SESSION["usu"],$_SESSION["pass"]);
+        $st->execute();
+        $st->bind_result($count,$rol,$estado);
+        $st->fetch();
+        $st->close();
+        $con->close();
+        if($count==1){
+            if($estado==1){
+                if($rol==0){
+                    header("Location: W_USER/index.php");
+                }
+                elseif($rol==1){
+                    header("Location: W_ADMIN/index.php");
+                }
             }
-            elseif($rol==1){
-                header("Location: W_ADMIN/index.php");
+            else{
+                //Tu cuenta has sido bloqueada
+                $msg="Tu cuenta ha sido bloqueada";
+                setcookie("msg",$msg);
+                header("Location:cierre.php");
             }
         }
+
         else{
-            //Tu cuenta has sido bloqueada
-            $msg="Tu cuenta ha sido bloqueada";
-            setcookie("msg",$msg);
             header("Location:cierre.php");
         }
     }
 
-    else{
-        header("Location:cierre.php");
+    catch (mysqli_sql_exception $e){
+        $cod=$e ->getCode();
+        $msgError=$e->getMessage();
+        setcookie("error","Error $cod, $msgError");
+        header("Location:error.php");
     }
+
 }
 
 //Login del usuario
@@ -64,9 +80,8 @@ else if (isset($_POST["usu"]) && strlen(trim($_POST["usu"]))>0 &&
         header("Location:index.php");
     }
 
-    if(conexUsu()==2002){
-        $cod=conexUsu();
-        setcookie("error","Error $cod, no se puede establecer conexión con la Base de Datos :(");
+    if(conexUsu()==0){
+        setcookie("error","Error, no se puede establecer conexión con la Base de Datos :(");
         header("Location:error.php");
     }
 
@@ -149,9 +164,8 @@ else if (isset($_POST["usuR"]) && strlen(trim($_POST["usuR"]))>0 &&
     }
 
     else{
-        if(conexUsu()==2002){
-            $cod=conexUsu();
-            setcookie("error","Error $cod, no se puede establecer conexión con la Base de Datos :(");
+        if(conexUsu()==0){
+            setcookie("error","Error, no se puede establecer conexión con la Base de Datos :(");
             header("Location:error.php");
         }
         try{

@@ -6,7 +6,7 @@ session_start();
 
 if (isset($_SESSION["usu"]) && isset($_SESSION["pass"])){
 
-    if (conexUsu()==2002){
+    if (conexUsu()==0){
         $cod=conexUsu();
         setcookie("error","Error $cod, no se puede establecer conexión con la Base de Datos :(");
         header("Location:error.php");
@@ -54,7 +54,7 @@ elseif (isset($_COOKIE["usu"]) && isset($_COOKIE["pass"])){
     $usu=base64_decode($_COOKIE["usu"]);
     $pass=base64_decode($_COOKIE["pass"]);
 
-    if (conexUsu()==2002){
+    if (conexUsu()==0){
         $cod=conexUsu();
         setcookie("error","Error $cod, no se puede establecer conexión con la Base de Datos :(");
         header("Location:error.php");
@@ -120,17 +120,21 @@ else{
 <header>
     <a href="index.php"><img src="../IMG/logoEntero.png" alt="Logo"></a>
     <nav>
-        <ul>
-            <a href="#"><li><img src="../IMG/ICONS/estadisticas.png" alt="Estadisticas"></li></a>
-            <a href="#"><li><img src="../IMG/ICONS/grupo.png" alt="Usuarios"></li></a>
-            <a href="#"><li><img src="../IMG/ICONS/agregar.png" alt="Subir Producto"></li></a>
-        </ul>
+        <section>
+            <a href="#"><img src="../IMG/ICONS/estadisticas.png" alt="Estadisticas"></a>
+            <a href="#"><img src="../IMG/ICONS/grupo.png" alt="Usuarios"></a>
+            <a href="#"><img src="../IMG/ICONS/agregar.png" alt="Subir Producto"></a>
+        </section>
     </nav>
 
     <div>
         <img src="../IMG/ICONS/usuario.png" alt="Perfil">
     </div>
-
 </header>
+
+<main>
+    Hola
+</main>
+
 </body>
 </html>

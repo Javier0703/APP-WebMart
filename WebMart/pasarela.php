@@ -7,7 +7,7 @@ session_start();
 
 if (isset($_SESSION["usu"]) && isset($_SESSION["pass"])){
 
-    if(conexUsu()==2002){
+    if(conexUsu()==0){
         $cod=conexUsu();
         setcookie("error","Error $cod, no se puede establecer conexión con la Base de Datos :(");
         header("Location:error.php");
