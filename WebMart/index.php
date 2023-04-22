@@ -15,14 +15,14 @@ if (isset($_SESSION["usu"]) && isset($_SESSION["pass"])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="shortcut icon" href="IMG/logo.png">
+    <link rel="shortcut icon" href="IMG/LOGOS_ERRORES/logo.png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0"/>
     <title>WebMart</title>
     <link rel="stylesheet" href="CSS/index.css">
 </head>
 <body>
 <header>
-    <a href="index.php"><img src="IMG/logoEntero.png" alt="Logo"></a>
+    <a href="index.php"><img src="IMG/LOGOS_ERRORES/logoEntero.png" alt="Logo"></a>
     <nav>
         <ul>
             <a class="liActive" href="index.php"><li>Inicio</li></a>
@@ -40,14 +40,14 @@ if (isset($_SESSION["usu"]) && isset($_SESSION["pass"])){
 
             <aside>
                 <div>
-                    <img src="IMG/fondoLogin.svg" alt="Fondo">
+                    <img src="IMG/LOGOS_ERRORES/fondoLogin.svg" alt="Fondo">
                 </div>
                 <h3 id="pReg">¡Regístrate!</h3>
             </aside>
 
             <form action="config.php" method="POST">
                 <section>
-                    <img src="IMG/logo.png" alt="Logo">
+                    <img src="IMG/LOGOS_ERRORES/logo.png" alt="Logo">
                 </section>
                 <label for="usu">Usuario o email</label>
                 <div class="marg20">
@@ -76,14 +76,14 @@ if (isset($_SESSION["usu"]) && isset($_SESSION["pass"])){
 
             <aside>
                 <div>
-                    <img src="IMG/fondoLogin.svg" alt="Fondo">
+                    <img src="IMG/LOGOS_ERRORES/fondoLogin.svg" alt="Fondo">
                 </div>
                 <h3 id="pLog">Iniciar Sesión</h3>
             </aside>
 
             <form action="config.php" method="POST">
                 <section>
-                    <img src="IMG/logo.png" alt="Logo">
+                    <img src="IMG/LOGOS_ERRORES/logo.png" alt="Logo">
                 </section>
                 <label for="usuR">Usuario</label>
                 <div class="marg20">
@@ -127,7 +127,7 @@ if (isset($_SESSION["usu"]) && isset($_SESSION["pass"])){
         <p>Creado por Javier Calvo Porro</p>
         <table>
             <tr>
-                <td><img id="github" src="IMG/github.png" alt="Github"></td>
+                <td><img id="github" src="IMG/LOGOS_ERRORES/github.png" alt="Github"></td>
                 <td>Github</td>
             </tr>
         </table>
