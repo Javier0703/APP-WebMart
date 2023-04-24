@@ -9,6 +9,10 @@
     --coloc-iconos: calc((var(--altura-header) - var(--tam-iconos)) / 4);
     --tam-perfil: 55px;
     --altura-footer: 80px;
+    --tam-sIndex4: 150px;
+    --tam-sIndex5: 100px;
+    --p-sIndex5: 16px;
+    --coloc-sIndex5: calc( var(--tam-sIndex5) / 20);
 }
 
 *{
@@ -200,27 +204,217 @@ footer table td:first-child{
 }
 
 .sIndex3{
+    display: flex;
     overflow-x: auto;
-    white-space: nowrap;
-    padding-top: 20px;
+    padding: 30px 0 10px;
+}
+
+.sIndex3 form{
+    display: flex;
+}
+
+body::-webkit-scrollbar,.sIndex3::-webkit-scrollbar {height: 8px; width: 10px}
+body::-webkit-scrollbar-thumb,.sIndex3::-webkit-scrollbar-thumb {background-color: lightgrey; border-radius: 5px;}
+body::-webkit-scrollbar-thumb:hover,.sIndex3::-webkit-scrollbar-thumb:hover {background-color: rgb(180, 180, 180);}
+
+.sIndex3 div{
+    margin:0 5px 0;
+    padding:10px 10px 2px;
+}
+
+.sIndex3 div:first-child{
+    margin: 0 5px 0 0;
+}
+
+.sIndex3 div:hover{
+    cursor: pointer;
+    border-radius: 15px;
+    background: rgba(211, 211, 211, 0.5);
+}
+.sIndex3 form img{
+    width: 45px;
+}
+
+.sIndex3 form div p{
+    width: 90px;
+    font-size: 11px;
+}
+
+.sIndex4{
+    padding: 30px 0 20px;
+}
+
+.sIndex4 h1, .sIndex4 h3{
+    font-weight: normal;
+}
+
+.sIndex4 h3{
+    padding-bottom: 15px;
+}
+
+.sIndex4 form{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    grid-gap: 10px;
+}
+
+.sIndex4 form div{
+    height: var(--tam-sIndex4);
+    background: url("../IMG/IMAGENES_GIFS/fondoDiv.gif") no-repeat right bottom / var(--tam-sIndex4) auto;
+    border-radius: 10px;
+    border: 1px solid lightgrey;
+}
+
+.sIndex4 form div:hover{
+    background: rgba(211, 211, 211, 0.2);
+    cursor: pointer;
+}
+
+.sIndex4 .grid1 {
+    grid-column: 1 / span 2;
+}
+
+.sIndex4 .grid2 {
+    grid-column: 1;
+}
+
+.sIndex4 .grid3 {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.sIndex4 form div{
+    display: flex;
+}
+
+.sIndex4 form div>aside{
+    text-align: left;
+    width: 50%;
+}
+
+.sIndex4 form div>aside:first-child{
+    padding-left: 20px;
+    padding-top:20px;
+}
+
+.sIndex4 form div>aside h3{
+    font-weight: bolder;
+}
+
+.sIndex4 form div>aside img{
+    width: var(--tam-sIndex4);
+    margin: calc(var(--tam-sIndex4) / 6);
+    float: right;
+}
+
+.sIndex4 #img3{
+    width: calc(var(--tam-sIndex4) / 1.5)
+}
+
+.sIndex5{
+    padding: 10px 0;
+}
+
+.sIndex5 form{
+    padding:10px 0;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap:10px;
+}
+
+.sIndex5 form div{
+    border-radius: 15px;
+    border: 1px solid lightgrey;
+    display: flex;
+}
+
+.sIndex5 form div:hover{
+    background: rgba(211, 211, 211, 0.2);
+    cursor: pointer;
+}
+
+.sIndex5 form aside{
+    display: grid;
+}
+
+.sIndex5 form aside:first-child{
+    width: calc(100% - var(--tam-sIndex5));
 
 }
 
+.sIndex5 form p, .sIndex5 form img{
+    margin: auto;
+}
 
+.sIndex5 form p{
+    font-size: var(--p-sIndex5);
+}
 
-
-
+.sIndex5 form img{
+    width: var(--tam-sIndex5);
+    margin: var(--coloc-imagen);
+    margin-left: 0;
+}
 
 
 /* MEDIA QUERY */
 
-@media (max-width: 680px) {
+@media (max-width: 440px) {
 
-    .sIndex2 form {
-        grid-template-columns: 1fr;
+    :root{
+        --p-sIndex5: 16px !important;
+        --tam-sIndex5: 150px !important;
     }
 
-    .sIndex2 .grid1, .sIndex2 .grid2, .sIndex2 .grid3{
-        grid-column: span 1;
+    .sIndex4 form div>aside:first-child{
+        width: 75%;
+        padding: 10px 0 0 10px;
     }
+
+    .sIndex4 form div>aside img{
+        width: calc(var(--tam-sIndex4) / 1.75);
+        padding:0;
+        margin: 40px 15px 0 0;
+        float: right;
+    }
+
+    .sIndex4 #img3{
+        width: calc(var(--tam-sIndex4) / 2);
+        margin:40px 20px 0 0;
+    }
+
+    .sIndex4 form aside p{
+        font-size: 13px;
+    }
+
+    .sIndex4 form aside h3{
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 715px) {
+
+    .sIndex2 form, .sIndex4 form, .sIndex5 form{
+        grid-template-columns: 1fr !important;
+        grid-template-rows: auto auto auto;
+    }
+
+    .mIndex .grid1, .mIndex .grid2, .mIndex .grid3{
+        grid-column: 1;
+    }
+
+}
+
+@media (max-width: 1260px) {
+
+    :root{
+        --p-sIndex5: 22px;
+        --tam-sIndex5: 200px;
+    }
+
+    .sIndex5 form{
+        grid-template-columns: repeat(2,1fr);
+    }
+
 }

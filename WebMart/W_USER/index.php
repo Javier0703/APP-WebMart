@@ -124,6 +124,7 @@ else{
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" href="../IMG/LOGOS_ERRORES/logo.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,-25" />
     <title>WebMart</title>
     <link rel="stylesheet" href="../CSS/estilos.css">
 </head>
@@ -146,7 +147,7 @@ else{
             $st->execute();
             $st->bind_result($icono);
             $st->fetch();
-            echo '<a href="#"><img src="data:image/jpg;base64,'.base64_encode($icono).'"></a>';
+            echo '<a href=""><img src="data:image/jpg;base64,'.base64_encode($icono).'"></a>';
             ?>
         </section>
     </nav>
@@ -161,17 +162,105 @@ else{
 
     <section class="sIndex2">
         <h1>¿Qué es lo que estás buscando?</h1>
+
         <form action="#" method="POST">
             <div class="grid1"><img src="../IMG/LOGOS_ERRORES/lupa.png" alt="lupa"><input type="text" placeholder="Estoy buscando..."></div>
-            <div class="grid2">Elige una Categoría</div>
+            <div class="grid2" id="grid2">
+                <span class="material-symbols-outlined">format_list_bulleted</span>
+                Elige una Categoría
+                <span class="material-symbols-outlined">expand_more</span>
+            </div>
             <div class="grid3"><button>Buscar</button></div>
         </form>
+
     </section>
 
     <section class="sIndex3">
-        Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.
+
+        <form action="sIndex3.php" method="POST">
+            <?php
+            $con=conexUsu();
+            $sql="SELECT ID_CAT,NOMBRE FROM categorias ORDER BY ID_CAT";
+            $st=$con->prepare($sql);
+            $st->execute();
+            $st->bind_result($id,$nombre);
+            while ($st->fetch()){
+            ?>
+                <div id="<?=$id?>"><img src="../IMG/CATEGORIAS/<?=$id?>.png" alt="Categoría"><p><?=$nombre?></p></div>
+            <?php
+            }
+            ?>
+            <input type='hidden' name='cat' value=''>
+        </form>
+    </section>
+
+    <section class="sIndex4">
+
+        <h1>Se acerca el verano... ¿No sabes que hacer?</h1>
+        <h3>¡Te ayudamos! Mira estos planazos que puedes ver</h3>
+
+        <form action="#" method="POST">
+
+            <div class="grid1">
+                <aside>
+                <p>Si tienes jardín este producto te encantará...</p>
+                <h3>Piscinas hinchables</h3>
+                </aside>
+                <aside>
+                    <img src="../IMG/IMAGENES_GIFS/piscina.png" alt="Piscina">
+                </aside>
+            </div>
+
+            <div class="grid2">
+                <aside>
+                    <p>Un buen plan con tus amigos...</p>
+                    <h3>Alquileres vacacionales</h3>
+                </aside>
+                <aside>
+                    <img src="../IMG/IMAGENES_GIFS/alquiler.png" alt="Alquiler">
+                </aside>
+            </div>
+
+            <div class="grid3">
+                <aside>
+                    <p>¿Te gusta el agua y el deporte?</p>
+                    <h3>Actividades de surfing</h3>
+                </aside>
+                <aside>
+                    <img id="img3" src="../IMG/IMAGENES_GIFS/surf.png" alt="Surf">
+                </aside>
+            </div>
+
+            <input type='hidden' name='cat' value=''>
+        </form>
 
     </section>
+
+    <section class="sIndex5">
+        <h1>Regalos y productos top</h1>
+        <form action="#" method="POST">
+            <div>
+                <aside><p>Cámaras</p></aside>
+                <aside><img src="../IMG/IMAGENES_GIFS/camara.png" alt="Camara"></aside>
+            </div>
+            <div>
+                <aside><p>Drones</p></aside>
+                <aside><img src="../IMG/IMAGENES_GIFS/dron.png" alt="Dron"></aside>
+            </div>
+            <div>
+                <aside><p>Libros</p></aside>
+                <aside><img src="../IMG/IMAGENES_GIFS/libro.png" alt="Libro"></aside>
+            </div>
+            <div>
+                <aside><p>Monitores</p></aside>
+                <aside><img src="../IMG/IMAGENES_GIFS/monitor.png" alt="Monitor"></aside>
+            </div>
+
+            <input type='hidden' name='cat' value=''>
+        </form>
+    </section>
+
+
 
 
 </main>
@@ -189,4 +278,5 @@ else{
 </footer>
 
 </body>
+<script src="../JS/app.js"></script>
 </html>

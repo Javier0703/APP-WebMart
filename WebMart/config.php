@@ -179,12 +179,14 @@ else if (isset($_POST["usuR"]) && strlen(trim($_POST["usuR"]))>0 &&
             $st->close();
             $con->close();
             if($numUsu===0){
+                $rutaImg = "IMG/ICONS_NAV/perfil.jpg";
+                $contImg = file_get_contents($rutaImg);
                 $con=conexUsu();
                 $passRHash = password_hash("$passR",PASSWORD_BCRYPT);
                 $rol=0; $estado=1;
-                $sql="INSERT INTO usuarios(USUARIO,CONTRASEÑA,ROL,ESTADO) VALUES(?,?,?,?)";
+                $sql="INSERT INTO usuarios(USUARIO,CONTRASEÑA,ICONO,ROL,ESTADO) VALUES(?,?,?,?,?)";
                 $st=$con->prepare($sql);
-                $st->bind_param("ssii",$usuR,$passRHash,$rol,$estado);
+                $st->bind_param("sssii",$usuR,$passRHash,$contImg,$rol,$estado);
                 $res=$st->execute();
                 $st->close();
                 $con->close();

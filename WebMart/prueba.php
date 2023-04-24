@@ -1,19 +1,36 @@
-<form action="pagina2.php" method="post">
-    <ul>
-        <li class="todos">Todos</li>
-        <li class="primer">Ola</li>
-        <li class="">Ola</li>
-    </ul>
-    <input id="hidenClass" type="hidden" name="categoria" value="">
-    <button>Ola</button>
-</form>
+<?php
+include ("conexDB.php");
+session_start();
 
-<script>
-    let lis=document.querySelectorAll("ul>li")
-    lis.forEach(li =>{
-        li.addEventListener("click",function (e){
-            let clase = li.classList[0]
-            document.getElementById("hidenClass").value=clase;
-        });
-    });
-</script>
+$con = conexUsu();
+$sql="SELECT c.ID_CAT, c.NOMBRE, s.ID_SUB, s.NOMBRE FROM categorias c JOIN subcategorias s using (id_cat)";
+$st=$con->prepare($sql);
+$st->execute();
+$st->bind_result($idCat,$nombreCat,$idSub,$nombreSub);
+
+while ($st->fetch()){
+    echo "<div id='$idCat' class='Categoria'>$nombreCat</div>";
+    $cat=$idCat;
+    echo "<section>";
+    echo "<div id='$idCat' class='Categoria'>Todas las categorías</div>";
+    while ($cat==$idCat){
+        echo "<div id='$idSub'>$nombreSub</div>";
+        $st->fetch();
+    }
+    echo "</section>";
+}
+
+?>
+
+<style>
+    div{
+        background:red;
+    }
+    section>div{
+        background: lightgreen;
+    }
+
+    section{
+        display: none;
+    }
+</style>
