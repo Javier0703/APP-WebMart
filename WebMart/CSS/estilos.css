@@ -9,6 +9,8 @@
     --coloc-iconos: calc((var(--altura-header) - var(--tam-iconos)) / 4);
     --tam-perfil: 55px;
     --altura-footer: 80px;
+    --tam-sec2popUp: 30px;
+    --s2popUp-col: calc( var(--tam-sec2popUp) / 4.3);
     --tam-sIndex4: 150px;
     --tam-sIndex5: 100px;
     --p-sIndex5: 16px;
@@ -35,6 +37,7 @@ header{
 
 header>nav>section{
     float: right;
+    display: flex;
 }
 
 
@@ -48,9 +51,7 @@ header>a>img{
     margin-left: var(--coloc-imagen);
 }
 
-
-
-header>nav>section>a:nth-child(-n+3) img{
+header>nav>section>a>img{
     width: var(--tam-iconos);
     padding: var(--coloc-iconos);
     margin-top: var(--coloc-iconos);
@@ -62,7 +63,7 @@ header>nav>section>a>img:hover{
 }
 
 header>nav>section>a span{
-    right: 275px;
+    right: 300px;
     top: calc(var(--altura-header) /2.5);
     position: absolute;
     display: none;
@@ -74,16 +75,71 @@ header>nav>section>a:hover span{
     display: block;
 }
 
-
-header>nav>section>a:last-child img{
-    width: var(--tam-perfil);
-    height: var(--tam-perfil);
-    border-radius: 50%;
-    margin-right: 15px;
-
+header>nav>section>div:hover{
+    cursor: pointer;
+    background: lightgrey;
 }
 
-/* Main */
+header>nav>section>div{
+    margin-left:5px;
+    padding: 0 10px;
+}
+
+header>nav>section>div{
+    width: var(--altura-header);
+    height: var(--altura-header);
+    display: flex;
+}
+
+header>nav>section>div>img{
+    margin: auto;
+    border-radius: 50%;
+    width: var(--tam-perfil);
+    height: var(--tam-perfil);
+}
+
+header>nav>section>div>span{
+    height: 20px;
+    margin-top: calc((var(--altura-header) - 20px) / 2);
+}
+
+header nav .profile{
+    display: none;
+    position: fixed;
+    right: 0;
+    top: var(--altura-header);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+header nav .profile div{
+    padding: 10px 15px;
+}
+
+header nav .profile div>section{
+    padding: 5px 15px;
+    margin: 5px 3px;
+}
+
+header nav .profile div>section:last-child{
+    border-top: 1px solid lightgrey;
+}
+
+header nav .profile div>section:hover{
+    border-radius: 10px;
+    background: lightgrey;
+}
+
+header nav .profile div a{
+    display: flex;
+    color: black;
+    text-decoration: none;
+}
+
+header nav .profile div a>span{
+    padding: 0 2px;
+}
+
+    /* Main */
 
 main{
     flex-direction: column;
@@ -135,6 +191,11 @@ footer table td:first-child{
     text-align: center;
 }
 
+.mIndex section a{
+    color: black;
+    text-decoration: none;
+}
+
 .sIndex1 {
     padding: 30px 0 30px;
 }
@@ -165,6 +226,114 @@ footer table td:first-child{
 .sIndex2 .grid1, .sIndex2 .grid2{
     grid-column: span 2;
 }
+
+.sIndex2 form .popUp{
+    width: 100%;
+    height: 100%;
+    display: none;
+    position: fixed;
+    top:0;
+    left: 0;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.sIndex2 .popUp>div{
+    border: none !important;
+    margin:auto;
+    background: white;
+}
+
+.sIndex2 .popUp>div{
+    display: block;
+}
+
+.sIndex2 .popUp .sec1popUp{
+    padding: 10px 10px;
+    display: flex;
+    text-align: center;
+}
+
+
+.sIndex2 .sec1popUp h3{
+    width: 100%;
+}
+
+.sIndex2 .sec1popUp span{
+    padding-top: 3px
+}
+.sIndex2 .sec1popUp span:hover{
+    cursor: pointer;
+}
+
+.sIndex2 .sec2popUp{
+    padding: 5px;
+    height: 500px;
+    overflow-y: auto;
+}
+.sIndex2 .sec2popUp aside{
+    display: none;
+}
+
+.sIndex2 .sec2popUp div{
+    padding: 3px;
+    width: 350px;
+    border-radius: 7px;
+    border: none !important;
+    margin: 5px 10px;
+}
+
+.sIndex2 .sec2popUp div:hover{
+    cursor: pointer;
+    background: lightgrey;
+}
+
+.sIndex2 .sec2popUp>div>img{
+    width: var(--tam-sec2popUp);
+}
+
+.sIndex2 .sec2popUp>div>p{
+    padding-top:var(--s2popUp-col);
+    width: 100%;
+    text-align: left;
+}
+
+.sIndex2 .sec2popUp>div>span{
+    padding-top: var(--s2popUp-col);
+}
+
+.sIndex2 .sec2popUp aside div{
+    margin: 10px 20px;
+    padding: 6px;
+}
+
+.sIndex2 .sec2popUp .typeAtr{
+    border-radius: 0;
+    border-bottom: 1px solid grey !important;
+}
+.sIndex2 .grid2>section{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.sIndex2 .grid2 p{
+    padding-top: 3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sIndex2 .grid2 span{
+    padding-top:3px;
+    width: 30px;
+}
+
+.sIndex2 .grid2.expandMore{
+    right: 0;
+    margin-left: auto;
+}
+
 
 .sIndex2 .grid3{
     grid-column: span 1;
@@ -213,20 +382,21 @@ footer table td:first-child{
     display: flex;
 }
 
-body::-webkit-scrollbar,.sIndex3::-webkit-scrollbar {height: 8px; width: 10px}
-body::-webkit-scrollbar-thumb,.sIndex3::-webkit-scrollbar-thumb {background-color: lightgrey; border-radius: 5px;}
-body::-webkit-scrollbar-thumb:hover,.sIndex3::-webkit-scrollbar-thumb:hover {background-color: rgb(180, 180, 180);}
+body::-webkit-scrollbar,.sIndex3::-webkit-scrollbar, .sIndex2 .popUp  .sec2popUp::-webkit-scrollbar {height: 8px; width: 10px}
+body::-webkit-scrollbar-thumb,.sIndex3::-webkit-scrollbar-thumb, .sIndex2 .popUp  .sec2popUp::-webkit-scrollbar-thumb {background-color: lightgrey; border-radius: 5px;}
+body::-webkit-scrollbar-thumb:hover,.sIndex3::-webkit-scrollbar-thumb:hover, .sIndex2 .popUp  .sec2popUp::-webkit-scrollbar-thumb:hover {background-color: rgb(180, 180, 180);}
 
-.sIndex3 div{
+
+.sIndex3 a{
     margin:0 5px 0;
     padding:10px 10px 2px;
 }
 
-.sIndex3 div:first-child{
+.sIndex3 a:first-child{
     margin: 0 5px 0 0;
 }
 
-.sIndex3 div:hover{
+.sIndex3 a:hover{
     cursor: pointer;
     border-radius: 15px;
     background: rgba(211, 211, 211, 0.5);
@@ -255,7 +425,7 @@ body::-webkit-scrollbar-thumb:hover,.sIndex3::-webkit-scrollbar-thumb:hover {bac
 .sIndex4 form{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto 1fr;
+    grid-template-rows: 1fr 1fr;
     grid-gap: 10px;
 }
 
@@ -269,19 +439,6 @@ body::-webkit-scrollbar-thumb:hover,.sIndex3::-webkit-scrollbar-thumb:hover {bac
 .sIndex4 form div:hover{
     background: rgba(211, 211, 211, 0.2);
     cursor: pointer;
-}
-
-.sIndex4 .grid1 {
-    grid-column: 1 / span 2;
-}
-
-.sIndex4 .grid2 {
-    grid-column: 1;
-}
-
-.sIndex4 .grid3 {
-    grid-column: 2;
-    grid-row: 2;
 }
 
 .sIndex4 form div{
@@ -397,12 +554,17 @@ body::-webkit-scrollbar-thumb:hover,.sIndex3::-webkit-scrollbar-thumb:hover {bac
 
     .sIndex2 form, .sIndex4 form, .sIndex5 form{
         grid-template-columns: 1fr !important;
-        grid-template-rows: auto auto auto;
+    }
+
+    .sIndex2 .grid2 section{
+        max-width: 100%;
     }
 
     .mIndex .grid1, .mIndex .grid2, .mIndex .grid3{
-        grid-column: 1;
+        grid-column: span 1 !important;
+        overflow: hidden;
     }
+
 
 }
 

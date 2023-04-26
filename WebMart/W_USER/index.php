@@ -147,9 +147,19 @@ else{
             $st->execute();
             $st->bind_result($icono);
             $st->fetch();
-            echo '<a href=""><img src="data:image/jpg;base64,'.base64_encode($icono).'"></a>';
+            echo '<div id="profileIcon"><img src="data:image/jpg;base64,'.base64_encode($icono).'"><span class="material-symbols-outlined">expand_more</span></div>';
             ?>
         </section>
+        <div class="profile" id="profile">
+            <div>
+                <section><a href=""><span class="material-symbols-outlined">person</span><p>Perfil</p></a></section>
+                <section><a href=""><span class="material-symbols-outlined">favorite</span><p>Favoritos</p></a></section>
+                <section><a href=""><span class="material-symbols-outlined">shopping_cart</span><p>Favoritos</p></a></section>
+                <section><a href=""><span class="material-symbols-outlined">sell</span><p>Ventas</p></a></section>
+                <section><a href=""><span class="material-symbols-outlined">chat</span><p>Mensajes</p></a></section>
+                <section><a href="../cierre.php"><span class="material-symbols-outlined">logout</span><p>Cerrar Sesión</p></a></section>
+            </div>
+        </div>
     </nav>
 </header>
 
@@ -163,21 +173,77 @@ else{
     <section class="sIndex2">
         <h1>¿Qué es lo que estás buscando?</h1>
 
-        <form action="#" method="POST">
-            <div class="grid1"><img src="../IMG/LOGOS_ERRORES/lupa.png" alt="lupa"><input type="text" placeholder="Estoy buscando..."></div>
+        <form action="productos.php" method="GET">
+            <div class="grid1"><img src="../IMG/LOGOS_ERRORES/lupa.png" alt="lupa"><input type="text" name="prod" placeholder="Estoy buscando..."></div>
             <div class="grid2" id="grid2">
-                <span class="material-symbols-outlined">format_list_bulleted</span>
-                Elige una Categoría
-                <span class="material-symbols-outlined">expand_more</span>
+                <section>
+                    <span class="material-symbols-outlined">format_list_bulleted</span>
+                    <p id="indexPtitle">Elige una Categoría</p>
+                    <span class="material-symbols-outlined expandMore">expand_more</span>
+                </section>
             </div>
             <div class="grid3"><button>Buscar</button></div>
+            <section class="popUp">
+                <div>
+                    <section class="sec1popUp">
+                        <h3>Categorías</h3>
+                        <span class="material-symbols-outlined">close</span>
+                    </section>
+                    <?php
+                    $con = conexUsu();
+                    $sql = "SELECT COUNT(*) FROM categorias c JOIN subcategorias s using (id_cat)";
+                    $st=$con->prepare($sql);
+                    $st->execute();
+                    $st->bind_result($filas);
+                    $st->fetch();
+                    $filasRest=$filas;
+                    $st->close();
+                    $sql="SELECT c.ID_CAT, c.NOMBRE, s.ID_SUB, s.NOMBRE FROM categorias c JOIN subcategorias s using (id_cat)";
+                    $st=$con->prepare($sql);
+                    $st->execute();
+                    $st->bind_result($idCat,$nombreCat,$idSub,$nombreSub);
+                    ?>
+                    <section class="sec2popUp">
+                    <?php
+                    $st->fetch();
+                    $filasRest--;
+                    while ($filasRest>0){
+                    ?>
+                        <div><img src="../IMG/CATEGORIAS/<?=$idCat?>.png"><p><?=$nombreCat?></p><span class="material-symbols-outlined">chevron_right</span></div>
+                        <?php
+                    $cat=$idCat;
+                    ?>
+                        <aside>
+                            <div class="typeAtr"><span class="material-symbols-outlined">chevron_left</span><p>Atrás</p></div>
+                            <div class="typeCat" id='<?=$idCat?>'><p>Todo sobre <?=$nombreCat?></p></div>
+                        <?php
+                        while ($cat==$idCat){
+                        ?>
+                            <div id='<?=$idSub?>'><p><?=$nombreSub?></p></div></a>
+                            <?php
+                            $st->fetch();
+                            $filasRest--;
+                        }
+                        ?>
+                        </aside>
+                    <?php
+                    }
+                    ?>
+                    </section>
+                    <?php
+                    $st->close();
+                    $con->close();
+                    ?>
+                </div>
+            </section>
+            <input id="indexHidden" type="hidden" name="" value="">
         </form>
 
     </section>
 
     <section class="sIndex3">
 
-        <form action="sIndex3.php" method="POST">
+        <form action="productos.php" method="GET">
             <?php
             $con=conexUsu();
             $sql="SELECT ID_CAT,NOMBRE FROM categorias ORDER BY ID_CAT";
@@ -186,11 +252,10 @@ else{
             $st->bind_result($id,$nombre);
             while ($st->fetch()){
             ?>
-                <div id="<?=$id?>"><img src="../IMG/CATEGORIAS/<?=$id?>.png" alt="Categoría"><p><?=$nombre?></p></div>
+                <a href="productos.php?id_cat=<?=$id?>"><div><img src="../IMG/CATEGORIAS/<?=$id?>.png" alt="Categoría"><p><?=$nombre?></p></div></a>
             <?php
             }
             ?>
-            <input type='hidden' name='cat' value=''>
         </form>
     </section>
 
@@ -199,69 +264,120 @@ else{
         <h1>Se acerca el verano... ¿No sabes que hacer?</h1>
         <h3>¡Te ayudamos! Mira estos planazos que puedes ver</h3>
 
-        <form action="#" method="POST">
-
-            <div class="grid1">
-                <aside>
-                <p>Si tienes jardín este producto te encantará...</p>
-                <h3>Piscinas hinchables</h3>
-                </aside>
-                <aside>
-                    <img src="../IMG/IMAGENES_GIFS/piscina.png" alt="Piscina">
-                </aside>
-            </div>
-
-            <div class="grid2">
-                <aside>
-                    <p>Un buen plan con tus amigos...</p>
-                    <h3>Alquileres vacacionales</h3>
-                </aside>
-                <aside>
-                    <img src="../IMG/IMAGENES_GIFS/alquiler.png" alt="Alquiler">
-                </aside>
-            </div>
-
-            <div class="grid3">
-                <aside>
-                    <p>¿Te gusta el agua y el deporte?</p>
-                    <h3>Actividades de surfing</h3>
-                </aside>
-                <aside>
-                    <img id="img3" src="../IMG/IMAGENES_GIFS/surf.png" alt="Surf">
-                </aside>
-            </div>
-
-            <input type='hidden' name='cat' value=''>
+        <form action="productos.php" method="GET">
+            <?php
+            $con=conexUsu();
+            $sql="SELECT ID_SUB FROM subcategorias WHERE NOMBRE LIKE '%Piscinas hinchables%' OR NOMBRE LIKE '%Alquiler vacacional%' OR  NOMBRE LIKE'%Surf%' OR NOMBRE LIKE '%Pesca' ORDER BY 1";
+            $st=$con->prepare($sql);
+            $st->execute();
+            $st->bind_result($id);
+            $st->fetch();
+            ?>
+            <a href="productos.php?id_sub=<?=$id?>">
+                <div class="grid1">
+                    <aside>
+                    <p>Si tienes jardín este producto te encantará...</p>
+                    <h3>Piscinas hinchables</h3>
+                    </aside>
+                    <aside>
+                        <img src="../IMG/IMAGENES_GIFS/piscina.png" alt="Piscina">
+                    </aside>
+                </div>
+            </a>
+            <?php
+            $st->fetch()?>
+            <a href="productos.php?id_sub=<?=$id?>">
+                <div class="grid2">
+                    <aside>
+                        <p>Un buen plan con tus amigos...</p>
+                        <h3>Alquileres vacacionales</h3>
+                    </aside>
+                    <aside>
+                        <img src="../IMG/IMAGENES_GIFS/alquiler.png" alt="Alquiler">
+                    </aside>
+                </div>
+            </a>
+            <?php
+            $st->fetch()?>
+            <a href="productos.php?id_sub=<?=$id?>">
+                <div class="grid3">
+                    <aside>
+                        <p>¿Te gusta el agua y el deporte?</p>
+                        <h3>Actividades de surfing</h3>
+                    </aside>
+                    <aside>
+                        <img id="img3" src="../IMG/IMAGENES_GIFS/surf.png" alt="Surf">
+                    </aside>
+                </div>
+            </a>
+            <?php
+            $st->fetch()?>
+            <a href="productos.php?id_sub=<?=$id?>">
+                <div class="grid4">
+                    <aside>
+                        <p>Otra actividad acuática</p>
+                        <h3>Pesca</h3>
+                    </aside>
+                    <aside>
+                        <img id="img3" src="../IMG/IMAGENES_GIFS/pesca.png" alt="Pesca">
+                    </aside>
+                </div>
+            </a>
+            <?php
+            $st->close();
+            $con->close();?>
         </form>
-
     </section>
 
     <section class="sIndex5">
         <h1>Regalos y productos top</h1>
-        <form action="#" method="POST">
-            <div>
-                <aside><p>Cámaras</p></aside>
-                <aside><img src="../IMG/IMAGENES_GIFS/camara.png" alt="Camara"></aside>
-            </div>
-            <div>
-                <aside><p>Drones</p></aside>
-                <aside><img src="../IMG/IMAGENES_GIFS/dron.png" alt="Dron"></aside>
-            </div>
-            <div>
-                <aside><p>Libros</p></aside>
-                <aside><img src="../IMG/IMAGENES_GIFS/libro.png" alt="Libro"></aside>
-            </div>
-            <div>
-                <aside><p>Monitores</p></aside>
-                <aside><img src="../IMG/IMAGENES_GIFS/monitor.png" alt="Monitor"></aside>
-            </div>
-
-            <input type='hidden' name='cat' value=''>
+        <form action="productos.php" method="GET">
+            <?php
+            $con=conexUsu();
+            $sql="SELECT ID_SUB, NOMBRE FROM subcategorias WHERE NOMBRE LIKE '%Cámaras%' OR NOMBRE LIKE '%Drones%' OR  NOMBRE='Libros' OR NOMBRE LIKE '%Monitores%' ORDER BY 2";
+            $st=$con->prepare($sql);
+            $st->execute();
+            $st->bind_result($id,$nombre);
+            $st->fetch();
+            ?>
+            <a href="productos.php?id_sub=<?=$id?>">
+                <div>
+                    <aside><p><?=$nombre?></p></aside>
+                    <aside><img src="../IMG/IMAGENES_GIFS/camara.png" alt="Camara"></aside>
+                </div>
+            </a>
+            <?php
+            $st->fetch();
+            ?>
+            <a href="productos.php?id_sub=<?=$id?>">
+                <div>
+                    <aside><p><?=$nombre?></p></aside>
+                    <aside><img src="../IMG/IMAGENES_GIFS/dron.png" alt="Dron"></aside>
+                </div>
+            </a>
+            <?php
+            $st->fetch();
+            ?>
+            <a href="productos.php?id_sub=<?=$id?>">
+                <div>
+                    <aside><p><?=$nombre?></p></aside>
+                    <aside><img src="../IMG/IMAGENES_GIFS/libro.png" alt="Libro"></aside>
+                </div>
+            </a>
+            <?php
+            $st->fetch();
+            ?>
+            <a href="productos.php?id_sub=<?=$id?>">
+                <div>
+                    <aside><p><?=$nombre?></p></aside>
+                    <aside><img src="../IMG/IMAGENES_GIFS/monitor.png" alt="Monitor"></aside>
+                </div>
+            </a>
+            <?php
+            $st->close();
+            $con->close();?>
         </form>
     </section>
-
-
-
 
 </main>
 
