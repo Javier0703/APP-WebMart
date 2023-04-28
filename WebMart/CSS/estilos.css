@@ -104,6 +104,7 @@ header>nav>section>div>span{
 }
 
 header nav .profile{
+    background: white;
     display: none;
     position: fixed;
     right: 0;
@@ -125,8 +126,8 @@ header nav .profile div>section:last-child{
 }
 
 header nav .profile div>section:hover{
-    border-radius: 10px;
-    background: lightgrey;
+    border-radius: 5px;
+    background: rgba(211, 211, 211, 0.5);
 }
 
 header nav .profile div a{
@@ -139,7 +140,7 @@ header nav .profile div a>span{
     padding: 0 2px;
 }
 
-    /* Main */
+/* Main */
 
 main{
     flex-direction: column;
@@ -311,6 +312,7 @@ footer table td:first-child{
     border-radius: 0;
     border-bottom: 1px solid grey !important;
 }
+
 .sIndex2 .grid2>section{
     display: flex;
     width: 100%;
@@ -328,12 +330,6 @@ footer table td:first-child{
     padding-top:3px;
     width: 30px;
 }
-
-.sIndex2 .grid2.expandMore{
-    right: 0;
-    margin-left: auto;
-}
-
 
 .sIndex2 .grid3{
     grid-column: span 1;
@@ -514,6 +510,95 @@ body::-webkit-scrollbar-thumb:hover,.sIndex3::-webkit-scrollbar-thumb:hover, .sI
     margin-left: 0;
 }
 
+/* Página Productos */
+
+.mProd>section{
+    max-width: 95%;
+    width: 1200px;
+    margin: auto;
+}
+
+.sProd1{
+    padding-bottom: 15px;
+    border-bottom: 1px solid lightgrey;
+}
+
+.sProd1 form{
+    padding-top: 10px;
+    display: grid;
+    grid-gap: 15px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.sProd1 form div{
+    cursor: pointer;
+}
+
+.sProd1 form .grid1{
+    border-radius: 25px;
+    grid-column: span 5;
+    border: 1px solid lightgrey;
+    display: flex;
+}
+
+.sProd1 .grid1 img:first-child{
+    width: 25px;
+    padding: 10px;
+}
+
+.sProd1 .grid1 input{
+    width: 100%;
+    outline: none;
+    border: none;
+    background: none;
+    font-size: 16px;
+}
+
+.sProd1 .grid1 img:last-child{
+    opacity: 0;
+    width: 15px;
+    margin: 15px;
+}
+
+.sProd1 .grid2, .sProd1 .grid3{
+    border-radius: 5px;
+    border: 1px solid lightgrey;
+    grid-column: span 2;
+}
+
+.sProd1 .grid2>section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sProd1 .grid2>section span{
+    padding: 0 5px
+}
+
+.sProd1 .grid3>section{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.sProd1 .grid3 p{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sProd1 form div button{
+    width: 100%;
+    background: #00adec;
+    color: white;
+    font-size: 16px;
+    outline: none;
+    border: none;
+    border-radius: 15px;
+}
+
+
 
 /* MEDIA QUERY */
 
@@ -552,15 +637,15 @@ body::-webkit-scrollbar-thumb:hover,.sIndex3::-webkit-scrollbar-thumb:hover, .sI
 
 @media (max-width: 715px) {
 
-    .sIndex2 form, .sIndex4 form, .sIndex5 form{
+    .sIndex2 form, .sIndex4 form, .sIndex5 form, .sProd1 form{
         grid-template-columns: 1fr !important;
     }
 
-    .sIndex2 .grid2 section{
+    .sIndex2 .grid2 section, .sProd1 .grid3 section{
         max-width: 100%;
     }
 
-    .mIndex .grid1, .mIndex .grid2, .mIndex .grid3{
+    .mIndex .grid1, .mIndex .grid2, .mIndex .grid3, .sProd1 form div{
         grid-column: span 1 !important;
         overflow: hidden;
     }

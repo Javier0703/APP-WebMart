@@ -3,63 +3,17 @@ include ("../conexDB.php");
 session_set_cookie_params(sesTime());
 session_start();
 
+if ((isset($_COOKIE["usu"]) && isset($_COOKIE["pass"])) || (isset($_SESSION["usu"]) && isset($_SESSION["pass"]))){
 
-if (isset($_SESSION["usu"]) && isset($_SESSION["pass"])){
-
-    if (conexUsu()==0){
-        $cod=conexUsu();
-        setcookie("error","Error $cod, no se puede establecer conexión con la Base de Datos :(");
-        header("Location:error.php");
+    if (isset($_COOKIE["usu"]) && $_COOKIE["pass"]){
+        $usu=base64_decode($_COOKIE["usu"]);
+        $pass=base64_decode($_COOKIE["pass"]);
     }
 
-    else{
-
-        try {
-            $con=conexUsu();
-            $sql="SELECT ESTADO,ROL FROM usuarios WHERE USUARIO=? AND CONTRASEÑA=?";
-            $st=$con->prepare($sql);
-            $st->bind_param("ss",$_SESSION["usu"],$_SESSION["pass"]);
-            $st->execute();
-            $st->bind_result($estado,$rol);
-
-            if ($st->fetch()){
-
-                if ($rol==1){
-                    $st->close();
-                    $con->close();
-                    header("Location: ../W_ADMIN/index.php");
-                }
-
-                if ($estado==0){
-                    //Tu cuenta has sido bloqueada
-                    $msg="Tu cuenta ha sido bloqueada";
-                    setcookie("msg",$msg);
-                    $st->close();
-                    $con->close();
-                    header("Location: ../index.php");
-                }
-
-                $st->close();
-                $con->close();
-                define("USU",$_SESSION["usu"]);
-                define("PASS",$_SESSION["pass"]);
-
-            }
-        }
-
-        catch (mysqli_sql_exception $e){
-            $cod=$e ->getCode();
-            $msgError=$e->getMessage();
-            setcookie("error","Error $cod, $msgError");
-            header("Location:error.php");
-        }
+    if (isset($_SESSION["usu"]) && $_SESSION["pass"]){
+        $usu=$_SESSION["usu"];
+        $pass=$_SESSION["pass"];
     }
-
-}
-
-elseif (isset($_COOKIE["usu"]) && isset($_COOKIE["pass"])){
-    $usu=base64_decode($_COOKIE["usu"]);
-    $pass=base64_decode($_COOKIE["pass"]);
 
     if (conexUsu()==0){
         $cod=conexUsu();
@@ -109,11 +63,10 @@ elseif (isset($_COOKIE["usu"]) && isset($_COOKIE["pass"])){
             header("Location:error.php");
         }
     }
-
 }
 
 else{
-    header("Location: ../index.php");
+    header("Location:../cierre.php");
 }
 ?>
 
@@ -124,7 +77,7 @@ else{
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" href="../IMG/LOGOS_ERRORES/logo.png">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,-25" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,-25"/>
     <title>WebMart</title>
     <link rel="stylesheet" href="../CSS/estilos.css">
 </head>
@@ -394,5 +347,6 @@ else{
 </footer>
 
 </body>
-<script src="../JS/app.js"></script>
+<script src="../JS_APP/header.js"></script>
+<script src="../JS_APP/app.js"></script>
 </html>

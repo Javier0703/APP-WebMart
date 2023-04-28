@@ -1,21 +1,6 @@
 window.addEventListener("DOMContentLoaded",function (e){
 
-    //header
-    let profileIcon = document.getElementById("profileIcon");
-    let profile = document.getElementById("profile");
-    profileIcon.addEventListener("click",function (e){
-        if (profileIcon.lastElementChild.textContent==="expand_more"){
-        profileIcon.lastElementChild.textContent="expand_less";
-        profile.style.display="block";
-        }
-
-        else{
-            profileIcon.lastElementChild.textContent="expand_more";
-            profile.style.display="none";
-        }
-    });
-
-    //Section 2 Popup
+    //Index Section 2 Popup
     let grid2 = document.querySelector(".sIndex2>form>.grid2");
     let popUp = document.querySelector(".sIndex2>form>.popUp");
     grid2.addEventListener("click", function (e){
@@ -44,6 +29,7 @@ window.addEventListener("DOMContentLoaded",function (e){
         });
     });
 
+    //Index Section 2 Seleccion Cat y muestra de texto
     let indexHidden = document.getElementById("indexHidden");
     let divsSub = document.querySelectorAll(".sIndex2>form>section>div>section>aside>div");
     let indexPtitle = document.getElementById("indexPtitle");
@@ -77,7 +63,5 @@ window.addEventListener("DOMContentLoaded",function (e){
             }
         });
     });
-
-
 });
 
