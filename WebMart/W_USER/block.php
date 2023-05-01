@@ -3,14 +3,14 @@ include ("../conexDB.php");
 session_set_cookie_params(sesTime());
 session_start();
 
-/*
+
 if (isset($_COOKIE["block"])){
     setcookie("block",false);
 }
 
 else{
     header("Location: productos.php");
-}*/
+}
 
 if ((isset($_COOKIE["usu"]) && isset($_COOKIE["pass"])) || (isset($_SESSION["usu"]) && isset($_SESSION["pass"]))){
 

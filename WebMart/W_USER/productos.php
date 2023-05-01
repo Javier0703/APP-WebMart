@@ -190,15 +190,77 @@ if (isset($_GET["price_max"]) && !is_numeric($_GET["price_max"])){ setcookie("bl
             <div class="grid3">
                 <section>
                     <span class="material-symbols-outlined">format_list_bulleted</span>
-                    <p id="catProd">Elige una Categoría</p>
+                    <p id="catProd">Todas las Categorías</p>
                     <span class="material-symbols-outlined expandMore">expand_more</span>
                 </section>
             </div>
 
+            <section class="popUp">
+                <div>
+                    <section class="sec1">
+                        <h3>Categorías</h3>
+                        <span class="material-symbols-outlined">close</span>
+                    </section>
+                    <?php
+                    $con = conexUsu();
+                    $sql = "SELECT COUNT(*) FROM categorias c JOIN subcategorias s using (id_cat)";
+                    $st=$con->prepare($sql);
+                    $st->execute();
+                    $st->bind_result($filas);
+                    $st->fetch();
+                    $filasRest=$filas;
+                    $st->close();
+                    $sql="SELECT c.ID_CAT, c.NOMBRE, s.ID_SUB, s.NOMBRE FROM categorias c JOIN subcategorias s using (id_cat)";
+                    $st=$con->prepare($sql);
+                    $st->execute();
+                    $st->bind_result($idCat,$nombreCat,$idSub,$nombreSub);
+                    ?>
+                    <section class="sec2">
+                        <section id="allCats"><p>Todas las Categorías</p></section>
+                        <?php
+                        $st->fetch();
+                        $filasRest--;
+                        while ($filasRest>0){
+                            ?>
+                            <div><img src="../IMG/CATEGORIAS/<?=$idCat?>.png"><p><?=$nombreCat?></p><span class="material-symbols-outlined">chevron_right</span></div>
+                            <?php
+                            $cat=$idCat;
+                            ?>
+                            <aside>
+                                <div class="typeAtr"><span class="material-symbols-outlined">chevron_left</span><p>Atrás</p></div>
+                                <div class="typeCat" id='<?=$idCat?>'><p>Todo sobre <?=$nombreCat?></p></div>
+                                <?php
+                                while ($cat==$idCat){
+                                    ?>
+                                    <div id='<?=$idSub?>'><p><?=$nombreSub?></p></div></a>
+                                    <?php
+                                    $st->fetch();
+                                    $filasRest--;
+                                }
+                                ?>
+                            </aside>
+                            <?php
+                        }
+                        ?>
+                    </section>
+                    <?php
+                    $st->close();
+                    $con->close();
+                    ?>
+                </div>
+            </section>
+
+            <input id="typeProd" type="hidden" name="" value="">
+
             <div class="grid4"><button>Buscar</button></div>
 
+            <section>
+                Hola
+            </section>
         </form>
+
     </section>
+
     <a href="productos.php">YHola</a>
     <?php
     echo $_GET["price_min"];

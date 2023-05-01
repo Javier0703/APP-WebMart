@@ -114,5 +114,80 @@ window.addEventListener("DOMContentLoaded",function (e){
         precio.style.display="none";
     });
 
+    //Popup de las categorías
+    let grid3 = document.querySelector(".sProd1>form>.grid3");
+    let cat = grid3.nextElementSibling;
+
+    grid3.addEventListener("click", function (e){
+        cat.style.display="grid";
+    });
+    cat.addEventListener("click",function (e){
+        cat.style.display="none";
+    });
+    cat.firstElementChild.addEventListener("click",function (e){
+        e.stopPropagation();
+    });
+    cat.firstElementChild.firstElementChild.lastElementChild.addEventListener("click",function(e){
+        cat.style.display="none";
+    });
+
+    let allCats = document.getElementById("allCats");
+    let divsCats= document.querySelectorAll(".sProd1 .popUp>div>.sec2>div");
+    divsCats.forEach(divsCat =>{
+        divsCat.addEventListener("click" ,function (e){
+            divsCat.nextElementSibling.style.display="block";
+            divsCats.forEach(div =>{
+                div.style.display="none";
+                allCats.style.display="none";
+            });
+        });
+    });
+
+    let typeProd = document.getElementById("typeProd");
+    let catProd = document.getElementById("catProd");
+    let divsSub = document.querySelectorAll(".sProd1 .popUp .sec2>aside>div");
+
+    divsSub.forEach(divSub =>{
+        divSub.addEventListener("click",function (e){
+            let id=divSub.id;
+
+            if (divSub.classList.contains("typeAtr")){
+                divSub.parentElement.style.display="none";
+                divsCats.forEach(div =>{
+                    div.style.display="flex";
+                    allCats.style.display="block";
+                });
+            }
+
+            else{
+                typeProd.value=id;
+                catProd.textContent=divSub.firstElementChild.textContent;
+                grid3.classList.add("typeExist");
+
+                if (divSub.classList.contains("typeCat")){
+                    typeProd.name="id_cat";
+                }
+                else{
+                    typeProd.name="id_sub";
+                }
+
+                divSub.parentElement.style.display="none";
+                divsCats.forEach(div => {
+                    div.style.display = "flex";
+                    allCats.style.display="block";
+                });
+                cat.style.display="none";
+            }
+
+        });
+    });
+
+    allCats.addEventListener("click",function (e){
+        typeProd.value="";
+        typeProd.name="";
+        catProd.textContent=allCats.firstElementChild.textContent;
+        grid3.classList.remove("typeExist");
+        cat.style.display="none";
+    });
 
 });
