@@ -533,6 +533,67 @@ footer table td:first-child{
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 
+.sProd1>form>.ordenProd{
+    font-size: 13px;
+    display: flex;
+    border-top: 1px solid lightgrey;
+    width: 100%;
+    grid-column: span 5;
+    padding: 5px 0;
+}
+
+
+.sProd1>form>.ordenProd div{
+    display: flex;
+}
+.sProd1>form>.ordenProd .orderSelected{
+    font-weight: bolder;
+}
+
+.sProd1>form>.ordenProd div p{
+    padding-top: 2px;
+}
+
+.sProd1>form>.ordenProd>section{
+    display: none;
+    border-radius: 5px;
+    margin: 25px 0 0 100px;
+    position: absolute;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    padding: 5px;
+    z-index: 10;
+}
+
+.sProd1>form>.ordenProd>section.mostrar{
+    display: block;
+}
+
+
+
+.sProd1>form>.ordenProd>section p:first-child{
+    width: 100%;
+    color: grey;
+    padding: 2px 0 0 10px;
+}
+
+.sProd1>form>.ordenProd>section>p{
+    padding: 5px 30px 5px 10px;
+    margin: 3px 0;
+}
+
+.sProd1>form>.ordenProd>section>p:hover{
+    background: lightgrey;
+}
+
+.sProd1>form>.ordenProd a{
+    text-decoration: none;
+    color: black;
+    margin-left: auto;
+}
+
+
+
 .sProd1 form div{
     cursor: pointer;
 }
@@ -780,9 +841,6 @@ footer table td:first-child{
     border-bottom: 1px solid grey !important;
 }
 
-
-
-
 .sProd1 form div button{
     height: 30px;
     width: 100%;
@@ -868,7 +926,7 @@ footer table td:first-child{
         max-width: 100%;
     }
 
-    .mIndex .grid1, .mIndex .grid2, .mIndex .grid3, .sProd1 form div{
+    .mIndex .grid1, .mIndex .grid2, .mIndex .grid3, .sProd1 form div, .sProd1>form>section{
         grid-column: span 1 !important;
         overflow: hidden;
     }

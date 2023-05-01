@@ -190,4 +190,17 @@ window.addEventListener("DOMContentLoaded",function (e){
         cat.style.display="none";
     });
 
+    //PopUp de order
+    let div = document.querySelector(".sProd1 .ordenProd").firstElementChild;
+    let section = document.getElementById("secOrder");
+
+    document.addEventListener("click", function(e) {
+        if (e.target.parentElement===div || e.target.parentElement===section || e.target.parentElement===section.firstElementChild){
+            section.classList.add("mostrar");
+        }
+        else {
+            section.classList.remove("mostrar");
+        }
+    });
+
 });
