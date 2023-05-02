@@ -3,15 +3,6 @@ include ("../conexDB.php");
 session_set_cookie_params(sesTime());
 session_start();
 
-
-if (isset($_COOKIE["block"])){
-    setcookie("block",false);
-}
-
-else{
-    header("Location: productos.php");
-}
-
 if ((isset($_COOKIE["usu"]) && isset($_COOKIE["pass"])) || (isset($_SESSION["usu"]) && isset($_SESSION["pass"]))){
 
     if (isset($_COOKIE["usu"]) && $_COOKIE["pass"]){
@@ -77,7 +68,6 @@ if ((isset($_COOKIE["usu"]) && isset($_COOKIE["pass"])) || (isset($_SESSION["usu
 else{
     header("Location:../cierre.php");
 }
-
 ?>
 
 <!doctype html>
@@ -87,11 +77,13 @@ else{
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" href="../IMG/LOGOS_ERRORES/logo.png">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,-25" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,-25"/>
     <title>WebMart</title>
     <link rel="stylesheet" href="../CSS/estilos.css">
 </head>
+
 <body>
+
 <header>
     <a href="index.php"><img src="../IMG/LOGOS_ERRORES/logoEntero.png" alt="Logo"></a>
     <nav>
@@ -115,7 +107,7 @@ else{
             <div>
                 <section><a href=""><span class="material-symbols-outlined">person</span><p>Perfil</p></a></section>
                 <section><a href=""><span class="material-symbols-outlined">favorite</span><p>Favoritos</p></a></section>
-                <section><a href=""><span class="material-symbols-outlined">shopping_cart</span><p>Favoritos</p></a></section>
+                <section><a href=""><span class="material-symbols-outlined">shopping_cart</span><p>Compras</p></a></section>
                 <section><a href=""><span class="material-symbols-outlined">sell</span><p>Ventas</p></a></section>
                 <section><a href=""><span class="material-symbols-outlined">chat</span><p>Mensajes</p></a></section>
                 <section><a href="../cierre.php"><span class="material-symbols-outlined">logout</span><p>Cerrar Sesión</p></a></section>
@@ -124,13 +116,16 @@ else{
     </nav>
 </header>
 
-<main class="mBlock">
-    <section>
-        <h3>¿Estás tramando cosas raras?</h3>
-        <p>Es muy probable que si estás aquí es porque has intentado algo extraño</p>
-        <p>Nosotros evitamos inyecciones SQL y XSS para evitar problemas ¡No lo hagas!</p>
-        <a href="productos.php">Volver</a>
-    </section>
+<main class="mPublic">
+    <form action="" method="POST">
+
+        <section class="sPublic1">
+            <h3>¿Qué es lo que deseas subir?</h3>
+            <p>En WebMart hay espacio para todo (o eso creemos)</p>
+
+        </section>
+
+    </form>
 </main>
 
 <footer>
@@ -146,7 +141,5 @@ else{
 </footer>
 
 </body>
-
 <script src="../JS_APP/header.js"></script>
-<script src="../JS_APP/prod.js"></script>
 </html>

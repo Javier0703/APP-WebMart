@@ -5,7 +5,7 @@
     --altura-header:80px;
     --tam-img:40px;
     --coloc-imagen: calc((var(--altura-header) - var(--tam-img)) / 2 );
-    --tam-iconos:35px;
+    --tam-iconos:30px;
     --coloc-iconos: calc((var(--altura-header) - var(--tam-iconos)) / 4);
     --tam-perfil: 55px;
     --altura-footer: 80px;
@@ -56,6 +56,7 @@ header>nav>section>a>img{
     padding: var(--coloc-iconos);
     margin-top: var(--coloc-iconos);
     margin-left: 5px;
+    border-radius: 5px;
 }
 
 header>nav>section>a>img:hover{
@@ -899,6 +900,28 @@ footer table td:first-child{
     color: black;
 
 }
+
+/* PUBLICAR */
+
+.mPublic{
+    margin-top: var(--altura-header);
+    background: #f2f3f6;
+    min-height: calc(100vh - var(--altura-header) - var(--altura-footer));
+}
+
+.mPublic>form{
+    padding-top: 10px;
+    max-width: 95%;
+    width: 1200px;
+    margin: auto;
+}
+
+.mPublic>form .sPublic1{
+    border-radius: 10px;
+    background: white;
+    padding: 30px;
+}
+
 /* MEDIA QUERY */
 
 @media (max-width: 440px) {

@@ -95,6 +95,8 @@ if (isset($_GET["id_cat"])){
     $st->execute();
     $st->bind_result($num);
     $st->fetch();
+    $st->close();
+    $con->close();
     if ($_GET["id_cat"] > $num || $_GET["id_cat"]<=0){
         setcookie("block","Bloqueado");
         header("Location: block.php");
@@ -108,6 +110,8 @@ if (isset($_GET["id_sub"])){
     $st->execute();
     $st->bind_result($num);
     $st->fetch();
+    $st->close();
+    $con->close();
     if ($_GET["id_sub"] > $num || $_GET["id_sub"]<=0){
         setcookie("block","Bloqueado");
         header("Location: block.php");
@@ -142,9 +146,9 @@ if (isset($_GET["order"]) && ($_GET["order"]>4 || $_GET["order"]<1)){
     <a href="index.php"><img src="../IMG/LOGOS_ERRORES/logoEntero.png" alt="Logo"></a>
     <nav>
         <section>
-            <a href="#"><img src="../IMG/ICONS_NAV/estadisticas.png" alt="Estadisticas"><span>Estadísticas</span></a>
-            <a href="#"><img src="../IMG/ICONS_NAV/grupo.png" alt="Usuarios"><span>Usuarios</span></a>
-            <a href="#"><img src="../IMG/ICONS_NAV/agregar.png" alt="Subir Producto"><span>Subir un Producto</span></a>
+            <a href="estadísticas.php"><img src="../IMG/ICONS_NAV/estadisticas.png" alt="Estadisticas"><span>Estadísticas</span></a>
+            <a href="usuarios.php"><img src="../IMG/ICONS_NAV/grupo.png" alt="Usuarios"><span>Usuarios</span></a>
+            <a href="publicar.php"><img src="../IMG/ICONS_NAV/agregar.png" alt="Subir Producto"><span>Subir un Producto</span></a>
             <?php
             $usu=USU;
             $con=conexUsu();
@@ -381,10 +385,15 @@ if (isset($_GET["order"]) && ($_GET["order"]>4 || $_GET["order"]<1)){
 
         </form>
     </section>
+
+    <section class="sProd2">
     <?php
-    echo $_GET["price_min"];
-    echo $_GET["price_max"];
+        $sql=""
     ?>
+
+
+
+    </section>
 
 
 
