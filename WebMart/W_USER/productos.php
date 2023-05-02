@@ -70,8 +70,58 @@ else{
 }
 
 //Comprobación del contenido de las Categorías, productos y texto
+
 if (isset($_GET["price_min"]) && !is_numeric($_GET["price_min"])){ setcookie("block","Bloqueado"); header("Location: block.php");}
 if (isset($_GET["price_max"]) && !is_numeric($_GET["price_max"])){ setcookie("block","Bloqueado"); header("Location: block.php");}
+
+if (isset($_GET["price_min"])){$_GET["price_min"]=abs($_GET["price_min"]);}
+if (isset($_GET["price_max"])){$_GET["price_max"]=abs($_GET["price_max"]);}
+
+if (isset($_GET["price_min"]) && isset($_GET["price_max"])){
+    if ($_GET["price_max"] < $_GET["price_min"]){
+        $priceMax = $_GET["price_max"];
+        $_GET["price_max"]=$_GET["price_min"];
+        $_GET["price_min"]= $priceMax;
+    }
+}
+
+if (isset($_GET["id_cat"]) && !is_numeric($_GET["id_cat"])){ setcookie("block","Bloqueado"); header("Location: block.php");}
+if (isset($_GET["id_sub"]) && !is_numeric($_GET["id_sub"])){ setcookie("block","Bloqueado"); header("Location: block.php");}
+
+if (isset($_GET["id_cat"])){
+    $con=conexUsu();
+    $sql="SELECT COUNT(*) FROM categorias";
+    $st=$con->prepare($sql);
+    $st->execute();
+    $st->bind_result($num);
+    $st->fetch();
+    if ($_GET["id_cat"] > $num || $_GET["id_cat"]<=0){
+        setcookie("block","Bloqueado");
+        header("Location: block.php");
+    }
+}
+
+if (isset($_GET["id_sub"])){
+    $con=conexUsu();
+    $sql="SELECT COUNT(*) FROM subcategorias";
+    $st=$con->prepare($sql);
+    $st->execute();
+    $st->bind_result($num);
+    $st->fetch();
+    if ($_GET["id_sub"] > $num || $_GET["id_sub"]<=0){
+        setcookie("block","Bloqueado");
+        header("Location: block.php");
+    }
+
+}
+
+if (isset($_GET["order"]) && !is_numeric($_GET["order"])){ setcookie("block","Bloqueado"); header("Location: block.php");}
+
+if (isset($_GET["order"]) && ($_GET["order"]>4 || $_GET["order"]<1)){
+    setcookie("block","Bloqueado");
+    header("Location: block.php");
+}
+
 ?>
 
 <!doctype html>
@@ -287,7 +337,7 @@ if (isset($_GET["price_max"]) && !is_numeric($_GET["price_max"])){ setcookie("bl
             <div class="grid4"><button>Buscar</button></div>
 
             <section class="ordenProd">
-                <div class="0">
+                <div>
                     <p>Ordenado por: &nbsp</p>
                     <p class="orderSelected">
                         <?php
@@ -304,19 +354,45 @@ if (isset($_GET["price_max"]) && !is_numeric($_GET["price_max"])){ setcookie("bl
                     </p>
                     <span class="material-symbols-outlined orderBy">expand_more</span>
                 </div>
-                <section id="secOrder">
-                    <p>ORDENADO POR</p>
-                    <p id="1" class="orderSelected">Fecha: nuevos primero</p>
-                    <p id="2" class="<?php if (isset($_GET["order"]) && $_GET["order"]==2){echo "orderSelected";}?>">Fecha: antiguos primero</p>
-                    <p id="3" class="<?php if (isset($_GET["order"]) && $_GET["order"]==3){echo "orderSelected";}?>">Precio: baratos primero</p>
-                    <p id="4" class="<?php if (isset($_GET["order"]) && $_GET["order"]==4){echo "orderSelected";}?>">Precio: caros primero</p>
-                </section>
+                <div id="popupOrder">
+                    <section id="secOrder">
+                        <nav><p>ORDENADO POR</p><span class="material-symbols-outlined">close</span></nav>
+                        <div>
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <p id="1" class="<?php if (isset($_GET["order"]) && $_GET["order"]==1){echo "orderSelected";}?>">Fecha: nuevos primero</p>
+                        </div>
+                        <div>
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <p id="2" class="<?php if (isset($_GET["order"]) && $_GET["order"]==2){echo "orderSelected";}?>">Fecha: antiguos primero</p>
+                        </div>
+                        <div>
+                            <span class="material-symbols-outlined">paid</span>
+                            <p id="3" class="<?php if (isset($_GET["order"]) && $_GET["order"]==3){echo "orderSelected";}?>">Precio: baratos primero</p>
+                        </div>
+                        <div>
+                            <span class="material-symbols-outlined">paid</span>
+                            <p id="4" class="<?php if (isset($_GET["order"]) && $_GET["order"]==4){echo "orderSelected";}?>">Precio: caros primero</p>
+                        </div>
+                    </section>
+                </div>
                 <a href="productos.php">Eliminar los filtros</a>
             </section>
-            <input type="hidden" name="order" value="<?php if (isset($_GET["order"])){echo $_GET["order"];}else{echo"1";}?>">
+            <input id="orderHidden" type="hidden" name="order" value="<?php if (isset($_GET["order"])){echo $_GET["order"];}else{echo"1";}?>">
 
         </form>
     </section>
+    <?php
+    echo $_GET["price_min"];
+    echo $_GET["price_max"];
+    ?>
+
+
+
+
+
+
+
+
 </main>
 
 

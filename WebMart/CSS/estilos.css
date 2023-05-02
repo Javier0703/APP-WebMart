@@ -534,7 +534,6 @@ footer table td:first-child{
 }
 
 .sProd1>form>.ordenProd{
-    font-size: 13px;
     display: flex;
     border-top: 1px solid lightgrey;
     width: 100%;
@@ -543,56 +542,75 @@ footer table td:first-child{
 }
 
 
-.sProd1>form>.ordenProd div{
+.sProd1>form>.ordenProd div:first-child{
+    font-size: 13px;
     display: flex;
 }
+
 .sProd1>form>.ordenProd .orderSelected{
     font-weight: bolder;
 }
 
-.sProd1>form>.ordenProd div p{
+.sProd1>form>.ordenProd div:first-child p{
     padding-top: 2px;
 }
 
-.sProd1>form>.ordenProd>section{
+.sProd1>form>.ordenProd #popupOrder {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: fixed;
     display: none;
-    border-radius: 5px;
-    margin: 25px 0 0 100px;
-    position: absolute;
+    background: rgba(0, 0, 0, 0.25);
+}
+
+#popupOrder>#secOrder{
+    margin: auto;
     background: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    padding: 5px;
-    z-index: 10;
+    padding: 5px 5px 10px 5px;
 }
 
-.sProd1>form>.ordenProd>section.mostrar{
-    display: block;
+#popupOrder>#secOrder nav{
+    border-bottom: 1px solid lightgrey;
+    margin: 10px;
+    display: flex;
 }
 
-
-
-.sProd1>form>.ordenProd>section p:first-child{
+#popupOrder>#secOrder nav p{
     width: 100%;
     color: grey;
-    padding: 2px 0 0 10px;
 }
 
-.sProd1>form>.ordenProd>section>p{
-    padding: 5px 30px 5px 10px;
-    margin: 3px 0;
+#popupOrder>#secOrder span{
+    margin-left: auto;
 }
 
-.sProd1>form>.ordenProd>section>p:hover{
+#popupOrder>#secOrder>div{
+    display: flex;
+    padding: 5px 60px 5px 10px;
+    margin: 3px;
+}
+
+#popupOrder>#secOrder>div:hover{
+    border-radius: 10px;
     background: lightgrey;
 }
 
+#popupOrder>#secOrder>div>p{
+    width: 100%;
+}
+
+#popupOrder>#secOrder>div>span{
+    margin: 0 3px 0 0;
+}
+
 .sProd1>form>.ordenProd a{
+    font-size: 13px;
     text-decoration: none;
     color: black;
     margin-left: auto;
 }
-
-
 
 .sProd1 form div{
     cursor: pointer;

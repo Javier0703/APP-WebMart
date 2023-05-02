@@ -191,16 +191,34 @@ window.addEventListener("DOMContentLoaded",function (e){
     });
 
     //PopUp de order
-    let div = document.querySelector(".sProd1 .ordenProd").firstElementChild;
-    let section = document.getElementById("secOrder");
+    let div = document.querySelector(".mProd .ordenProd").firstElementChild;
+    let divpopUp = document.querySelector(".mProd .ordenProd #popupOrder");
+    let x = divpopUp.firstElementChild.firstElementChild.lastElementChild;
 
-    document.addEventListener("click", function(e) {
-        if (e.target.parentElement===div || e.target.parentElement===section || e.target.parentElement===section.firstElementChild){
-            section.classList.add("mostrar");
-        }
-        else {
-            section.classList.remove("mostrar");
-        }
+    div.addEventListener("click", function (e){
+        divpopUp.style.display="grid";
+    });
+    divpopUp.addEventListener("click",function (e){
+        divpopUp.style.display="none";
+    });
+    divpopUp.firstElementChild.addEventListener("click",function (e){
+        e.stopPropagation();
+    });
+
+    x.addEventListener("click", function (e){
+        divpopUp.style.display="none";
+    });
+
+    let ps = document.querySelectorAll("#popupOrder>#secOrder>div>p");
+    let form = document.querySelector(".mProd>.sProd1 form");
+    let inputH = document.getElementById("orderHidden");
+    ps.forEach(p =>{
+        p.addEventListener("click",function (e){
+            inputH.name="order";
+            inputH.value=p.id;
+            form.submit();
+        });
+
     });
 
 });
