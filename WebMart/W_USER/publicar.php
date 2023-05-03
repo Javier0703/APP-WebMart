@@ -117,15 +117,168 @@ else{
 </header>
 
 <main class="mPublic">
-    <form action="" method="POST">
+
+    <form action="subirProd.php" method="POST">
 
         <section class="sPublic1">
             <h3>¿Qué es lo que deseas subir?</h3>
-            <p>En WebMart hay espacio para todo (o eso creemos)</p>
+            <p>En WebMart hay espacio para todo</p>
 
+            <section>
+                <div class="grid1">
+                    <p>Elige la Categoría</p>
+                </div>
+
+                <div class="grid3">
+                    <p>Categoría</p>
+                    <span class="material-symbols-outlined">expand_more</span>
+                </div>
+
+                <div class="grid2">
+                    <p>Elige la Subcategoría</p>
+                </div>
+
+                <div class="grid4 blocked">
+                        <p>Subcategorías</p>
+                        <span class="material-symbols-outlined">expand_more</span>
+                </div>
+            </section>
+
+            <div class="pUp g3pU">
+                <div>
+                    <section>
+                        <h4>Categorías</h4>
+                        <span class="material-symbols-outlined">close</span>
+                    </section>
+                    <section>
+                        <?php
+                        $con=conexUsu();
+                        $sql="SELECT ID_CAT, NOMBRE FROM categorias";
+                        $st=$con->prepare($sql);
+                        $st->execute();
+                        $st->bind_result($ic, $n);
+                        while ($st->fetch()){
+                        ?>
+                          <div class="category" id="<?=$ic?>"><img src="../IMG/CATEGORIAS/<?=$ic?>.png" alt="Icon"><?=$n?></div>
+                        <?php
+                        }
+                        ?>
+                    </section>
+                </div>
+            </div>
+
+            <div class="pUp g4pU">
+                <div>
+                    <section>
+                        <h4>Categorías</h4>
+                        <span class="material-symbols-outlined">close</span>
+                    </section>
+                    <section>
+                        <?php
+                        $con=conexUsu();
+                        $sql="SELECT ID_CAT, ID_SUB, NOMBRE FROM subcategorias";
+                        $st=$con->prepare($sql);
+                        $st->execute();
+                        $st->bind_result($ic, $is, $n);
+                        while ($st->fetch()){
+                            ?>
+                            <div class="subcategorias <?=$ic?>" id="<?=$is?>"><?=$n?></div>
+                            <?php
+                        }
+                        ?>
+                    </section>
+                </div>
+            </div>
+
+            <input id="inputHidden" type="hidden" name="id_sub" value="">
+            <p style="color: red; text-align: center">&nbsp</p>
+        </section>
+
+        <section class="sPublic2">
+            <h3>Información del producto</h3>
+            <div class="info">
+                <label for="titulo">¿Qué estás venciendo?</label>
+                <span id="tit">0</span>
+                <p>/50</p>
+            </div>
+            <div class="titulo">
+                <input class="campoRellenar" id="titulo" type="text" name="titulo" maxlength="50" placeholder="Sé breve y preciso...">
+            </div>
+            <br>
+            <div class="info">
+                <label for="descripcion">Descripción</label>
+                <span id="desc">0</span>
+                <p>/400</p>
+            </div>
+            <div class="textarea">
+                <textarea class="campoRellenar" name="descripcion" id="descripcion" rows="6" maxlength="400" placeholder="Indica características como el estado, color, capacidad..."></textarea>
+            </div>
+            <br>
+            <div class="info">
+                <label for="precio">Precio</label>
+            </div>
+
+            <div class="titulo">
+                <input class="campoRellenar" id="precio" type="number" name="precio" placeholder="Que sea razonado">
+            </div>
+            <p style="color: red; text-align: center">&nbsp</p>
+
+            <div class="pesaje">
+                <h4>¿Cuanto pesa tu producto?</h4>
+                <p>Es importante saberlo porque al comprador le merece la pena usar alguna empresa de transporte...</p>
+                <section>
+                    <div>
+                        <p>Menos de 2 kg</p>
+                        <input type="radio" name="peso" value="0">
+                    </div>
+                    <div>
+                        <p>2 a 5 kg</p>
+                        <input type="radio" name="peso" value="2">
+                    </div>
+                    <div>
+                        <p>5 a 10 kg</p>
+                        <input type="radio" name="peso" value="5">
+                    </div>
+                    <div>
+                        <p>10 a 20 kg</p>
+                        <input type="radio" name="peso" value="10">
+                    </div>
+                    <div>
+                        <p>20 a 30 kg</p>
+                        <input type="radio" name="peso" value="20">
+                    </div>
+                    <div>
+                        <p>30 a 50 kg</p>
+                        <input type="radio" name="peso" value="30">
+                    </div>
+                    <div>
+                        <p>Más de 50 kg</p>
+                        <input type="radio" name="peso" value="50">
+                    </div>
+            </div>
+            <p style="color: red; text-align: center">&nbsp</p>
+        </section>
+
+        <section class="sPublic3">
+            <h3>Fotos</h3>
+            <p>Elija al menos una foto (Recomendado 3)</p>
+            <section>
+                <input type="file" name="img1">
+                <input type="file" name="img2">
+                <input type="file" name="img3">
+                <input type="file" name="img4">
+                <input type="file" name="img5">
+                <input type="file" name="img6">
+            </section>
+            <p style="color: red; text-align: center">&nbsp</p>
+        </section>
+
+        <section class="sPublic4">
+            <button>Subir producto</button>
         </section>
 
     </form>
+
 </main>
 
 <footer>
@@ -142,4 +295,6 @@ else{
 
 </body>
 <script src="../JS_APP/header.js"></script>
+<script src="../JS_APP/public.js"></script>
+
 </html>

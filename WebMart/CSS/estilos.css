@@ -917,9 +917,257 @@ footer table td:first-child{
 }
 
 .mPublic>form .sPublic1{
+    text-align: center;
     border-radius: 10px;
     background: white;
     padding: 30px;
+}
+
+.sPublic1 .blocked{
+    cursor: default !important;
+    background: lightgrey;
+}
+
+.mPublic .sPublic1>section{
+    text-align: left;
+    padding: 10px;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+}
+
+.mPublic .sPublic1>section>div{
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    display: flex;
+    grid-column: span 1;
+}
+
+.sPublic1>section .grid3,  .sPublic1>section .grid4{
+    justify-content: space-between;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid lightgrey;
+}
+
+.sPublic1>section .grid3 p, .sPublic1>section .grid4{
+    padding-left: 3px;
+}
+
+.jsColorRed{
+    border: 1px solid red !important;
+}
+
+.mPublic .sPublic1>section>div p{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.pUp{
+    display: none;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.25);
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+.pUp>div{
+    border-radius: 10px;
+    background: white;
+    margin: auto;
+}
+
+.pUp>div>section:first-child{
+    padding: 5px 0;
+    display: flex;
+}
+
+.pUp>div>section:first-child h4{
+    width: 100%;
+}
+
+.pUp>div>section:first-child span{
+    cursor: pointer;
+    padding-right: 5px;
+}
+
+.pUp>div>section:last-child{
+    height: 500px;
+    overflow: auto;
+}
+
+.pUp>div>section:last-child div:hover{
+    background: lightgrey;
+
+}
+
+.g3pU>div>section:last-child div{
+    width: 300px;
+    margin: 8px 10px;
+    padding: 8px 10px;
+    display: flex;
+}
+
+.g3pU>div>section:last-child div img{
+    padding-right: 10px;
+    width: 25px;
+}
+
+.g4pU>div>section:last-child div{
+    display: flex;
+    width: 300px;
+    margin: 8px 10px;
+    padding: 8px 10px;
+}
+
+.mPublic .sPublic2, .mPublic .sPublic3{
+    margin-top: 20px;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.mPublic .sPublic2 h3{
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.mPublic .sPublic2 .info{
+    display: flex;
+}
+.mPublic .sPublic2 .info span{
+    margin-left: auto;
+}
+
+.mPublic .sPublic2 .titulo, .sPublic2 .textarea{
+    margin:5px;
+    border-radius: 5px;
+    border: 1px solid lightgrey;
+    width: calc(100% - 10px);
+}
+
+.mPublic .sPublic2 #titulo, #precio{
+    padding-left: 10px;
+    width: calc(100% - 10px);
+    font-size: 14px;
+    height: 45px;
+    outline: none;
+    border: none;
+    background: none;
+}
+
+.mPublic .sPublic2 .titulo:focus-within, .sPublic2 .textarea:focus-within{
+    border: 1px solid #00adec;
+}
+
+.mPublic .sPublic2 textarea{
+    resize: none;
+    width: calc(100% - 20px);
+    height: 100%;
+    outline: none;
+    border: none;
+    background: none;
+    padding: 7px;
+    font-size: 14px;
+}
+
+.mPublic .sPublic2 textarea::-webkit-scrollbar, .pUp>div>section:last-child::-webkit-scrollbar {height: 8px; width: 10px}
+.mPublic .sPublic2 textarea::-webkit-scrollbar-thumb, .pUp>div>section:last-child::-webkit-scrollbar-thumb {background-color: lightgrey; border-radius: 5px;}
+.mPublic .sPublic2 textarea::-webkit-scrollbar-thumb:hover, .pUp>div>section:last-child::-webkit-scrollbar-thumb:hover {background-color: rgb(180, 180, 180);}
+
+.mPublic .sPublic2 #precio::-webkit-inner-spin-button, .mPublic .sPublic2 #precio::-webkit-outer-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.mPublic .sPublic2 .pesaje{
+    padding: 20px 0 10px 0;
+}
+
+.mPublic .sPublic2 .pesaje>p{
+    padding-bottom: 10px;
+}
+
+.mPublic .sPublic2 .pesaje section{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    border-bottom: 1px solid lightgrey;
+    padding-bottom: 10px;
+}
+
+.mPublic .sPublic2 .pesaje section div:last-child{
+    grid-column: span 2;
+}
+
+.mPublic .sPublic2 .pesaje div{
+    border-top: 1px solid lightgrey;
+    padding-top: 10px;
+    display: flex;
+}
+
+
+.mPublic .sPublic2 .pesaje div input{
+    margin-left: auto;
+}
+
+.sPublic3>section{
+    display: grid;
+    padding: 20px 0 10px 0;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.sPublic3>section>input{
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    border-radius: 25px;
+}
+
+
+.sPublic3>section ::-webkit-file-upload-button{
+    font-size: 14px;
+    background: #00adec;
+    color: white;
+    outline: none;
+    border:none;
+    height: 50px;
+    border-radius: 25px;
+    width: 180px;
+    cursor: pointer;
+}
+
+.sPublic3>section .fileAdd::-webkit-file-upload-button{
+    background: #2e3093;
+}
+
+.sPublic4{
+    margin-top: 20px;
+    text-align: center;
+    padding: 5px 0 20px 0;
+}
+
+.sPublic4 button{
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 25px;
+    outline: none;
+    border: none;
+    max-width: 95%;
+    width: 200px;
+    background: #00adec;
+    color: white;
+    height: 50px;
+}
+
+.sPublic4 button:hover{
+    background: #2e3093;
+    transition: 1s;
 }
 
 /* MEDIA QUERY */
@@ -955,11 +1203,25 @@ footer table td:first-child{
     .sIndex4 form aside h3{
         font-size: 16px;
     }
+
+    .sPublic1>section{
+        grid-template-columns: 1fr !important;
+    }
+
+    .sPublic3>section{
+        grid-template-columns: 1fr !important;
+    }
+}
+
+@media (max-width: 645px) {
+    .sPublic3>section{
+        grid-template-columns: 1fr 1fr;
+    }
 }
 
 @media (max-width: 715px) {
 
-    .sIndex2 form, .sIndex4 form, .sIndex5 form, .sProd1 form{
+    .sIndex2 form, .sIndex4 form, .sIndex5 form, .sProd1 form, .mPublic .sPublic2 .pesaje section{
         grid-template-columns: 1fr !important;
     }
 
@@ -967,7 +1229,7 @@ footer table td:first-child{
         max-width: 100%;
     }
 
-    .mIndex .grid1, .mIndex .grid2, .mIndex .grid3, .sProd1 form div, .sProd1>form>section{
+    .mIndex .grid1, .mIndex .grid2, .mIndex .grid3, .sProd1 form div, .sProd1>form>section, .mPublic .sPublic2 .pesaje section div:last-child{
         grid-column: span 1 !important;
         overflow: hidden;
     }
