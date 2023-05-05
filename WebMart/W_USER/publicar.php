@@ -118,7 +118,7 @@ else{
 
 <main class="mPublic">
 
-    <form action="subirProd.php" method="POST">
+    <form action="subirProd.php" method="POST" enctype="multipart/form-data">
 
         <section class="sPublic1">
             <h3>¿Qué es lo que deseas subir?</h3>
@@ -191,7 +191,8 @@ else{
             </div>
 
             <input id="inputHidden" type="hidden" name="id_sub" value="">
-            <p style="color: red; text-align: center">&nbsp</p>
+
+            <p style="color: red; text-align: center"></p>
         </section>
 
         <section class="sPublic2">
@@ -221,11 +222,11 @@ else{
             <div class="titulo">
                 <input class="campoRellenar" id="precio" type="number" name="precio" placeholder="Que sea razonado">
             </div>
-            <p style="color: red; text-align: center">&nbsp</p>
+            <p style="color: red; text-align: center"></p>
 
             <div class="pesaje">
                 <h4>¿Cuanto pesa tu producto?</h4>
-                <p>Es importante saberlo porque al comprador le merece la pena usar alguna empresa de transporte...</p>
+                <p>Es importante saberlo ya que puede ser que al comprador le merece la pena usar alguna empresa de transporte...</p>
                 <section>
                     <div>
                         <p>Menos de 2 kg</p>
@@ -256,12 +257,12 @@ else{
                         <input type="radio" name="peso" value="50">
                     </div>
             </div>
-            <p style="color: red; text-align: center">&nbsp</p>
+            <p style="color: red; text-align: center"></p>
         </section>
 
         <section class="sPublic3">
             <h3>Fotos</h3>
-            <p>Elija al menos una foto (Recomendado 3)</p>
+            <p>Elija al menos una foto (Recomendado 3). Formato jpg </p>
             <section>
                 <input type="file" name="img1">
                 <input type="file" name="img2">
@@ -270,7 +271,7 @@ else{
                 <input type="file" name="img5">
                 <input type="file" name="img6">
             </section>
-            <p style="color: red; text-align: center">&nbsp</p>
+            <p style="color: red; text-align: center"></p>
         </section>
 
         <section class="sPublic4">

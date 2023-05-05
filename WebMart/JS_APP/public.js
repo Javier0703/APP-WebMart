@@ -173,7 +173,6 @@ window.addEventListener("DOMContentLoaded",function (e){
             grid4.firstElementChild.textContent=sub.textContent;
             g4pU.style.display="none";
             iHidden.value=sub.id;
-
         });
 
     });

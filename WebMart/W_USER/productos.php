@@ -126,6 +126,13 @@ if (isset($_GET["order"]) && ($_GET["order"]>4 || $_GET["order"]<1)){
     header("Location: block.php");
 }
 
+if (isset($_SESSION["limit"])){
+    if (!($_SESSION["limit"] % 12 ===0)){
+        header("Location: ../cierre.php");
+    }
+}
+
+
 ?>
 
 <!doctype html>
@@ -387,18 +394,88 @@ if (isset($_GET["order"]) && ($_GET["order"]>4 || $_GET["order"]<1)){
     </section>
 
     <section class="sProd2">
+        <section class="prods">
     <?php
-        $sql=""
+        $con=conexUsu();
+        $sql="SELECT p.ID_PROD, TITULO, ID_RESERVA, PRECIO, FOTO FROM productos p JOIN fotos f USING (ID_PROD) JOIN subcategorias s USING (ID_SUB) WHERE ID_COMPRADOR IS NULL";
+
+        if (isset($_GET["prod"]) && strlen(trim($_GET["prod"]))>0){
+            $p=$_GET["prod"];
+            $p1= str_replace('"', '', $p);
+            $p2 = str_replace("'", '', $p1);
+            $html = htmlspecialchars_decode($p2);
+            $d= strip_tags($html);
+            $sql=$sql." AND (TITULO LIKE '%$d%' OR DESCRIPCION LIKE '%$d%')";
+        }
+
+        if (isset($_GET["price_min"])){
+            $p=$_GET["price_min"];
+            $sql=$sql." AND PRECIO>$p";
+        }
+
+        if (isset($_GET["price_max"])){
+            $p=$_GET["price_max"];
+            $sql=$sql." AND PRECIO<$p";
+        }
+
+        if (isset($_GET["id_cat"])){
+            $p=$_GET["id_cat"];
+            $sql=$sql." AND ID_CAT=$p";
+        }
+
+        if (isset($_GET["id_sub"])){
+            $p=$_GET["id_sub"];
+            $sql=$sql." AND ID_SUB=$p";
+        }
+
+        $sql=$sql." GROUP BY ID_PROD";
+
+        if (isset($_GET["order"])){
+            $o=$_GET["order"];
+            if ($o === 1){
+                $sql=$sql." ORDER BY FECHA_SUBIDA DESC";
+            }
+            elseif ($o === 2){
+                $sql=$sql." ORDER BY FECHA_SUBIDA ASC";
+            }
+            elseif ($o === 3){
+                $sql=$sql." ORDER BY PRECIO ASC";
+            }
+            elseif ($o === 4){
+                $sql=$sql." ORDER BY PRECIO DESC";
+            }
+        }
+
+        try{
+            $res=$con->query($sql);
+            $filasTotales=$res->num_rows;
+            echo $filasTotales;
+            $res->close();
+
+
+
+
+            $res=$con->query($sql);
+            $fila = $res->fetch_assoc();
+            while ($fila){
+                echo $fila["ID_PROD"];
+                $fila = $res->fetch_assoc();
+            }
+        }
+
+        catch (mysqli_sql_exception $e){
+            $cod=$e ->getCode();
+            $msgError=$e->getMessage();
+            setcookie("error","Error $cod, $msgError");
+            header("Location:error.php");
+        }
+
     ?>
-
-
-
+        </section>
+        <aside>
+            Hola
+        </aside>
     </section>
-
-
-
-
-
 
 
 

@@ -877,6 +877,13 @@ footer table td:first-child{
 }
 
 
+.sProd2 .prods{
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+
 /* PÁGINA BLOCK */
 .mBlock{
     display: grid;
