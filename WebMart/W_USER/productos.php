@@ -25,11 +25,11 @@ if ((isset($_COOKIE["usu"]) && isset($_COOKIE["pass"])) || (isset($_SESSION["usu
 
         try {
             $con=conexUsu();
-            $sql="SELECT ESTADO,ROL FROM usuarios WHERE USUARIO=? AND CONTRASEÑA=?";
+            $sql="SELECT ID_USU,ESTADO,ROL FROM usuarios WHERE USUARIO=? AND CONTRASEÑA=?";
             $st=$con->prepare($sql);
             $st->bind_param("ss",$usu,$pass);
             $st->execute();
-            $st->bind_result($estado,$rol);
+            $st->bind_result($id_usu,$estado,$rol);
 
             if ($st->fetch()){
 
@@ -52,6 +52,7 @@ if ((isset($_COOKIE["usu"]) && isset($_COOKIE["pass"])) || (isset($_SESSION["usu
                 $con->close();
                 define("USU",$usu);
                 define("PASS",$pass);
+                define("IDUSU",$id_usu);
 
             }
         }
@@ -125,13 +126,6 @@ if (isset($_GET["order"]) && ($_GET["order"]>4 || $_GET["order"]<1)){
     setcookie("block","Bloqueado");
     header("Location: block.php");
 }
-
-if (isset($_SESSION["limit"])){
-    if (!($_SESSION["limit"] % 12 ===0)){
-        header("Location: ../cierre.php");
-    }
-}
-
 
 ?>
 
@@ -359,7 +353,7 @@ if (isset($_SESSION["limit"])){
                             else{echo "Precio: caros primero";}
                         }
                         else{
-                            echo "Fecha: nuevos primero";
+                            echo "Fecha: antiguos primero";
                         }
                         ?>
                     </p>
@@ -394,10 +388,10 @@ if (isset($_SESSION["limit"])){
     </section>
 
     <section class="sProd2">
-        <section class="prods">
     <?php
+        $id_usu = IDUSU;
         $con=conexUsu();
-        $sql="SELECT p.ID_PROD, TITULO, ID_RESERVA, PRECIO, FOTO FROM productos p JOIN fotos f USING (ID_PROD) JOIN subcategorias s USING (ID_SUB) WHERE ID_COMPRADOR IS NULL";
+        $sql="SELECT p.ID_PROD ID_P, TITULO, ID_RESERVA R, PRECIO, FOTO FROM productos p JOIN fotos f USING (ID_PROD) JOIN subcategorias s USING (ID_SUB) WHERE ID_USU!=$id_usu AND ID_COMPRADOR IS NULL";
 
         if (isset($_GET["prod"]) && strlen(trim($_GET["prod"]))>0){
             $p=$_GET["prod"];
@@ -430,37 +424,60 @@ if (isset($_SESSION["limit"])){
 
         $sql=$sql." GROUP BY ID_PROD";
 
-        if (isset($_GET["order"])){
-            $o=$_GET["order"];
-            if ($o === 1){
-                $sql=$sql." ORDER BY FECHA_SUBIDA DESC";
-            }
-            elseif ($o === 2){
-                $sql=$sql." ORDER BY FECHA_SUBIDA ASC";
-            }
-            elseif ($o === 3){
-                $sql=$sql." ORDER BY PRECIO ASC";
-            }
-            elseif ($o === 4){
-                $sql=$sql." ORDER BY PRECIO DESC";
-            }
+        if (isset($_GET["order"]) && $_GET["order"]==1){
+            $sql=$sql." ORDER BY FECHA_SUBIDA DESC";
+        }
+        if (isset($_GET["order"]) && $_GET["order"]==2){
+            $sql=$sql." ORDER BY FECHA_SUBIDA ASC";
+        }
+
+        if (isset($_GET["order"]) && $_GET["order"]==3){
+            $sql=$sql." ORDER BY PRECIO ASC";
+        }
+
+        if (isset($_GET["order"]) && $_GET["order"]==4){
+            $sql=$sql." ORDER BY PRECIO DESC";
         }
 
         try{
             $res=$con->query($sql);
             $filasTotales=$res->num_rows;
-            echo $filasTotales;
-            $res->close();
-
-
-
-
-            $res=$con->query($sql);
             $fila = $res->fetch_assoc();
-            while ($fila){
-                echo $fila["ID_PROD"];
-                $fila = $res->fetch_assoc();
+
+            if (!$fila){
+                echo "Vaya...";
             }
+
+            else{
+                $contador = 0;
+                echo '<section>';
+                for($i = 0; $i < $filasTotales; $i++) {
+                    if($contador == 12) {
+                        echo '</section><section>';
+                        $contador = 0;
+                    }
+                    ?>
+                    <a href="prod.php?id_prod=<?=$fila["ID_P"]?>" target="_blank">
+                        <div style="background-image: url('data:image/jpg;base64,<?=base64_encode($fila["FOTO"])?>')"></div>
+                        <section>
+                            <p><?=strtoupper($fila["TITULO"])?></p>
+                            <div>
+                                <p><?=number_format($fila["PRECIO"], 0, '', '.')?> €</p>
+                                <?php
+                                if ($fila["R"] !== null)echo "<p class='reserved'>Reservado</p>";
+                                ?>
+                            </div>
+                        </section>
+                    </a>
+                    <?php
+                    $fila = $res->fetch_assoc();
+                    $contador++;
+                }
+                echo '</section>';
+            }
+
+
+
         }
 
         catch (mysqli_sql_exception $e){
@@ -471,10 +488,17 @@ if (isset($_SESSION["limit"])){
         }
 
     ?>
-        </section>
-        <aside>
-            Hola
-        </aside>
+
+            <?php
+            if ($filasTotales>12){
+                ?>
+                <aside class="asideComp">
+                    <button>Mostrar más</button>
+                </aside>
+            <?php
+            }
+            ?>
+
     </section>
 
 

@@ -567,6 +567,7 @@ footer table td:first-child{
 }
 
 #popupOrder>#secOrder{
+    border-radius: 15px;
     margin: auto;
     background: white;
     padding: 5px 5px 10px 5px;
@@ -618,7 +619,7 @@ footer table td:first-child{
 }
 
 .sProd1 .typeExist{
-    background: rgba(0, 173, 236);
+    background: rgb(24, 166, 183);
     color: white;
 }
 
@@ -876,11 +877,79 @@ footer table td:first-child{
     background: #2e3093;
 }
 
-
-.sProd2 .prods{
-    display: grid;
+.sProd2>section{
+    padding-bottom: 20px;
+    display: none;
     gap: 20px;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.sProd2>section.showedS{
+    display: grid;
+}
+
+.sProd2>section a{
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    color: black;
+}
+
+
+
+.sProd2>section a:hover{
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.sProd2>section a>div{
+    border-radius: 10px 10px 0 0;
+    width: 100%;
+    height: 200px;
+    background-position: center;
+    background-size: cover;
+    overflow: hidden;
+}
+
+.sProd2>section a>section{
+    padding: 10px;
+}
+
+.sProd2>section a>section>div{
+    margin: 5px 0;
+    display: flex;
+}
+
+.sProd2>section a>section>div p:first-of-type{
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.sProd2>section a>section>div p.reserved{
+    margin-left: auto;
+    color: grey;
+    font-size: 14px;
+}
+
+.sProd2>aside{
+    padding-bottom: 20px;
+    place-items: center;
+    text-align: center;
+}
+
+.sProd2>aside button{
+    max-width: 100%;
+    font-size: 15px;
+    cursor: pointer;
+    border-radius: 20px;
+    height: 35px;
+    width: 200px;
+    border: none;
+    color: white;
+    background-color: #00adec;
+}
+
+.sProd2>aside button:hover{
+    background-color: #2e3094;
 }
 
 
@@ -1218,6 +1287,10 @@ footer table td:first-child{
     .sPublic3>section{
         grid-template-columns: 1fr !important;
     }
+
+    .sProd2>section{
+        grid-template-columns: repeat(1, 1fr) !important;
+    }
 }
 
 @media (max-width: 645px) {
@@ -1239,6 +1312,10 @@ footer table td:first-child{
     .mIndex .grid1, .mIndex .grid2, .mIndex .grid3, .sProd1 form div, .sProd1>form>section, .mPublic .sPublic2 .pesaje section div:last-child{
         grid-column: span 1 !important;
         overflow: hidden;
+    }
+
+    .sProd2>section{
+        grid-template-columns: repeat(2, 1fr);
     }
 
 }

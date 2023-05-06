@@ -221,4 +221,26 @@ window.addEventListener("DOMContentLoaded",function (e){
 
     });
 
+    //Escondemos todos los sections de productos menos el primero.
+    let sections = document.querySelectorAll(".sProd2>section");
+    sections.forEach(sec =>{
+        sections[0].classList.add("showedS");
+    });
+
+    let bMas = document.querySelector(".sProd2>aside>button");
+
+    let cent= 0;
+    bMas.addEventListener("click",function (e){
+        if (cent<sections.length-1){
+            sections[cent].nextElementSibling.classList.add("showedS");
+            cent++;
+            if (cent===sections.length-1){
+                bMas.parentElement.style.display="none";
+            }
+        }
+    });
+
+    //Mostrar mas
+
+
 });

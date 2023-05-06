@@ -180,9 +180,6 @@ if (isset($_POST["id_sub"]) && strlen(trim($_POST["id_sub"]))>0 && is_numeric($_
             $st->bind_param("issiisi", $id_sub,$titulo,$descripcion,$peso,$precio,$date,$id_usu);
             $st->execute();
             $st->close();
-            echo "Prod subido <br>";
-
-            echo $id_usu."<br>";
 
             $sql="SELECT ID_PROD FROM productos WHERE ID_USU='$id_usu' ORDER BY FECHA_SUBIDA DESC";
             $res=$con->query($sql);
