@@ -877,6 +877,16 @@ footer table td:first-child{
     background: #2e3093;
 }
 
+.sProd2 .noResult{
+    width: 100%;
+    text-align: center;
+}
+
+.sProd2 .noResult img{
+    max-width: 100%;
+    width: 500px;
+}
+
 .sProd2>section{
     padding-bottom: 20px;
     display: none;
@@ -894,8 +904,6 @@ footer table td:first-child{
     text-decoration: none;
     color: black;
 }
-
-
 
 .sProd2>section a:hover{
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
@@ -1244,6 +1252,47 @@ footer table td:first-child{
 .sPublic4 button:hover{
     background: #2e3093;
     transition: 1s;
+}
+
+/* Página PROD */
+
+.mPSelected>section{
+    padding-top: 10px;
+    max-width: 95%;
+    width: 1200px;
+    margin: auto;
+}
+
+
+/* PERFIL */
+
+/* Página de Perfil */
+
+.mPerfil{
+    margin-top: var(--altura-header);
+    min-height: calc(100vh - var(--altura-header) - var(--altura-footer));
+}
+
+.mPerfil>section{
+    display: flex;
+}
+
+.mPerfil>section aside{
+    background-color: red;
+    min-height: calc(100vh - var(--altura-header) - var(--altura-footer));
+}
+
+.mPerfil>section aside:first-child div:first-child{
+    display: flex;
+}
+
+.mPerfil>section aside:first-child div:first-child>div{
+    width: 80px;
+}
+
+.mPerfil>section aside:last-child{
+    background-color: yellow;
+    width: 100%;
 }
 
 /* MEDIA QUERY */

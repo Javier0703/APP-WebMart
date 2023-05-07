@@ -1,5 +1,5 @@
 <?php
-include ("../conexDB.php");
+include ("../../conexDB.php");
 session_set_cookie_params(sesTime());
 session_start();
 
@@ -25,11 +25,11 @@ if ((isset($_COOKIE["usu"]) && isset($_COOKIE["pass"])) || (isset($_SESSION["usu
 
         try {
             $con=conexUsu();
-            $sql="SELECT ID_USU,ESTADO,ROL FROM usuarios WHERE USUARIO=? AND CONTRASEÑA=?";
+            $sql="SELECT ESTADO,ROL FROM usuarios WHERE USUARIO=? AND CONTRASEÑA=?";
             $st=$con->prepare($sql);
             $st->bind_param("ss",$usu,$pass);
             $st->execute();
-            $st->bind_result($id_usu,$estado,$rol);
+            $st->bind_result($estado,$rol);
 
             if ($st->fetch()){
 
@@ -52,7 +52,6 @@ if ((isset($_COOKIE["usu"]) && isset($_COOKIE["pass"])) || (isset($_SESSION["usu
                 $con->close();
                 define("USU",$usu);
                 define("PASS",$pass);
-                define("IDUSU",$id_usu);
 
             }
         }
@@ -63,55 +62,34 @@ if ((isset($_COOKIE["usu"]) && isset($_COOKIE["pass"])) || (isset($_SESSION["usu
             setcookie("error","Error $cod, $msgError");
             header("Location:error.php");
         }
-
-        if (isset($_GET["id_prod"]) && is_numeric($_GET["id_prod"])){
-
-            $con=conexUsu();
-            $sql="SELECT ID_PROD FROM productos WHERE ID_PROD=?";
-            $st= $con->prepare($sql);
-            $st->bind_param("i", $_GET["id_prod"]);
-            $st->execute();
-            $st->bind_result($id_p);
-
-            if (!$st->fetch()){
-                setcookie("block","block");
-                header("Location: block.php");
-            }
-        }
-
-        else{
-            header("Location: productos.php");
-        }
     }
 }
 
 else{
     header("Location:../cierre.php");
 }
-
 ?>
-
 <!doctype html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="shortcut icon" href="../IMG/LOGOS_ERRORES/logo.png">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,-25" />
+    <link rel="shortcut icon" href="../../IMG/LOGOS_ERRORES/logo.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,-25"/>
     <title>WebMart</title>
-    <link rel="stylesheet" href="../CSS/estilos.css">
+    <link rel="stylesheet" href="../../CSS/estilos.css">
 </head>
 
 <body>
 
 <header>
-    <a href="index.php"><img src="../IMG/LOGOS_ERRORES/logoEntero.png" alt="Logo"></a>
+    <a href="../index.php"><img src="../../IMG/LOGOS_ERRORES/logoEntero.png" alt="Logo"></a>
     <nav>
         <section>
-            <a href="estadísticas.php"><img src="../IMG/ICONS_NAV/estadisticas.png" alt="Estadisticas"><span>Estadísticas</span></a>
-            <a href="usuarios.php"><img src="../IMG/ICONS_NAV/grupo.png" alt="Usuarios"><span>Usuarios</span></a>
-            <a href="publicar.php"><img src="../IMG/ICONS_NAV/agregar.png" alt="Subir Producto"><span>Subir un Producto</span></a>
+            <a href="../estadísticas.php"><img src="../../IMG/ICONS_NAV/estadisticas.png" alt="Estadisticas"><span>Estadísticas</span></a>
+            <a href="../usuarios.php"><img src="../../IMG/ICONS_NAV/grupo.png" alt="Usuarios"><span>Usuarios</span></a>
+            <a href="../publicar.php"><img src="../../IMG/ICONS_NAV/agregar.png" alt="Subir Producto"><span>Subir un Producto</span></a>
             <?php
             $usu=USU;
             $con=conexUsu();
@@ -122,24 +100,43 @@ else{
             $st->bind_result($icono);
             $st->fetch();
             echo '<div id="profileIcon"><img src="data:image/jpg;base64,'.base64_encode($icono).'"><span class="material-symbols-outlined">expand_more</span></div>';
+            $st->close();
             ?>
         </section>
         <div class="profile" id="profile">
             <div>
-                <section><a href=""><span class="material-symbols-outlined">person</span><p>Perfil</p></a></section>
-                <section><a href=""><span class="material-symbols-outlined">favorite</span><p>Favoritos</p></a></section>
-                <section><a href=""><span class="material-symbols-outlined">shopping_cart</span><p>Compras</p></a></section>
-                <section><a href=""><span class="material-symbols-outlined">sell</span><p>Ventas</p></a></section>
-                <section><a href=""><span class="material-symbols-outlined">chat</span><p>Mensajes</p></a></section>
-                <section><a href="../cierre.php"><span class="material-symbols-outlined">logout</span><p>Cerrar Sesión</p></a></section>
+                <section><a href="perfil.php"><span class="material-symbols-outlined">person</span><p>Perfil</p></a></section>
+                <section><a href="favoritos.php"><span class="material-symbols-outlined">favorite</span><p>Favoritos</p></a></section>
+                <section><a href="compras.php"><span class="material-symbols-outlined">shopping_cart</span><p>Compras</p></a></section>
+                <section><a href="productos.php"><span class="material-symbols-outlined">sell</span><p>Productos</p></a></section>
+                <section><a href="mensajeria/mensajes.php"><span class="material-symbols-outlined">chat</span><p>Mensajes</p></a></section>
+                <section><a href="../../cierre.php"><span class="material-symbols-outlined">logout</span><p>Cerrar Sesión</p></a></section>
             </div>
         </div>
     </nav>
 </header>
 
-<main class="mPSelected">
+<main class="mPerfil">
     <section>
-        Hola
+        <aside>
+            <div>
+                <?php
+                $usu=USU;
+                $con=conexUsu();
+                $sql="SELECT ICONO,USUARIO FROM usuarios WHERE USUARIO=?";
+                $st=$con->prepare($sql);
+                $st->bind_param("s",$usu);
+                $st->execute();
+                $st->bind_result($icono, $usuDB);
+                $st->fetch();
+                echo '<div id="profileIcon"><img src="data:image/jpg;base64,'.base64_encode($icono).'"></div>';
+                ?>
+                <p><?=$usuDB?></p>
+            </div>
+        </aside>
+        <aside>
+
+        </aside>
     </section>
 </main>
 
@@ -148,7 +145,7 @@ else{
         <p>Creado por Javier Calvo Porro</p>
         <table>
             <tr>
-                <td><img id="github" src="../IMG/LOGOS_ERRORES/github.png" alt="Github"></td>
+                <td><img id="github" src="../../IMG/LOGOS_ERRORES/github.png" alt="Github"></td>
                 <td>Github</td>
             </tr>
         </table>
@@ -156,6 +153,6 @@ else{
 </footer>
 
 </body>
-
-<script src="../JS_APP/header.js"></script>
+<script src="../../JS_APP/header.js"></script>
 </html>
+

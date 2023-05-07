@@ -29,7 +29,7 @@ window.addEventListener("DOMContentLoaded",function (e){
         }
 
         else{
-            let regexPass = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d+_*ñÑ-]{8,}$/;
+            let regexPass = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z0-9ñÑ_\-*.+]{8,30}$/;
             if (regexPass.test(pass.value) === false){
                 event.preventDefault();
                 nuevaP.textContent="La contraseña debe tener mayúsculas, minúsculas, y números (8 caracteres mínimo)";
@@ -79,7 +79,7 @@ window.addEventListener("DOMContentLoaded",function (e){
         }
 
         else{
-            let regexPass= /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d+_*ñÑ-]{8,}$/;
+            let regexPass = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z0-9ñÑ_\-*.+]{8,30}$/
             if (regexPass.test(passR.value) === false){
                 event.preventDefault();
                 passR.parentElement.classList.add("colorOrange");

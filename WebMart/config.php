@@ -62,7 +62,7 @@ else if (isset($_POST["usu"]) && strlen(trim($_POST["usu"]))>0 &&
     $pass=$_POST["pass"];
     $pregName = preg_match('/^[a-zA-Z0-9_ñÑ]{5,30}$/',$usu);
     $pregEmail = preg_match('/^(?=.{1,40}$)[\wñÑ-]+(\.[\wñÑ-]+)*@[\wñÑ-]+(\.[\wñÑ-]{2,})+$/',$usu);
-    $pregPass = preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d+_*ñÑ-]{8,}$/',$pass);
+    $pregPass = preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z0-9ñÑ_\-*.+]{8,30}$/',$pass);
 
     if ($pregName===0){
         if ($pregEmail===0){
@@ -141,7 +141,7 @@ else if (isset($_POST["usuR"]) && strlen(trim($_POST["usuR"]))>0 &&
 
     $usuR=$_POST["usuR"]; $passR=$_POST["passR"]; $passR2=$_POST["passR2"];
     $pregName = preg_match('/^[a-zA-Z0-9_ñÑ]{5,30}$/',$usuR);
-    $pregPass = preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d+_*ñÑ-]{8,}$/',$passR);
+    $pregPass = preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z0-9ñÑ_\-*.+]{8,30}$/',$passR);
 
     if ($pregName===0){
         //Usuario no tiene las características pedidas

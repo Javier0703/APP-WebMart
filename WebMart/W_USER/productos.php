@@ -164,11 +164,11 @@ if (isset($_GET["order"]) && ($_GET["order"]>4 || $_GET["order"]<1)){
         </section>
         <div class="profile" id="profile">
             <div>
-                <section><a href=""><span class="material-symbols-outlined">person</span><p>Perfil</p></a></section>
-                <section><a href=""><span class="material-symbols-outlined">favorite</span><p>Favoritos</p></a></section>
-                <section><a href=""><span class="material-symbols-outlined">shopping_cart</span><p>Compras</p></a></section>
-                <section><a href=""><span class="material-symbols-outlined">sell</span><p>Ventas</p></a></section>
-                <section><a href=""><span class="material-symbols-outlined">chat</span><p>Mensajes</p></a></section>
+                <section><a href="perfil/perfil.php"><span class="material-symbols-outlined">person</span><p>Perfil</p></a></section>
+                <section><a href="perfil/favoritos.php"><span class="material-symbols-outlined">favorite</span><p>Favoritos</p></a></section>
+                <section><a href="perfil/compras.php"><span class="material-symbols-outlined">shopping_cart</span><p>Compras</p></a></section>
+                <section><a href="perfil/productos.php"><span class="material-symbols-outlined">sell</span><p>Productos</p></a></section>
+                <section><a href="perfil/mensajeria/mensajes.php"><span class="material-symbols-outlined">chat</span><p>Mensajes</p></a></section>
                 <section><a href="../cierre.php"><span class="material-symbols-outlined">logout</span><p>Cerrar Sesión</p></a></section>
             </div>
         </div>
@@ -445,9 +445,14 @@ if (isset($_GET["order"]) && ($_GET["order"]>4 || $_GET["order"]<1)){
             $fila = $res->fetch_assoc();
 
             if (!$fila){
-                echo "Vaya...";
-            }
+                ?>
+                <div class="noResult">
+                    <p>Vaya... parece que no hay ningún producto con lo que estás buscando :(</p>
+                    <img src="../IMG/LOGOS_ERRORES/noFound.jpg" alt="noFound">
+                </div>
 
+        <?php
+            }
             else{
                 $contador = 0;
                 echo '<section>';
@@ -475,11 +480,7 @@ if (isset($_GET["order"]) && ($_GET["order"]>4 || $_GET["order"]<1)){
                 }
                 echo '</section>';
             }
-
-
-
         }
-
         catch (mysqli_sql_exception $e){
             $cod=$e ->getCode();
             $msgError=$e->getMessage();
@@ -488,7 +489,6 @@ if (isset($_GET["order"]) && ($_GET["order"]>4 || $_GET["order"]<1)){
         }
 
     ?>
-
             <?php
             if ($filasTotales>12){
                 ?>
@@ -501,11 +501,7 @@ if (isset($_GET["order"]) && ($_GET["order"]>4 || $_GET["order"]<1)){
 
     </section>
 
-
-
 </main>
-
-
 
 <footer>
     <div>
