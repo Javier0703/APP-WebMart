@@ -15,6 +15,9 @@
     --tam-sIndex5: 100px;
     --p-sIndex5: 16px;
     --coloc-sIndex5: calc( var(--tam-sIndex5) / 20);
+    --aside-profile:calc(250px);
+    --aside2-profile: calc(100% - var(--aside-profile));
+    --aside-img-tam:50px;
 }
 
 *{
@@ -26,6 +29,7 @@
 /*HEADER*/
 
 header{
+    z-index: 1;
     border-bottom: 1px solid lightgrey;
     top: 0;
     height: var(--altura-header);
@@ -1270,7 +1274,7 @@ footer table td:first-child{
 
 .mPerfil{
     margin-top: var(--altura-header);
-    min-height: calc(100vh - var(--altura-header) - var(--altura-footer));
+    min-height: calc(100vh - var(--altura-header));
 }
 
 .mPerfil>section{
@@ -1278,22 +1282,209 @@ footer table td:first-child{
 }
 
 .mPerfil>section aside{
-    background-color: red;
+    min-height: calc(100vh - var(--altura-header));
+    position: fixed;
+    overflow: auto;
+}
+
+.mPerfil>section aside::-webkit-scrollbar {height: 8px; width: 8px}
+.mPerfil>section aside::-webkit-scrollbar-thumb {background-color: lightgrey; border-radius: 5px;}
+.mPerfil>section aside::-webkit-scrollbar-thumb:hover {background-color: rgb(180, 180, 180);}
+
+.mPerfil #a1{
+    height:calc(100vh - var(--altura-header));
+    width: var(--aside-profile);
+}
+
+.mPerfil #a2{
+    position: relative;
+    background-color: rgba(211, 211, 211, 0.5);
+    left: var(--aside-profile);
+    width: var(--aside2-profile);
+}
+
+.mPerfil #a2>form, .mPerfil #a2>section{
     min-height: calc(100vh - var(--altura-header) - var(--altura-footer));
 }
 
-.mPerfil>section aside:first-child div:first-child{
+.mPerfil #a1 a{
+    border-radius: 10px;
+    color: black;
+    text-decoration: none;
+    margin-left: 10px;
+    width: 210px;
     display: flex;
+    padding: 10px;
 }
 
-.mPerfil>section aside:first-child div:first-child>div{
-    width: 80px;
+.mPerfil #a1 a.aSelected{
+    background-color: rgba(211, 211, 211, 0.5);
 }
 
-.mPerfil>section aside:last-child{
-    background-color: yellow;
+.mPerfil #a1 a.aSelected div>p:first-child{
+    font-weight: bold;
+}
+
+.mPerfil #a1 a:hover{
+    background-color: rgba(211, 211, 211, 0.5);
+}
+
+.mPerfil #a1>a:first-child{
+    margin: 25px 10px;
+}
+
+.mPerfil #a1>a:first-child div{
+    margin-left: 20px;
+    height: var(--aside-img-tam);
+    width: 100%;
+    overflow: hidden;
+}
+
+.mPerfil #a1>a:first-child div p{
+    height: 25px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mPerfil #a1>a:first-child div p:first-child{
+    font-weight: bold;
+}
+
+.mPerfil #a1>a:first-child div p:last-child{
+    color: grey;
+}
+
+.mPerfil #a1>a:first-child img{
+    border-radius: calc(var(--aside-img-tam) / 2);
+    width: var(--aside-img-tam);
+    height: var(--aside-img-tam);
+}
+
+.mPerfil #a1>section>a{
+    margin-top: 5px;
+}
+
+.mPerfil #a1>section>a img{
+    margin-left: 5px;
+    width: calc(var(--aside-img-tam) / 1.5);
+    height: calc(var(--aside-img-tam) / 1.5);
+}
+
+.mPerfil #a1>section>a div{
+    display: flex;
+    align-items: center;
+    height: calc(var(--aside-img-tam) / 1.5);
     width: 100%;
 }
+
+.mPerfil #a1>section>a div p{
+    margin-left: 20px;
+    font-size: 17px;
+}
+
+.mPerfil #a2>form>section{
+    border-radius: 15px;
+    margin: auto;
+    max-width: 95%;
+    width: 1200px;
+    background-color: white;
+}
+
+.mPerfil #a2 .sAPerfil1{
+    display: grid;
+    margin: 15px auto;
+    place-items: center;
+}
+
+#a2 .sAPerfil1 h3{
+    text-align: center;
+    padding-top: 10px;
+}
+
+#a2 .sAPerfil1>p{
+    margin: 5px;
+    padding: 2px 5px;
+    text-align: center;
+}
+
+#a2 .sAPerfil1>div{
+    padding:15px 0 5px 0;
+    display: flex;
+    place-items: center;
+    align-content: center;
+}
+
+#a2 .sAPerfil1>div img{
+    margin: 0 15px;
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+}
+
+#a2 .sAPerfil1>div input[type="file"]{
+    display: none;
+}
+
+#a2 .sAPerfil1>div label{
+    cursor: pointer;
+    background-color: #00adec;
+    color: white;
+    display: flex;
+    padding: 12px 20px;
+    border-radius: 10px;
+}
+
+#a2 .sAPerfil1>div label:hover{
+    background-color: #2e3094;
+    transition: .25s;
+}
+
+#a2 .sAPerfil1>div label p{
+    margin-left: 5px;
+}
+
+#a2 .sAPerfil2 h3{
+    text-align: center;
+    padding: 15px;
+}
+
+#a2 .sAPerfil2>section{
+    padding: 0 20px 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+   row-gap: 20px;
+    column-gap: 15px;
+}
+
+#a2 .sAPerfil2>section input{
+    border-radius: 5px;
+    width: calc(100% - 10px);
+    outline: none;
+    border: 1px solid lightgrey;
+    height: 40px;
+    font-size: 18px;
+    padding: 5px;
+}
+
+#a2 .sAPerfil2>section input:focus-within{
+    border: 1px solid #00adec;
+}
+
+
+
+
+
+
+
+#a2 #map{
+    margin: auto;
+    position: relative;
+    width: 1000px;
+    height: 400px;
+    max-width: 100%;
+}
+
 
 /* MEDIA QUERY */
 
