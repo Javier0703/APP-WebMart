@@ -18,25 +18,25 @@ if ((isset($_COOKIE["usu"]) && isset($_COOKIE["pass"])) || (isset($_SESSION["usu
     if (conexUsu()==0){
         $cod=conexUsu();
         setcookie("error","Error $cod, no se puede establecer conexión con la Base de Datos :(");
-        header("Location:error.php");
+        header("Location:../../error.php");
     }
 
     else{
 
         try {
             $con=conexUsu();
-            $sql="SELECT ESTADO,ROL FROM usuarios WHERE USUARIO=? AND CONTRASEÑA=?";
+            $sql="SELECT ID_USU,ESTADO,ROL FROM usuarios WHERE USUARIO=? AND CONTRASEÑA=?";
             $st=$con->prepare($sql);
             $st->bind_param("ss",$usu,$pass);
             $st->execute();
-            $st->bind_result($estado,$rol);
+            $st->bind_result($id_usu,$estado,$rol);
 
             if ($st->fetch()){
 
                 if ($rol==1){
                     $st->close();
                     $con->close();
-                    header("Location: ../W_ADMIN/index.php");
+                    header("Location: ../../W_ADMIN/index.php");
                 }
 
                 if ($estado==0){
@@ -45,13 +45,14 @@ if ((isset($_COOKIE["usu"]) && isset($_COOKIE["pass"])) || (isset($_SESSION["usu
                     setcookie("msg",$msg);
                     $st->close();
                     $con->close();
-                    header("Location: ../index.php");
+                    header("Location: ../../index.php");
                 }
 
                 $st->close();
                 $con->close();
                 define("USU",$usu);
                 define("PASS",$pass);
+                define("ID",$id_usu);
 
             }
         }
@@ -60,13 +61,13 @@ if ((isset($_COOKIE["usu"]) && isset($_COOKIE["pass"])) || (isset($_SESSION["usu
             $cod=$e ->getCode();
             $msgError=$e->getMessage();
             setcookie("error","Error $cod, $msgError");
-            header("Location:error.php");
+            header("Location:../../error.php");
         }
     }
 }
 
 else{
-    header("Location:../cierre.php");
+    header("Location:../../cierre.php");
 }
 ?>
 <!doctype html>
@@ -200,10 +201,106 @@ else{
         </aside>
 
         <aside id="a2">
+            <section id="sMainProd">
+                <section class="s1Prod">
+                    <h3>Tus productos</h3>
+                    <p>Aquí podras ver todos los productos que tienes en venta como los que has vendido. ¡No hay límite!</p>
+                </section>
+                <section class="s2Prod">
+                        <ul>
+                            <li class="active">EN VENTA</li>
+                            <li>VENDIDOS</li>
+                        </ul>
+                </section>
 
-            <section>
+                <section class="s3Prod">
+                <?php $idUsu=ID;?>
+                    <section class="active">
+                        <?php
+                        $con=conexUsu();
+                        $sql="SELECT p.ID_PROD ID_P, TITULO, ID_RESERVA R, PRECIO, FOTO FROM productos p JOIN fotos f USING (ID_PROD) WHERE ID_USU=$idUsu AND ID_COMPRADOR IS NULL GROUP BY (ID_PROD) ORDER BY FECHA_SUBIDA DESC";
+                        $res=$con->query($sql);
+                        $filasTotales=$res->num_rows;
+                        if (!$fila = $res->fetch_assoc()){
+                        ?>
+                        <div class="noResult">
+                            <p>Vaya... parece que no tienes productos :( <a href="../publicar.php">¡Sube uno!</a></p>
+                            <img src="../../IMG/LOGOS_ERRORES/noFound.jpg" alt="noFound">
+                        </div>
+                        <?php
+                        }
+                        if ($filasTotales>0){
+                            echo "<p>$filasTotales productos</p>";
+                        }
+                        ?>
+                        <section class="products">
+                            <?php
+                            while ($fila){
+                            ?>
+                            <a href="../prod.php?id_prod=<?=$fila["ID_P"]?>" target="_blank">
+                                <div style="background-image: url('data:image/jpg;base64,<?=base64_encode($fila["FOTO"])?>')"></div>
+                                <section>
+                                    <p><?=strtoupper($fila["TITULO"])?></p>
+                                    <div>
+                                        <p><?=number_format($fila["PRECIO"], 0, '', '.')?> €</p>
+                                        <?php
+                                        if ($fila["R"] !== null)echo "<p class='reserved'>Reservado</p>";
+                                        ?>
+                                    </div>
+                                </section>
+                            </a>
+                            <?php
+                                $fila= $res->fetch_assoc();
+                            }
+                            ?>
+                        </section>
 
+                    </section>
 
+                    <section>
+                        <?php
+                        $con=conexUsu();
+                        $sql="SELECT p.ID_PROD ID_P, TITULO, ID_RESERVA R, PRECIO, FOTO FROM productos p JOIN fotos f USING (ID_PROD) WHERE ID_USU=$idUsu AND ID_COMPRADOR IS NOT NULL GROUP BY (ID_PROD) ORDER BY FECHA_SUBIDA DESC";
+                        $res=$con->query($sql);
+                        $filasTotales=$res->num_rows;
+                        if (!$fila = $res->fetch_assoc()){
+                            ?>
+                            <div class="noResult">
+                                <p>Vaya... parece que nadie ha comprado tus productos :( </p>
+                                <img src="../../IMG/LOGOS_ERRORES/noFound.jpg" alt="noFound">
+                            </div>
+                            <?php
+                        }
+                        if ($filasTotales>0){
+                            echo "<p>$filasTotales ventas</p>";
+                        }
+                        ?>
+                        <section class="products">
+                            <?php
+                            while ($fila){
+                                ?>
+                                <a href="../prod.php?id_prod=<?=$fila["ID_P"]?>" target="_blank">
+                                    <div style="background-image: url('data:image/jpg;base64,<?=base64_encode($fila["FOTO"])?>')"></div>
+                                    <section>
+                                        <p><?=strtoupper($fila["TITULO"])?></p>
+                                        <div>
+                                            <p><?=number_format($fila["PRECIO"], 0, '', '.')?> €</p>
+                                            <?php
+                                            if ($fila["R"] !== null)echo "<p class='reserved'>Reservado</p>";
+                                            ?>
+                                        </div>
+                                    </section>
+                                </a>
+                                <?php
+                                $fila= $res->fetch_assoc();
+                                $st->close();
+                                $con->close();
+                            }
+                            ?>
+                        </section>
+                    </section>
+
+                </section>
             </section>
 
             <footer class="footerProfile">
@@ -217,6 +314,7 @@ else{
                     </table>
                 </div>
             </footer>
+
         </aside>
 
     </section>
@@ -224,5 +322,6 @@ else{
 
 </body>
 <script src="../../JS_APP/header.js"></script>
+<script src="../../JS_APP/PERFIL/productos.js"></script>
 </html>
 

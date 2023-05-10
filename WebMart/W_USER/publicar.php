@@ -264,12 +264,12 @@ else{
             <h3>Fotos</h3>
             <p>Elija al menos una foto (Recomendado 3). Formato jpg </p>
             <section>
-                <input type="file" name="img1">
-                <input type="file" name="img2">
-                <input type="file" name="img3">
-                <input type="file" name="img4">
-                <input type="file" name="img5">
-                <input type="file" name="img6">
+                <input type="file" name="img1" accept="image/jpeg">
+                <input type="file" name="img2" accept="image/jpeg">
+                <input type="file" name="img3" accept="image/jpeg">
+                <input type="file" name="img4" accept="image/jpeg">
+                <input type="file" name="img5" accept="image/jpeg">
+                <input type="file" name="img6" accept="image/jpeg">
             </section>
             <p style="color: red; text-align: center"></p>
         </section>

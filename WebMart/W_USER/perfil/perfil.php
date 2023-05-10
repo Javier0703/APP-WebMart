@@ -1,4 +1,10 @@
 <?php
+if (isset($_COOKIE["correo"])) {
+    $cookie=$_COOKIE["correo"];
+    setcookie("correo",false);
+}
+
+
 include ("../../conexDB.php");
 session_set_cookie_params(sesTime());
 session_start();
@@ -18,7 +24,7 @@ if ((isset($_COOKIE["usu"]) && isset($_COOKIE["pass"])) || (isset($_SESSION["usu
     if (conexUsu()==0){
         $cod=conexUsu();
         setcookie("error","Error $cod, no se puede establecer conexión con la Base de Datos :(");
-        header("Location:error.php");
+        header("Location:../../error.php");
     }
 
     else{
@@ -36,7 +42,7 @@ if ((isset($_COOKIE["usu"]) && isset($_COOKIE["pass"])) || (isset($_SESSION["usu
                 if ($rol==1){
                     $st->close();
                     $con->close();
-                    header("Location: ../W_ADMIN/index.php");
+                    header("Location: ../../W_ADMIN/index.php");
                 }
 
                 if ($estado==0){
@@ -45,7 +51,7 @@ if ((isset($_COOKIE["usu"]) && isset($_COOKIE["pass"])) || (isset($_SESSION["usu
                     setcookie("msg",$msg);
                     $st->close();
                     $con->close();
-                    header("Location: ../index.php");
+                    header("Location: ../../index.php");
                 }
 
                 $st->close();
@@ -60,13 +66,13 @@ if ((isset($_COOKIE["usu"]) && isset($_COOKIE["pass"])) || (isset($_SESSION["usu
             $cod=$e ->getCode();
             $msgError=$e->getMessage();
             setcookie("error","Error $cod, $msgError");
-            header("Location:error.php");
+            header("Location:../../error.php");
         }
     }
 }
 
 else{
-    header("Location:../cierre.php");
+    header("Location:../../cierre.php");
 }
 ?>
 <!doctype html>
@@ -238,40 +244,52 @@ else{
                             $st->fetch();
                             ?>
                             <label for="nombre">Nombre</label><br>
-                            <input type="text" id="nombre" name="nombre" value="<?=$n?>" placeholder="Nombre">
+                            <input type="text" id="nombre" name="nombre" value="<?=$n?>" maxlength="30" placeholder="Nombre">
                         </div>
                         <div>
-                            <label for="nombre">Primer Apellido</label><br>
-                            <input type="text" id="nombre" name="ape1" value="<?=$ap1?>" placeholder="Primer apellido">
+                            <label for="ape1">Primer Apellido</label><br>
+                            <input type="text" id="ape1" name="ape1" value="<?=$ap1?>" placeholder="Primer apellido" maxlength="30">
                         </div>
                         <div>
-                            <label for="nombre">Segundo Apellido</label><br>
-                            <input type="text" id="nombre" name="ape2" value="<?=$ap2?>" placeholder="Segundo apellido">
+                            <label for="ape2">Segundo Apellido</label><br>
+                            <input type="text" id="ape2" name="ape2" value="<?=$ap2?>" placeholder="Segundo apellido" maxlength="30">
                         </div>
                         <div>
-                            <label for="nombre">Correo</label><br>
-                            <input type="text" id="nombre" name="correo" value="<?=$correo?>" placeholder="Correo">
+                            <label for="correo">Correo</label><br>
+                            <div><input type="text" id="correo" name="correo" value="<?=$correo?>" placeholder="Correo" maxlength="40"></div>
                         </div>
                     </section>
-
+                    <p id="error">
+                        <?php
+                        if ($cookie !== ''){
+                            echo $cookie;
+                            $cookie='';
+                        }
+                        ?>
+                    </p>
                     <div>
-                        <label for="descripcion">Descripción</label><br>
-                        <textarea name="descripcion" id="descripcion" cols="30" rows="10">Hola</textarea>
+                        <section><label for="descripcion">Descripción</label><span>0</span><p>/400</p></section>
+                        <div><textarea name="desc" id="descripcion" rows="6" placeholder="Una descripción para saber un poco quien eres" maxlength="400"><?=$desc?></textarea></div>
                     </div>
                 </section>
 
                 <section class="sAPerfil3">
+                    <h3>Dirección</h3>
+                    <section>
+                        <input id="direccion" type="text" name="direccion" value="<?=$dir?>" placeholder="Introduce tu dirección" maxlength="60">
+                        <button id="comprobar">Comprobar</button>
+                    </section>
+                    
                     <div id="map">
+
                     </div>
+
+                    <button id="guardar">Guardar</button>
+
                 </section>
                 <?php
                 $st->close();
                 ?>
-                <section class="sAPerfil2">
-
-                </section>
-
-
             </form>
 
             <footer class="footerProfile">
@@ -285,15 +303,19 @@ else{
                     </table>
                 </div>
             </footer>
+
         </aside>
 
     </section>
+
 </main>
 
 </body>
 <script src="../../JS_APP/header.js"></script>
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
 <script src="../../JS_APP/PERFIL/map.js"></script>
+
+
 <script>
     function mostrarImagen() {
         let input = document.getElementById('file');
@@ -310,5 +332,6 @@ else{
         }
     }
 </script>
+
 </html>
 

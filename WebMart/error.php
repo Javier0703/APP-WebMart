@@ -32,6 +32,7 @@ if (!isset($_COOKIE["error"])){
         <?php
         if (isset($_COOKIE["error"])){
             echo $_COOKIE["error"];
+            setcookie("error",false);
         }
         ?>
     </div>

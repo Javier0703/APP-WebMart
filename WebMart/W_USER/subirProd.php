@@ -245,7 +245,7 @@ if (isset($_POST["id_sub"]) && strlen(trim($_POST["id_sub"]))>0 && is_numeric($_
                 $st->close();
             }
             $con->close();
-            echo "Guardado todo";
+            header("Location: perfil/productos.php");
         }
 
         catch (mysqli_sql_exception $e){
