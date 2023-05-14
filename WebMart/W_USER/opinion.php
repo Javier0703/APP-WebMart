@@ -3,6 +3,15 @@ include("../conexDB.php");
 session_set_cookie_params(sesTime());
 session_start();
 
+if (isset($_GET["id_prod"])){
+    if (strlen($_GET["id_prod"])===0){
+        header("Location: usuarios.php");
+    }
+    if (!is_numeric($_GET["id_prod"]) || $_GET["id_prod"]<=0){
+        header("Location: usuarios.php");
+    }
+}
+
 if ((isset($_COOKIE["usu"]) && isset($_COOKIE["pass"])) || (isset($_SESSION["usu"]) && isset($_SESSION["pass"]))) {
 
     if (isset($_COOKIE["usu"]) && $_COOKIE["pass"]) {
@@ -23,11 +32,11 @@ if ((isset($_COOKIE["usu"]) && isset($_COOKIE["pass"])) || (isset($_SESSION["usu
 
         try {
             $con = conexUsu();
-            $sql = "SELECT ESTADO,ROL FROM usuarios WHERE USUARIO=? AND CONTRASEÑA=?";
+            $sql = "SELECT ID_USU, ESTADO,ROL FROM usuarios WHERE USUARIO=? AND CONTRASEÑA=?";
             $st = $con->prepare($sql);
             $st->bind_param("ss", $usu, $pass);
             $st->execute();
-            $st->bind_result($estado, $rol);
+            $st->bind_result($idDB,$estado, $rol);
 
             if ($st->fetch()) {
 
@@ -50,6 +59,7 @@ if ((isset($_COOKIE["usu"]) && isset($_COOKIE["pass"])) || (isset($_SESSION["usu
                 $con->close();
                 define("USU", $usu);
                 define("PASS", $pass);
+                define("IDUSU", $idDB);
 
             }
         } catch (mysqli_sql_exception $e) {
@@ -65,21 +75,20 @@ else {
     header("Location:../cierre.php");
 }
 
-if (isset($_GET["usu"])){
-    $pregName = preg_match('/^[a-zA-Z0-9_ñÑ]+$/', $_GET["usu"]);
+$prod = $_GET["id_prod"];
+$idComp=IDUSU;
+$con= conexUsu();
+$sql="SELECT ID_PROD, ID_COMPRADOR from productos WHERE ID_PROD=? AND ID_COMPRADOR=?";
+$st = $con->prepare($sql);
+$st->bind_param("ii", $prod, $idComp);
+$st->execute();
+$st->bind_result($idProd,$id_Comp);
 
-    if (strlen($_GET["usu"])===0){
-        //Esta bien
-    }
-
-    else if (strlen($_GET["usu"])>0 && !$pregName){
-        setcookie("block","block");
-        header("Location: block.php");
-        exit;
-    }
+if (!$fila = $st->fetch()){
+    $st->close();
+    $con->close();
+    header("Location: usuarios.php");
 }
-
-
 ?>
 
 <!doctype html>
@@ -91,6 +100,7 @@ if (isset($_GET["usu"])){
     <link rel="shortcut icon" href="../IMG/LOGOS_ERRORES/logo.png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,-25"/>
     <title>WebMart</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
     <link rel="stylesheet" href="../CSS/estilos.css">
 </head>
 
@@ -113,6 +123,7 @@ if (isset($_GET["usu"])){
             $st->bind_result($icono);
             $st->fetch();
             echo '<div id="profileIcon"><img src="data:image/jpg;base64,'.base64_encode($icono).'"><span class="material-symbols-outlined">expand_more</span></div>';
+            $st->close();
             ?>
         </section>
         <div class="profile" id="profile">
@@ -128,69 +139,39 @@ if (isset($_GET["usu"])){
     </nav>
 </header>
 
-<main class="mUser">
-    <form action="usuarios.php" method="GET">
-        <p> Encuentra el perfil que estes buscando</p>
+<main class="mOpinion">
 
-        <section>
-            <div class="flex">
-                <img src="../IMG/LOGOS_ERRORES/lupa.png" alt="Lupa">
-                <input type="text" name="usu" placeholder="Estoy buscando..." value="<?php if (isset($_GET["usu"]) && strlen(trim($_GET["usu"]))>0){echo $_GET["usu"];}?>">
-                <img src="../IMG/LOGOS_ERRORES/x.png" alt="Lupa"<?php if (isset($_GET["usu"]) && strlen(trim($_GET["usu"]))>0){echo 'style="opacity: 1"';}?>>
-                </div>
-            <button>Buscar</button>
-            <p></p>
-        </section>
-    </form>
+    <section class="titulo">
+        <p>Edita o añade una opinión sobre un producto comprado</p>
+    </section>
 
+    <section class="producto">
         <?php
-        $usu=USU;
-        if (isset($_GET["usu"])){
-            $con=conexUsu();
-
-            if (strlen(trim($_GET["usu"]))>0){
-                $str= $_GET["usu"];
-                $char = str_split($str);
-                $regexp = implode(".*", $char);
-                $sql="SELECT ID_USU, ICONO, USUARIO, count(TITULO) PRODS FROM usuarios u left join productos p using (id_usu) where USUARIO REGEXP '$regexp' and USUARIO!='$usu' group by USUARIO";
-            }
-            else{
-                $sql="SELECT ID_USU, ICONO, USUARIO, count(TITULO) PRODS FROM usuarios u left join productos p using (id_usu) where USUARIO!='$usu' group by USUARIO";
-            }
-            $res= $con->query($sql);
-            $fila= $res->fetch_assoc();
-
-            if (!$fila){
-                ?>
-                <div class="noResult">
-                    <p>Vaya... ¿Seguro has escrito bien el usuario? :(</p>
-                    <img src="../IMG/LOGOS_ERRORES/noFound.jpg" alt="noFound">
-                </div>
-        <?php
-            }
-            ?>
-
-            <section class="users">
-            <?php
-            while ($fila){
-                ?>
-                <a href="user.php?id_usu=<?=$fila["ID_USU"]?>">
-                    <?php echo '<img src="data:image/jpg;base64,'.base64_encode($fila["ICONO"]).'">'; ?>
-                    <div>
-                        <p><?=$fila["USUARIO"]?></p>
-                        <p><?=$fila["PRODS"]?> artículos</p>
-                    </div>
-                </a>
-                <?php
-                $fila= $res->fetch_assoc();
-            }
-            ?>
-            </section>
-    <?php
-        }
+        $con=conexUsu();
+        $sql="SELECT TITULO, FOTO FROM productos JOIN FOTOS USING (ID_PROD) WHERE ID_PROD=$prod GROUP BY ID_PROD";
+        $res= $con->query($sql);
+        $fila = $res->fetch_assoc();
+        echo '<div><img src="data:image/jpg;base64,'.base64_encode($fila["FOTO"]).'"></div>';
+        echo "<p>".strtoupper($fila["TITULO"])."</p>";
         ?>
+    </section>
 
-
+    <section class="info">
+        <form action="">
+            <?php
+            $sql="SELECT p.ID_PROD, VALORACION, MENSAJE  from productos p left outer join opiniones o using (ID_PROD) where p.ID_PROD=$prod";
+            $res = $con->query($sql);
+            $fila = $res->fetch_assoc();
+            ?>
+            <label for="val">Valoración</label><br>
+            <input id="val" type="number" name="valoracion" min="0" max="5" value="<?=$fila["VALORACION"]?>" placeholder="Del 1 al 5"><br><br>
+            <label for="desc">Descripcion</label><br>
+            <textarea name="descripcion" id="desc" rows="6" placeholder="Se bueno..."></textarea>
+            <div>
+                <button>Guardad</button>
+            </div>
+        </form>
+    </section>
 
 </main>
 
@@ -208,6 +189,7 @@ if (isset($_GET["usu"])){
 
 </body>
 <script src="../JS_APP/header.js"></script>
-<script src="../JS_APP/usuarios.js"></script>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+<script src="../JS_APP/user.js"></script>
 
 </html>

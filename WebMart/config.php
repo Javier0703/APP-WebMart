@@ -58,80 +58,81 @@ if(isset($_SESSION["usu"]) && $_SESSION["pass"]){
 //Login del usuario
 else if (isset($_POST["usu"]) && strlen(trim($_POST["usu"]))>0 &&
         isset($_POST["pass"]) && strlen(trim($_POST["pass"]))>0){
+
     $usu=$_POST["usu"];
+
     $pass=$_POST["pass"];
+
     $pregName = preg_match('/^[a-zA-Z0-9_ñÑ]{5,30}$/',$usu);
     $pregEmail = preg_match('/^(?=.{1,40}$)[\wñÑ-]+(\.[\wñÑ-]+)*@[\wñÑ-]+(\.[\wñÑ-]{2,})+$/',$usu);
-    $pregPass = preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z0-9ñÑ_\-*.+]{8,30}$/',$pass);
+    $pregPass = preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z0-9ñÑ_\-*.+]{8,30}$/', $pass);
 
-    if ($pregName===0){
-        if ($pregEmail===0){
-            //Usuario no tiene las características pedidas
-            $msg="Se permiten mayúsculas, minúsculas, números y _ (de 5 a 30 caracteres para el usuario) y el correo hasta 40 caracteres";
-            setcookie("msg",$msg);
-            header("Location:index.php");
-        }
+    if (!$pregName && !$pregEmail){
+        $msg="Se permiten mayúsculas, minúsculas, números y _ (de 5 a 30 caracteres para el usuario) y el correo hasta 40 caracteres";
+        setcookie("msg",$msg);
+        header("Location: index.php");
+        exit;
     }
 
-    if ($pregPass===0){
-        //Contraseña no cumple
+    if (!$pregPass){
         $msg="La contraseña debe tener mayúsculas, minúsculas, y números (8 caracteres mínimo)";
         setcookie("msg",$msg);
-        header("Location:index.php");
+        header("Location: index.php");
+        exit;
     }
 
-    if(conexUsu()==0){
-        setcookie("error","Error, no se puede establecer conexión con la Base de Datos :(");
-        header("Location:error.php");
-    }
+        if(conexUsu()==0){
+            setcookie("error","Error, no se puede establecer conexión con la Base de Datos :(");
+            header("Location:error.php");
+        }
 
-    else{
-        try{
-            $con=conexUsu();
-            $sql="SELECT USUARIO,CORREO,CONTRASEÑA FROM usuarios WHERE USUARIO=? OR CORREO=?";
-            $st=$con->prepare($sql);
-            $st->bind_param("ss",$usu,$usu);
-            $st->execute();
-            $st->bind_result($usuDB, $correoDB, $passDB);
-            $st->fetch();
-            $st->close();
-            $con->close();
-            if ($usuDB==$usu || $correoDB==$usu){
-                //Hay que comparar la contraseña sea correcta
-                if (password_verify("$pass","$passDB")===true){
-                    $_SESSION["usu"]=$usuDB;
-                    $_SESSION["pass"]=$passDB;
-                    if (isset($_POST["sesion"])){
-                        //Mantiene la sesión iniciada
-                        setcookie("pasarela",1);
+        else{
+            try{
+                $con=conexUsu();
+                $sql="SELECT USUARIO,CORREO,CONTRASEÑA FROM usuarios WHERE USUARIO=? OR CORREO=?";
+                $st=$con->prepare($sql);
+                $st->bind_param("ss",$usu,$usu);
+                $st->execute();
+                $st->bind_result($usuDB, $correoDB, $passDB);
+                $st->fetch();
+                $st->close();
+                $con->close();
+                if ($usuDB==$usu || $correoDB==$usu){
+                    //Hay que comparar la contraseña sea correcta
+                    if (password_verify("$pass","$passDB")===true){
+                        $_SESSION["usu"]=$usuDB;
+                        $_SESSION["pass"]=$passDB;
+                        if (isset($_POST["sesion"])){
+                            //Mantiene la sesión iniciada
+                            setcookie("pasarela",1);
+                        }
+                        header("Location:pasarela.php");
                     }
-                    header("Location:pasarela.php");
+
+                    else{
+                        //La contraseña es incorrecta
+                        $msg="Usuario o contraseña incorrecto";
+                        setcookie("msg",$msg);
+                        header("Location:index.php");
+                    }
                 }
 
                 else{
-                    //La contraseña es incorrecta
+                    //El usuario es incorrecto
                     $msg="Usuario o contraseña incorrecto";
                     setcookie("msg",$msg);
                     header("Location:index.php");
                 }
             }
 
-            else{
-                //El usuario es incorrecto
-                $msg="Usuario o contraseña incorrecto";
-                setcookie("msg",$msg);
-                header("Location:index.php");
+            catch (mysqli_sql_exception $e){
+                $cod=$e ->getCode();
+                $msgError=$e->getMessage();
+                setcookie("error","Error $cod, $msgError");
+                header("Location:error.php");
             }
-
         }
 
-        catch (mysqli_sql_exception $e){
-            $cod=$e ->getCode();
-            $msgError=$e->getMessage();
-            setcookie("error","Error $cod, $msgError");
-            header("Location:error.php");
-        }
-    }
 }
 
 //Registro del usuario
@@ -143,27 +144,29 @@ else if (isset($_POST["usuR"]) && strlen(trim($_POST["usuR"]))>0 &&
     $pregName = preg_match('/^[a-zA-Z0-9_ñÑ]{5,30}$/',$usuR);
     $pregPass = preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z0-9ñÑ_\-*.+]{8,30}$/',$passR);
 
-    if ($pregName===0){
+    if ($pregName==0){
         //Usuario no tiene las características pedidas
         $msg="El usuario solo puede tener mayúsculas, minúsculas, números y _ y de 5 a 30 caracteres";
         setcookie("msg",$msg);
         header("Location:index.php");
+        exit;
     }
 
-    elseif ($pregPass===0){
+    if ($pregPass==0){
         //Contraseña no cumple
         $msg="La contraseña debe tener mayúsculas, minúsculas, y números (8 caracteres mínimo)";
         setcookie("msg",$msg);
         header("Location:index.php");
+        exit;
     }
 
-    elseif ($passR!==$passR2){
+    if ($passR!==$passR2){
         $msg="Las contraseñas no coinciden";
         setcookie("msg",$msg);
         header("Location:index.php");
+        exit;
     }
 
-    else{
         if(conexUsu()==0){
             setcookie("error","Error, no se puede establecer conexión con la Base de Datos :(");
             header("Location:error.php");
@@ -222,8 +225,8 @@ else if (isset($_POST["usuR"]) && strlen(trim($_POST["usuR"]))>0 &&
             setcookie("error","Error $cod, $msgError");
             header("Location:error.php");
         }
-    }
 }
+
 
 else{
     header("Location:index.php");

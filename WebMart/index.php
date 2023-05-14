@@ -7,6 +7,14 @@ if (isset($_COOKIE["pass"])){setcookie("pass",false);}
 if (isset($_SESSION["usu"]) && isset($_SESSION["pass"])){
     header("Location:config.php");
 }
+
+
+if (isset($_COOKIE["msg"])) {
+    $msg=$_COOKIE["msg"];
+    setcookie("msg", false);
+}
+
+
 ?>
 
 <!doctype html>
@@ -105,7 +113,7 @@ if (isset($_SESSION["usu"]) && isset($_SESSION["pass"])){
                         <input type="password" name="passR2" id="passR2">
                     </div>
                 </div>
-                <input type="checkbox" name="sesionR" id="sesionR"> Mantener la sesión iniciada.<br>
+                <input type="checkbox" name="sesionR" id="sesionR"><label for="sesionR">Mantener la sesión iniciada.</label><br>
                 <section>
                     <button id="Reg">Registrarse</button>
                 </section>
@@ -115,9 +123,9 @@ if (isset($_SESSION["usu"]) && isset($_SESSION["pass"])){
 
     <p></p>
     <?php
-    if (isset($_COOKIE["msg"])){
-        echo "<p>".$_COOKIE["msg"]."</p>";
-        setcookie("msg",false);
+    if (isset($msg)){
+        echo "<p>$msg</p>";
+        unset($msg);
     }
     ?>
 </main>

@@ -218,7 +218,7 @@ else{
                     if (!$fila = $res->fetch_assoc()){
                         ?>
                         <div class="noResult">
-                            <p>Vaya... parece que no has comprado nada <a href="../productos.php">¡Mira algo!</a> </p>
+                            <p>Vaya... parece que no te gusta nada... <a href="../productos.php">¡Mira de nuevo!</a> </p>
                             <img src="../../IMG/LOGOS_ERRORES/noFound.jpg" alt="noFound">
                         </div>
                         <?php

@@ -29,7 +29,7 @@
 /*HEADER*/
 
 header{
-    z-index: 1;
+    z-index: 2;
     border-bottom: 1px solid lightgrey;
     top: 0;
     height: var(--altura-header);
@@ -1258,10 +1258,409 @@ footer table td:first-child{
     transition: 1s;
 }
 
+/* Pagina USUARIOS */
+
+.mUser>form, .mUser>section{
+    max-width: 95%;
+    width: 1200px;
+    margin: auto;
+}
+
+.mUser>form{
+    padding: 10px;
+    border-bottom: 1px solid lightgrey;
+}
+
+.mUser>form>p{
+    text-align: center;
+    font-size: 24px;
+    padding-bottom: 10px;
+}
+
+.mUser>form>section{
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(6, 1fr);
+}
+
+.mUser form .flex{
+    border-radius: 25px;
+    grid-column: span 5;
+    border: 1px solid lightgrey;
+    display: flex;
+}
+
+.mUser .flex img:first-child{
+    width: 25px;
+    padding: 10px;
+}
+
+.mUser .flex input{
+    width: 100%;
+    outline: none;
+    border: none;
+    background: none;
+    font-size: 16px;
+}
+
+.mUser .flex img:last-child{
+    opacity: 0;
+    width: 15px;
+    margin: 15px;
+}
+
+.mUser>form>section button{
+    font-size: 16px;
+    width: 100%;
+    border-radius: 50px;
+    cursor: pointer;
+    grid-column: span 1;
+    background: #00adec;
+    color: white;
+    border: none;
+}
+
+.mUser>section{
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(4, 1fr);
+    margin-top: 15px;
+}
+
+.mUser>section>a{
+    color: black;
+    text-decoration: none;
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid lightgrey;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.mUser>section>a:hover{
+    background: lightgrey;
+}
+
+.mUser>section>a img{
+    border-radius: 50%;
+    grid-column: span 1;
+    width: 70px;
+    height: 70px;
+}
+
+.mUser>section>a div{
+    overflow: hidden;
+    grid-column: span 3;
+}
+
+.mUser>section>a div p{
+    display: flex;
+    place-items: center;
+    margin-left: 20px;
+    height: 35px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+.mUser>section>a div p:first-child{
+    font-weight: bold;
+}
+
+/* Página de Perfil de Usuario */
+
+.mUserP{
+    min-height: calc(100vh - var(--altura-header) - var(--altura-footer) - 20px);
+    margin-top: calc(var(--altura-header) + 20px);
+}
+
+.mUserP>div, .mUserP>section{
+    margin:auto;
+    max-width: 95%;
+    width: 1200px;
+}
+
+.mUserP>.sUserP1{
+    border-radius: 10px;
+    border: 1px solid lightgrey;
+    gap: 8px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    padding: 10px;
+}
+
+.sUserP1>.perfil{
+    display: grid;
+    align-items: center;
+    place-items: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sUserP1>.perfil>div, .sUserP1>.perfil>div>div:last-child{
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sUserP1>.perfil img{
+    margin: 10px 0;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+
+.sUserP1>.perfil p{
+    font-weight: bold;
+    font-size: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mUserP>.sUserP1 .info{
+    grid-column: span 2;
+}
+.mUserP>.sUserP1 .map{
+    grid-column: span 3;
+}
+
+.sUserP1 .info p:first-child{
+    text-decoration: underline;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sUserP1>.info p:last-child{
+    width: 100%;
+    max-height: 250px;
+    overflow: auto;
+    margin-top:10px;
+    font-size: 14px;
+}
+
+.sUserP1>.info p:last-child::-webkit-scrollbar {height: 8px; width: 8px}
+.sUserP1>.info p:last-child::-webkit-scrollbar-thumb {background-color: lightgrey; border-radius: 4px;}
+.sUserP1>.info p:last-child::-webkit-scrollbar-thumb:hover {background-color: rgb(180, 180, 180);}
+
+.sUserP1>.map div:first-child{
+    display: flex;
+}
+
+.sUserP1>.map div:first-child p{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sUserP1>.map #map{
+    z-index: 1;
+    margin-top: 10px;
+    width: 1000px;
+    height: 250px;
+    max-width: 100%;
+    border-radius: 10px;
+    border: 1px solid lightgrey;
+}
+
+
+.sUserP2{
+    margin-top: 10px !important;
+}
+
+
+.sUserP2 ul{
+    padding: 10px 0;
+    list-style: none;
+    overflow: hidden;
+}
+
+.sUserP2 ul li{
+    cursor: pointer;
+    display: inline-block;
+}
+
+.sUserP2 ul li:last-child{
+    margin-left: 10px;
+}
+
+.sUserP2 ul li.active{
+    color: #00adec;
+    border-bottom: 2px solid #00adec;
+}
+
+.sUserP2>section{
+    display: none;
+}
+
+.sUserP2>section.active{
+    display: block;
+}
+
+.valoration>div{
+    max-height: 150px;
+    height: 150px;
+    padding: 10px 0 20px 0;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+}
+
+.valoration>div aside:first-child{
+    margin: 5px;
+    position: relative;
+    grid-column: span 2;
+}
+
+.valoration>div aside:first-child img{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.valoration>div aside:last-child{
+    grid-column: span 4;
+}
+
+.valoration>div aside:last-child div{
+    font-size: 18px;
+    display: flex;
+}
+
+.valoration>div aside:last-child div p:first-child{
+    margin-right: 10px;
+    font-weight: bolder;
+}
+
+.valoration>div aside:last-child>p:last-child{
+    max-height: 120px;
+    overflow: auto;
+}
+
+.valoration>div aside:last-child>p:last-child::-webkit-scrollbar {height: 8px; width: 8px}
+.valoration>div aside:last-child>p:last-child::-webkit-scrollbar-thumb {background-color: lightgrey; border-radius: 4px;}
+.valoration>div aside:last-child>p:last-child::-webkit-scrollbar-thumb:hover {background-color: rgb(180, 180, 180);}
+
+form.formOpinar{
+   text-align: center;
+    padding-bottom: 10px;
+}
+
+form.formOpinar button{
+    background: #00adec;
+    outline: none;
+    border: none;
+    color: white;
+    padding: 3px 10px;
+    font-size: 12px;
+    border-radius: 20px;
+}
+
+/*Pagina de Opinion */
+
+.mOpinion>section{
+    width: 1200px;
+    max-width: 95%;
+    margin: auto;
+}
+
+.mOpinion .titulo p{
+    text-align: center;
+    padding-top: 10px;
+    font-size: 24px;
+}
+
+.mOpinion .producto{
+    padding: 5px;
+    border-radius: 10px;
+    margin-top: 10px;
+    border: 1px solid lightgrey;
+    height: 200px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.mOpinion .producto div, .mOpinion .producto p{
+    grid-column: span 2;
+    position: relative;
+}
+
+.mOpinion .producto p{
+    display: flex;
+    align-items: center;
+    place-items: center;
+    text-align: center;
+}
+
+.mOpinion .producto div img{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.mOpinion .info{
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.mOpinion .info input{
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid lightgrey;
+    height: 30px;
+    padding: 5px;
+    width: calc(100% - 10px);
+}
+
+.mOpinion .info input:focus-within{
+    border: 1px solid #00adec;
+}
+
+.mOpinion .info textarea{
+    resize: none;
+    border: 1px solid lightgrey;
+    outline: none;
+    width: calc(100% - 10px);
+    padding: 5px;
+}
+.mOpinion .info div{
+    text-align: center;
+}
+
+.mOpinion .info button{
+    height: 30px;
+    width: 120px;
+    background: #00adec;
+    outline: none;
+    padding: 3px 10px;
+    color: white;
+    border: none;
+    border-radius: 20px;
+}
+
+
+
+
+
+
+
 /* Página PROD */
 
 .mPSelected>section{
-    padding-top: 10px;
     max-width: 95%;
     width: 1200px;
     margin: auto;
@@ -1573,8 +1972,8 @@ footer table td:first-child{
 }
 
 #a2 #map{
+    z-index: 1;
     margin: auto;
-    position: relative;
     width: 1000px;
     height: 400px;
     max-width: 95%;
@@ -1731,6 +2130,110 @@ footer table td:first-child{
 
 /* MEDIA QUERY */
 
+@media (max-width: 1260px) {
+
+    :root{
+        --p-sIndex5: 22px;
+        --tam-sIndex5: 200px;
+    }
+
+    .sIndex5 form{
+        grid-template-columns: repeat(2,1fr);
+    }
+
+}
+
+@media  (max-width: 1000px ) {
+    .mUser>section{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 915px){
+
+    .mPerfil #a1{
+        display: none;
+    }
+
+    .mPerfil #a2{
+        left: 0;
+        width: 100%;
+    }
+
+    .mUserP>.sUserP1{
+        max-width: calc(95% - 20px) !important;
+        overflow: hidden;
+        grid-template-columns: repeat(5, 1fr);
+    }
+
+    .mUserP>.sUserP1 .perfil{
+        grid-column: span 2;
+    }
+
+    .mUserP>.sUserP1 .info{
+        grid-column: span 3;
+    }
+
+    .mUserP>.sUserP1 .info p:last-child{
+        font-size: 12px;
+    }
+
+    .mUserP>.sUserP1 .map{
+        grid-column: span 5;
+        margin-top: 10px;
+        padding-top: 5px;
+        border-top: 1px solid lightgrey;
+    }
+
+}
+
+
+@media (max-width: 715px) {
+
+    .sIndex2 form, .sIndex4 form, .sIndex5 form, .sProd1 form, .mPublic .sPublic2 .pesaje section, .mUser>form>section{
+        grid-template-columns: 1fr !important;
+    }
+
+    .sIndex2 .grid2 section, .sProd1 .grid3 section{
+        max-width: 100%;
+    }
+
+    .mIndex .grid1, .mIndex .grid2, .mIndex .grid3, .sProd1 form div, .sProd1>form>section, .mPublic .sPublic2 .pesaje section div:last-child, .mUser>form>section .flex, .mUser>form>section button{
+        grid-column: span 1 !important;
+        overflow: hidden;
+    }
+
+    .sProd2>section, .products{
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .mUser>section{
+        grid-template-columns: 1fr 1fr !important;
+    }
+
+    .mUser>form>section button{
+        height: 35px;
+    }
+}
+
+@media (max-width: 645px) {
+
+    .sPublic3>section{
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .sAPerfil2>section{
+        grid-template-columns: 1fr !important;
+    }
+}
+
+@media (max-width: 530px) {
+
+    .mUser>section{
+        grid-template-columns: 1fr !important;
+    }
+}
+
 @media (max-width: 440px) {
 
     :root{
@@ -1776,57 +2279,11 @@ footer table td:first-child{
     }
 }
 
-@media (max-width: 645px) {
-    .sPublic3>section{
-        grid-template-columns: 1fr 1fr;
+@media (max-width: 440px) {
+    .mOpinion .producto{
+        height: 150px;
     }
-
-    .sAPerfil2>section{
-        grid-template-columns: 1fr !important;
+    .mOpinion .producto p{
+        font-size: 12px;
     }
-}
-
-@media (max-width: 715px) {
-
-    .sIndex2 form, .sIndex4 form, .sIndex5 form, .sProd1 form, .mPublic .sPublic2 .pesaje section{
-        grid-template-columns: 1fr !important;
-    }
-
-    .sIndex2 .grid2 section, .sProd1 .grid3 section{
-        max-width: 100%;
-    }
-
-    .mIndex .grid1, .mIndex .grid2, .mIndex .grid3, .sProd1 form div, .sProd1>form>section, .mPublic .sPublic2 .pesaje section div:last-child{
-        grid-column: span 1 !important;
-        overflow: hidden;
-    }
-
-    .sProd2>section, .products{
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 915px){
-
-    .mPerfil #a1{
-        display: none;
-    }
-
-    .mPerfil #a2{
-        left: 0;
-        width: 100%;
-    }
-
-}
-@media (max-width: 1260px) {
-
-    :root{
-        --p-sIndex5: 22px;
-        --tam-sIndex5: 200px;
-    }
-
-    .sIndex5 form{
-        grid-template-columns: repeat(2,1fr);
-    }
-
 }

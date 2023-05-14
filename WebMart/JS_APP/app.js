@@ -63,5 +63,12 @@ window.addEventListener("DOMContentLoaded",function (e){
             }
         });
     });
+
+    let sIndex3 = document.querySelector(".sIndex3");
+    sIndex3.addEventListener("wheel",function (e){
+        e.preventDefault();
+        sIndex3.scrollLeft += e.deltaY;
+    });
+
 });
 
