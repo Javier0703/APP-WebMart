@@ -190,6 +190,27 @@ else{
                     </div>
                 </a>
 
+                <a href="misOpiniones.php">
+                    <img src="../../IMG/ICONS_NAV/ICONOS_ASIDE/misOpiniones.png" alt="Favoritos">
+                    <div>
+                        <p>Mis Opiniones</p>
+                    </div>
+                </a>
+
+                <a href="opiniones.php">
+                    <img src="../../IMG/ICONS_NAV/ICONOS_ASIDE/OpinionesRecibidas.png" alt="Favoritos">
+                    <div>
+                        <p>Opiniones</p>
+                    </div>
+                </a>
+
+                <a href="reservas.php">
+                    <img src="../../IMG/ICONS_NAV/ICONOS_ASIDE/Reservas.png" alt="Favoritos">
+                    <div>
+                        <p>Reservas</p>
+                    </div>
+                </a>
+
                 <a href="mensajeria/mensajes.php">
                     <img src="../../IMG/ICONS_NAV/ICONOS_ASIDE/mensajes.png" alt="Mensajes">
                     <div>
@@ -293,9 +314,9 @@ else{
                                 </a>
                                 <?php
                                 $fila= $res->fetch_assoc();
-                                $st->close();
-                                $con->close();
                             }
+                            $st->close();
+                            $con->close();
                             ?>
                         </section>
                     </section>

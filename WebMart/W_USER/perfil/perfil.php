@@ -1,4 +1,5 @@
 <?php
+
 if (isset($_COOKIE["correo"])) {
     $cookie=$_COOKIE["correo"];
     setcookie("correo",false);
@@ -162,10 +163,10 @@ else{
                             echo "1 opinión";
                         }
                         else if ($opinion>1){
-                            echo $opinion. "opiniones";
+                            echo $opinion. " opiniones";
                         }
                         else{
-                            echo "Sin opiniones";
+                            echo " Sin opiniones";
                         }
                         $st->close();
                         ?>
@@ -183,7 +184,7 @@ else{
                 </a>
 
                 <a href="compras.php">
-                    <img src="../../IMG/ICONS_NAV/ICONOS_ASIDE/compras.png" alt="Compras">
+                     <img src="../../IMG/ICONS_NAV/ICONOS_ASIDE/compras.png" alt="Compras">
                     <div>
                         <p>Compras</p>
                     </div>
@@ -193,6 +194,27 @@ else{
                     <img src="../../IMG/ICONS_NAV/ICONOS_ASIDE/favoritos.png" alt="Favoritos">
                     <div>
                         <p>Favoritos</p>
+                    </div>
+                </a>
+
+                <a href="misOpiniones.php">
+                    <img src="../../IMG/ICONS_NAV/ICONOS_ASIDE/misOpiniones.png" alt="Favoritos">
+                    <div>
+                        <p>Mis Opiniones</p>
+                    </div>
+                </a>
+
+                <a href="opiniones.php">
+                    <img src="../../IMG/ICONS_NAV/ICONOS_ASIDE/OpinionesRecibidas.png" alt="Favoritos">
+                    <div>
+                        <p>Opiniones</p>
+                    </div>
+                </a>
+
+                <a href="reservas.php">
+                    <img src="../../IMG/ICONS_NAV/ICONOS_ASIDE/Reservas.png" alt="Favoritos">
+                    <div>
+                        <p>Reservas</p>
                     </div>
                 </a>
 

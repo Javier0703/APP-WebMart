@@ -1,4 +1,5 @@
 <?php
+
 include ("../../conexDB.php");
 session_set_cookie_params(sesTime());
 session_start();
@@ -29,7 +30,7 @@ if ((isset($_COOKIE["usu"]) && isset($_COOKIE["pass"])) || (isset($_SESSION["usu
             $st=$con->prepare($sql);
             $st->bind_param("ss",$usu,$pass);
             $st->execute();
-            $st->bind_result($id_usu,$estado,$rol);
+            $st->bind_result($IDdb,$estado,$rol);
 
             if ($st->fetch()){
 
@@ -52,7 +53,7 @@ if ((isset($_COOKIE["usu"]) && isset($_COOKIE["pass"])) || (isset($_SESSION["usu
                 $con->close();
                 define("USU",$usu);
                 define("PASS",$pass);
-                define("IDUSU",$id_usu);
+                define("IDU",$IDdb);
 
             }
         }
@@ -70,6 +71,7 @@ else{
     header("Location:../../cierre.php");
 }
 ?>
+
 <!doctype html>
 <html lang="es">
 <head>
@@ -123,7 +125,6 @@ else{
             <a href="perfil.php">
                 <?php
                 $usu=USU;
-                $con=conexUsu();
                 $sql="SELECT ID_USU,ICONO,USUARIO,NOMBRE,APELLIDO1 FROM usuarios WHERE USUARIO=?";
                 $st=$con->prepare($sql);
                 $st->bind_param("s",$usu);
@@ -162,6 +163,7 @@ else{
                         else{
                             echo "Sin opiniones";
                         }
+                        $st->close();
                         ?>
                     </p>
                 </div>
@@ -183,14 +185,14 @@ else{
                     </div>
                 </a>
 
-                <a href="favoritos.php" class="aSelected">
+                <a href="favoritos.php">
                     <img src="../../IMG/ICONS_NAV/ICONOS_ASIDE/favoritos.png" alt="Favoritos">
                     <div>
                         <p>Favoritos</p>
                     </div>
                 </a>
 
-                <a href="misOpiniones.php">
+                <a href="misOpiniones.php" class="aSelected">
                     <img src="../../IMG/ICONS_NAV/ICONOS_ASIDE/misOpiniones.png" alt="Favoritos">
                     <div>
                         <p>Mis Opiniones</p>
@@ -223,58 +225,42 @@ else{
 
         <aside id="a2">
 
-            <section class="sMainFav">
+           <section class="sMisOpiniones">
 
-                <section class="sFav1">
-                    <h3>Productos favoritos</h3>
-                </section>
+               <section id="titulo">
+                   <p>Estas son todas tus opiniones que has realizado</p>
+               </section>
 
-                <section>
-                    <?php
-                    $idUsu=IDUSU;
-                    $con=conexUsu();
-                    $sql="SELECT p.ID_PROD, TITULO, ID_RESERVA , PRECIO, FOTO FROM productos p JOIN favoritos f USING(ID_PROD) JOIN fotos f2 USING (ID_PROD) WHERE f.ID_USU=$idUsu GROUP BY (ID_PROD) ORDER BY FECHA_SUBIDA DESC";
-                    $res=$con->query($sql);
-                    $filasTotales=$res->num_rows;
-                    if (!$fila = $res->fetch_assoc()){
-                        ?>
-                        <div class="noResult">
-                            <p>Vaya... parece que no te gusta nada... <a href="../productos.php">¡Mira de nuevo!</a> </p>
-                            <img src="../../IMG/LOGOS_ERRORES/noFound.jpg" alt="noFound">
-                        </div>
-                        <?php
-                    }
-                    if ($filasTotales>0){
-                        echo "<p>$filasTotales artíulos favoritos</p>";
-                    }
-                    ?>
-                    <section class="products">
-                        <?php
-                        while ($fila){
-                            ?>
-                            <a href="../prod.php?id_prod=<?=$fila["ID_PROD"]?>" target="_blank">
-                                <div style="background-image: url('data:image/jpg;base64,<?=base64_encode($fila["FOTO"])?>')"></div>
-                                <section>
-                                    <p><?=strtoupper($fila["TITULO"])?></p>
-                                    <div>
-                                        <p><?=number_format($fila["PRECIO"], 0, '', '.')?> €</p>
-                                        <?php
-                                        if ($fila["ID_RESERVA"] !== null)echo "<p class='reserved'>Reservado</p>";
-                                        ?>
-                                    </div>
-                                </section>
-                            </a>
-                            <?php
-                            $fila= $res->fetch_assoc();
-                        }
-                        $st->close();
-                        $con->close();
-                        ?>
-                    </section>
+               <section id="opiniones">
+                   <?php
+                   $IDdb=IDU;
+                   $con=conexUsu();
+                   $sql= "select p.TITULO, p.ID_PROD, o.VALORACION, o.MENSAJE from productos p join opiniones o on p.ID_PROD = o.ID_PROD join usuarios u on o.ID_USU = u.ID_USU WHERE O.ID_USU=$IDdb group by p.ID_PROD ";
+                   $res = $con->query($sql);
 
-                </section>
+                   if (!$fila = $res->fetch_assoc()){
+                       ?>
+                       <div class="noResult">
+                           <p>Vaya... parece que no has opinado todavía... :(</p>
+                           <img src="../../IMG/LOGOS_ERRORES/noOpinions.jpg" alt="noFound">
+                       </div>
+                       <?php
+                   }
 
-            </section>
+                   else{
+                       while ($fila){
+                           ?>
+                               <a href="../opinion.php?id_prod=<?=$fila["ID_PROD"]?>">
+                                   <p><?=$fila["TITULO"]?></p>
+                               </a>
+                   <?php
+                           $fila= $res->fetch_assoc();
+                       }
+                   }
+                   ?>
+               </section>
+
+           </section>
 
             <footer class="footerProfile">
                 <div>
@@ -287,12 +273,16 @@ else{
                     </table>
                 </div>
             </footer>
+
         </aside>
 
     </section>
+
 </main>
 
 </body>
 <script src="../../JS_APP/header.js"></script>
+
+
 </html>
 

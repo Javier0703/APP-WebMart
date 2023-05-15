@@ -12,6 +12,10 @@ if (isset($_GET["id_prod"])){
     }
 }
 
+else{
+    header("Location: usuarios.php");
+}
+
 if ((isset($_COOKIE["usu"]) && isset($_COOKIE["pass"])) || (isset($_SESSION["usu"]) && isset($_SESSION["pass"]))) {
 
     if (isset($_COOKIE["usu"]) && $_COOKIE["pass"]) {
@@ -157,19 +161,25 @@ if (!$fila = $st->fetch()){
     </section>
 
     <section class="info">
-        <form action="">
+        <form action="modifOpinion.php" method="POST">
             <?php
             $sql="SELECT p.ID_PROD, VALORACION, MENSAJE  from productos p left outer join opiniones o using (ID_PROD) where p.ID_PROD=$prod";
             $res = $con->query($sql);
             $fila = $res->fetch_assoc();
             ?>
             <label for="val">Valoración</label><br>
-            <input id="val" type="number" name="valoracion" min="0" max="5" value="<?=$fila["VALORACION"]?>" placeholder="Del 1 al 5"><br><br>
+            <input id="val" type="text" name="valoracion" min="1" max="5" value="<?=$fila["VALORACION"]?>" placeholder="Del 1 al 5" required><br><br>
             <label for="desc">Descripcion</label><br>
-            <textarea name="descripcion" id="desc" rows="6" placeholder="Se bueno..."></textarea>
+            <textarea name="descripcion" id="desc" rows="6" placeholder="Se bueno..." required maxlength="400"><?=$fila["MENSAJE"]?></textarea>
+            <input type="hidden" name="id_prod" value="<?=$fila["ID_PROD"]?>">
             <div>
                 <button>Guardad</button>
             </div>
+        </form>
+
+        <form action="eliminarOpinion.php" method="POST" class="drop">
+            <input type="hidden" name="id_prod" value="<?=$fila["ID_PROD"]?>">
+            <button class="delete">Eliminar</button>
         </form>
     </section>
 

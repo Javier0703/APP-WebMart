@@ -519,6 +519,88 @@ footer table td:first-child{
     margin-left: 0;
 }
 
+/* Página Estadisticas */
+
+.mEstadisticas>section{
+    max-width: 95%;
+    width: 1200px;
+    margin: auto;
+}
+
+.mEstadisticas .tit{
+    text-align: center;
+    font-size: 24px;
+    padding: 20px 0;
+}
+
+.mEstadisticas .info{
+    padding-top: 20px;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 1fr 1fr;
+}
+
+.mEstadisticas .info>div{
+    padding: 5px 15px;
+    border-radius: 10px;
+    border: 1px solid lightgrey;
+    text-align: center;
+    grid-column: span 1;
+}
+
+.mEstadisticas .info>div:hover{
+    background: rgba(211, 211, 211, 0.25);
+}
+
+.mEstadisticas .info>div>p{
+    padding: 5px 0;
+    font-size: 18px;
+}
+
+.mEstadisticas .info>div .datos{
+    display: none;
+}
+
+.mEstadisticas .personal{
+    margin-bottom: 20px;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    padding: 0;
+}
+
+.mEstadisticas .personal:hover{
+    background: rgba(211, 211, 211, 0.25);
+}
+
+.mEstadisticas .personal div{
+    border: none;
+    border-radius: 0;
+}
+
+.mEstadisticas .personal div:hover{
+    background: none;
+}
+
+.mEstadisticas .personal .leyenda{
+    display: flex;
+    margin: auto;
+}
+
+.mEstadisticas .personal .leyenda section div{
+    margin: 5px 0;
+    display: flex;
+}
+
+.mEstadisticas .personal .leyenda section div p{
+    margin-left: 3px;
+    font-size: 16px;
+}
+
+
+
+
+
+
 /* Página Productos */
 
 .mProd>section{
@@ -1631,12 +1713,19 @@ form.formOpinar button{
 }
 
 .mOpinion .info textarea{
+    border-radius: 5px;
     resize: none;
     border: 1px solid lightgrey;
     outline: none;
     width: calc(100% - 10px);
     padding: 5px;
 }
+
+.mOpinion .info textarea:focus-within{
+    border: 1px solid #00adec;
+}
+
+
 .mOpinion .info div{
     text-align: center;
 }
@@ -1652,8 +1741,15 @@ form.formOpinar button{
     border-radius: 20px;
 }
 
+.mOpinion .info .drop{
+    padding: 20px;
+    text-align: center;
+}
 
-
+.mOpinion .info .drop button{
+    cursor: pointer;
+    background: red;
+}
 
 
 
@@ -2128,6 +2224,98 @@ form.formOpinar button{
     padding: 10px 0;
 }
 
+/* Mis Opiniones y Opiniones */
+
+.sMisOpiniones>section .sOpiniones>section{
+    width: 1200px;
+    margin: auto;
+    max-width: 95%;
+}
+
+.sMisOpiniones #titulo, .sOpiniones #titulo{
+    padding: 20px 0;
+    font-size: 20px;
+    text-align: center;
+}
+
+.sMisOpiniones a{
+    font-size: 20px;
+    border-radius: 5px;
+    color: black;
+    text-decoration: underline;
+    margin: 5px 0;
+    padding: 10px 0;
+    text-align: center;
+    display: block;
+}
+
+.sMisOpiniones a:hover{
+    background: lightgrey;
+}
+
+.sOpiniones #opiniones, .sMisOpiniones #opiniones{
+    width: 1200px;
+    margin: auto;
+    max-width: 95%;
+}
+
+#opinionesRec{
+    border-radius: 10px;
+    display: block;
+    margin: 10px 0;
+    color: black;
+    text-decoration: none;
+}
+
+#opinionesRec>p{
+    border-radius: 10px;
+    background: lightgrey;
+    text-decoration: underline;
+    text-align: center;
+    font-size: 18px;
+}
+
+#opinionesRec:hover{
+    background: lightgrey;
+}
+
+#opinionesRec>div{
+    padding: 10px 0;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    width: 100%;
+}
+
+#opinionesRec div section p:first-child{
+    font-weight: bolder;
+}
+
+#opinionesRec>div section:first-child{
+    text-align: center;
+    display: flex;
+    margin: auto;
+    grid-column: span 2;
+}
+
+#opinionesRec>div section:first-child div img{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+#opinionesRec>div section:last-child{
+    margin-left: 10px;
+    grid-column: span 3;
+    max-height: 200px;
+    overflow: auto;
+}
+
+#opinionesRec>div section:last-child::-webkit-scrollbar {height: 8px; width: 8px}
+#opinionesRec>div section:last-child::-webkit-scrollbar-thumb {background-color: grey; border-radius: 5px;}
+#opinionesRec>div section:last-child::-webkit-scrollbar-thumb:hover {background-color: rgb(180, 180, 180);}
+
+
+
 /* MEDIA QUERY */
 
 @media (max-width: 1260px) {
@@ -2190,7 +2378,7 @@ form.formOpinar button{
 
 @media (max-width: 715px) {
 
-    .sIndex2 form, .sIndex4 form, .sIndex5 form, .sProd1 form, .mPublic .sPublic2 .pesaje section, .mUser>form>section{
+    .sIndex2 form, .sIndex4 form, .sIndex5 form, .sProd1 form, .mPublic .sPublic2 .pesaje section, .mUser>form>section, .mEstadisticas .info{
         grid-template-columns: 1fr !important;
     }
 
