@@ -568,6 +568,11 @@ footer table td:first-child{
     padding: 0;
 }
 
+.mEstadisticas #personal p{
+    display: none;
+    font-size: 16px;
+}
+
 .mEstadisticas .personal:hover{
     background: rgba(211, 211, 211, 0.25);
 }
@@ -595,10 +600,6 @@ footer table td:first-child{
     margin-left: 3px;
     font-size: 16px;
 }
-
-
-
-
 
 
 /* Página Productos */
@@ -1752,8 +1753,6 @@ form.formOpinar button{
 }
 
 
-
-
 /* Página PROD */
 
 .mPSelected>section{
@@ -1762,8 +1761,166 @@ form.formOpinar button{
     margin: auto;
 }
 
+.mPSelected .noProduct{
+    margin: auto;
+    max-width: 95%;
+}
 
-/* PERFIL */
+.mPSelected>.miProducto, .mPSelected>.comprado{
+    margin-top: 10px;
+    border-radius: 6px;
+    background: rgba(211, 211, 211, 0.2);
+}
+
+.mPSelected>.miProducto>p, .mPSelected>.comprado>p{
+    text-align: center;
+    padding: 5px;
+}
+
+.mPSelected>.gridFyP{
+    padding-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+
+.mPSelected>.gridFyP .profile{
+    position: relative;
+    max-height: 400px;
+    overflow-y: hidden;
+    text-overflow: ellipsis;
+    grid-column: span 2;
+}
+
+.mPSelected>.gridFyP .profile .abajo{
+    position: absolute;
+    bottom: 0;
+    font-size: 14px;
+}
+
+.mPSelected>.gridFyP .profile p{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mPSelected>.gridFyP .profile a{
+    color: black;
+    text-decoration: none;
+    padding: 5px;
+    display: flex;
+    border-radius: 10px;
+}
+
+.mPSelected>.gridFyP .profile a:hover{
+    background: lightgrey;
+}
+
+.mPSelected>.gridFyP .profile a img{
+    width: 70px;
+    height: 70px;
+    margin: 10px;
+    border-radius: 50%;
+}
+
+.mPSelected>.gridFyP .profile a div{
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
+
+.mPSelected>.gridFyP .profile a p{
+    display: flex;
+    place-items: center;
+    margin-left: 10px;
+    height: 40px;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mPSelected>.gridFyP .profile a p:first-child{
+    padding-top: 5px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.mPSelected>.gridFyP .profile a p:last-child{
+    color: grey;
+    padding-bottom: 5px;
+}
+
+.mPSelected>.gridFyP .profile>div{
+    color: grey;
+    padding: 5px 0;
+    display: flex;
+}
+
+
+
+
+
+
+.mPSelected>.gridFyP .image{
+    overflow: hidden;
+    position: relative;
+    border-radius: 10px;
+    background: rgba(211, 211, 211, 0.5);
+    height: 400px;
+    grid-column: span 3;
+}
+
+.mPSelected>.gridFyP .image img{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+
+
+
+
+
+
+
+.mPSelected>.gridFyP .image div{
+    z-index: 1;
+    position: absolute;
+    height: 100%;
+    width: 30%;
+}
+
+.mPSelected>.gridFyP .image div:hover{
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.mPSelected>.gridFyP .image #left{
+    display: flex;
+    align-items: center;
+}
+
+.mPSelected>.gridFyP .image #right{
+    place-items: center;
+    right: 0;
+    justify-content: flex-end;
+    display: flex;
+}
+
+.mPSelected>.gridFyP .image div span{
+    margin: 5px;
+}
+
+
+
+    /* PERFIL */
 
 /* Página de Perfil */
 

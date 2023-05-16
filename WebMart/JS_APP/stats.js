@@ -51,24 +51,27 @@ window.addEventListener("DOMContentLoaded",function (e){
     });
 
 
-    //Hacer que si es 0 no muestre nada, el msg de haz algo y si da algo mostrar el contenido jeje
-    console.log(cent);
+    if (cent===0){
+        document.querySelector(".mEstadisticas #personal p").style.display="block";
+    }
 
-    new Chart(ctx3, {
-        type: 'pie',
-        data: {
-            labels: [ personales[0].textContent, personales[1].textContent, personales[2].textContent, personales[3].textContent,personales[4].textContent],
-            datasets: [{
-                data: [ personales[0].textContent, personales[1].textContent, personales[2].textContent, personales[3].textContent,personales[4].textContent],
-                borderWidth: 0,
-                backgroundColor: ['#2898ee', '#107acc', '#0cbccc', '#15297c', '#142157'],
-                label: 'Cantidad'
-            }]
-        },
-        options: {
-            responsive: true,
-        }
-    });
+    else{
+        new Chart(ctx3, {
+            type: 'pie',
+            data: {
+                labels: [ personales[0].textContent, personales[1].textContent, personales[2].textContent, personales[3].textContent,personales[4].textContent],
+                datasets: [{
+                    data: [ personales[0].textContent, personales[1].textContent, personales[2].textContent, personales[3].textContent,personales[4].textContent],
+                    borderWidth: 0,
+                    backgroundColor: ['#2898ee', '#107acc', '#0cbccc', '#15297c', '#142157'],
+                    label: 'Cantidad'
+                }]
+            },
+            options: {
+                responsive: true,
+            }
+        });
+    }
 
 
 });

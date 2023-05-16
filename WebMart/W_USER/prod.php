@@ -3,6 +3,22 @@ include ("../conexDB.php");
 session_set_cookie_params(sesTime());
 session_start();
 
+if (isset($_GET["id_prod"]) && strlen(trim($_GET["id_prod"]))>0 ){
+
+        if (!is_numeric($_GET["id_prod"])){
+            setcookie("block","block");
+            header("Location: block.php");
+        }
+
+        if ($_GET["id_prod"]<=0){
+            header("Location: productos.php");
+        }
+}
+
+else{
+    header("Location: productos.php");
+}
+
 if ((isset($_COOKIE["usu"]) && isset($_COOKIE["pass"])) || (isset($_SESSION["usu"]) && isset($_SESSION["pass"]))){
 
     if (isset($_COOKIE["usu"]) && $_COOKIE["pass"]){
@@ -64,24 +80,6 @@ if ((isset($_COOKIE["usu"]) && isset($_COOKIE["pass"])) || (isset($_SESSION["usu
             header("Location:error.php");
         }
 
-        if (isset($_GET["id_prod"]) && is_numeric($_GET["id_prod"])){
-
-            $con=conexUsu();
-            $sql="SELECT ID_PROD FROM productos WHERE ID_PROD=?";
-            $st= $con->prepare($sql);
-            $st->bind_param("i", $_GET["id_prod"]);
-            $st->execute();
-            $st->bind_result($id_p);
-
-            if (!$st->fetch()){
-                setcookie("block","block");
-                header("Location: block.php");
-            }
-        }
-
-        else{
-            header("Location: productos.php");
-        }
     }
 }
 
@@ -126,11 +124,11 @@ else{
         </section>
         <div class="profile" id="profile">
             <div>
-                <section><a href=""><span class="material-symbols-outlined">person</span><p>Perfil</p></a></section>
-                <section><a href=""><span class="material-symbols-outlined">favorite</span><p>Favoritos</p></a></section>
-                <section><a href=""><span class="material-symbols-outlined">shopping_cart</span><p>Compras</p></a></section>
-                <section><a href=""><span class="material-symbols-outlined">sell</span><p>Ventas</p></a></section>
-                <section><a href=""><span class="material-symbols-outlined">chat</span><p>Mensajes</p></a></section>
+                <section><a href="perfil/perfil.php"><span class="material-symbols-outlined">person</span><p>Perfil</p></a></section>
+                <section><a href="perfil/favoritos.php"><span class="material-symbols-outlined">favorite</span><p>Favoritos</p></a></section>
+                <section><a href="perfil/compras.php"><span class="material-symbols-outlined">shopping_cart</span><p>Compras</p></a></section>
+                <section><a href="perfil/productos.php"><span class="material-symbols-outlined">sell</span><p>Productos</p></a></section>
+                <section><a href="perfil/mensajeria/mensajes.php"><span class="material-symbols-outlined">chat</span><p>Mensajes</p></a></section>
                 <section><a href="../cierre.php"><span class="material-symbols-outlined">logout</span><p>Cerrar Sesión</p></a></section>
             </div>
         </div>
@@ -138,9 +136,128 @@ else{
 </header>
 
 <main class="mPSelected">
-    <section>
-        Hola
-    </section>
+    <?php
+    $con=conexUsu();
+    $sql="SELECT ID_PROD FROM productos WHERE ID_PROD=?";
+    $st= $con->prepare($sql);
+    $st->bind_param("i", $_GET["id_prod"]);
+    $st->execute();
+    $st->bind_result($id_p);
+
+    if (!$st->fetch()){
+        ?>
+        <div class="noResult noProduct">
+            <p>Vaya... no hemos podido encontrar el producto... :(</p>
+            <img src="../IMG/LOGOS_ERRORES/noResultProduct.jpg" alt="noProduct:(">
+        </div>
+    <?php
+    $st->close();
+    $con->close();
+    }
+
+    else {
+
+        $st->close();
+        $prod= $_GET["id_prod"];
+        $sql = "SELECT c.NOMBRE N_CAT, s.NOMBRE N_SUB ,p.TITULO, p.DESCRIPCION, DATE_FORMAT(FECHA_SUBIDA, '%d/%m/%Y a las %H:%i') FECHA, p.PESO, p.PRECIO, p.FECHA_SUBIDA, p.ID_RESERVA, p.ID_COMPRADOR, p.ID_USU, u.USUARIO, u.ICONO, u.DIRECCION FROM productos p join usuarios u on u.ID_USU = p.ID_USU join subcategorias s on p.ID_SUB = s.ID_SUB join categorias c on s.ID_CAT = c.ID_CAT WHERE p.ID_PROD=$prod";
+        $fila = $con->query($sql)->fetch_assoc();
+        //Desde aqui hacer los sections
+        $idSes=IDUSU;
+
+        if ($fila["ID_USU"]==$idSes){
+            if ($fila["ID_COMPRADOR"]==null){
+                ?>
+                <section class="miProducto">
+                    <p>Este producto es tuyo, lo que no podrás comprarlo ni reservarlo, pero sí podrás editarlo.</p>
+                </section>
+                <?php
+            }
+        }
+
+        if ($fila["ID_COMPRADOR"]!=null){
+            ?>
+            <section class="comprado">
+                <?php
+                if ($fila["ID_COMPRADOR"]!=$idSes && $fila["ID_USU"]==$idSes){
+                    echo "<p>Este producto ha sido vendido por tí, lo que no podrás editarlo</p>";
+                }
+                else if ($fila["ID_COMPRADOR"]==$idSes && $fila["ID_USU"]!=$idSes){
+                    echo "<p>Este producto ha sido comprado por tí</p>";
+                }
+                else{
+                    echo "<p>Oops! Este producto ya ha sido comprado por otro usuario, has llegado tarde :(</p>";
+                }
+                ?>
+            </section>
+        <?php
+        }
+        ?>
+
+        <section class="gridFyP">
+
+            <div class="profile">
+                <a href="user.php?id_usu=<?=$fila["ID_USU"]?>">
+                    <img src="data:image/jpg;base64, <?=base64_encode($fila["ICONO"]);?>"/>
+                    <div>
+                        <p><?=$fila["USUARIO"]?></p>
+                        <?php
+                        $idCount=$fila["ID_USU"];
+                        $cProds="SELECT COUNT(ID_PROD) N FROM productos WHERE ID_USU=$idCount";
+                        $sum = $con->query($cProds)->fetch_assoc();
+                        ?>
+                        <p><?=$sum["N"]?> productos</p>
+                        <?php
+                        $con->query($cProds)->close();
+                        ?>
+                    </div>
+                </a>
+
+                <div>
+                    <span class="material-symbols-outlined">location_on</span>
+                    <p><?=$fila["DIRECCION"]?></p>
+                </div>
+
+
+
+
+
+                <p class="abajo">Artículo subido el <?=$fila["FECHA"]?></p>
+            </div>
+
+            <div class="image">
+                <?php
+                $con2=conexUsu();
+                $sql2="SELECT FOTO FROM fotos WHERE ID_PROD=$prod";
+                $res2= $con2->query($sql2);
+                $fila2 = $res2->fetch_assoc();
+                while ($fila2){
+                    ?>
+                    <img src="data:image/jpg;base64, <?=base64_encode($fila2["FOTO"]);?>" />
+                    <?php
+                    $fila2= $res2->fetch_assoc();
+                }
+                $res2->close();
+                $con2->close();
+                ?>
+
+                <div id="left">
+                    <span class="material-symbols-outlined">arrow_back_ios</span>
+                </div>
+
+                <div id="right">
+                    <span class="material-symbols-outlined">arrow_forward_ios</span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+
+    <?php
+    }
+    ?>
 </main>
 
 <footer>
@@ -158,4 +275,5 @@ else{
 </body>
 
 <script src="../JS_APP/header.js"></script>
+<script src="../JS_APP/pProd.js"></script>
 </html>

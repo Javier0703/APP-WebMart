@@ -180,7 +180,6 @@ else{
     <section class="info personal">
 
         <div class="leyenda">
-
             <section>
                 <div>
                     <span style="background: #2898ee; color: #2898ee" class="material-symbols-outlined">Done</span><p>Productos subidos</p>
@@ -206,6 +205,7 @@ else{
         </div>
 
         <div id="personal">
+            <p class="noResultsGiven">Parece que eres nuevo en la aplicación y no tienes acciones :(</p>
             <canvas id="myChart3"></canvas>
             <section class="datos" id="datosPersolanes">
                 <?php
