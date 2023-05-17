@@ -1629,9 +1629,9 @@ footer table td:first-child{
     overflow: auto;
 }
 
-.valoration>div aside:last-child>p:last-child::-webkit-scrollbar {height: 8px; width: 8px}
-.valoration>div aside:last-child>p:last-child::-webkit-scrollbar-thumb {background-color: lightgrey; border-radius: 4px;}
-.valoration>div aside:last-child>p:last-child::-webkit-scrollbar-thumb:hover {background-color: rgb(180, 180, 180);}
+.valoration>div aside:last-child>p:last-child::-webkit-scrollbar, .mPSelected #formProd textarea::-webkit-scrollbar {height: 8px; width: 8px}
+.valoration>div aside:last-child>p:last-child::-webkit-scrollbar-thumb, .mPSelected #formProd textarea::-webkit-scrollbar-thumb {background-color: lightgrey; border-radius: 4px;}
+.valoration>div aside:last-child>p:last-child::-webkit-scrollbar-thumb:hover, .mPSelected #formProd textarea::-webkit-scrollbar-thumb:hover {background-color: rgb(180, 180, 180);}
 
 form.formOpinar{
    text-align: center;
@@ -1922,6 +1922,8 @@ form.formOpinar button{
 
 
 
+
+
 .mPSelected>.gridFyP .image{
     overflow: hidden;
     position: relative;
@@ -1983,8 +1985,97 @@ form.formOpinar button{
     max-width: 95%;
 }
 
+.mPSelected #formProd input{
+    border-radius: 5px;
+    padding:10px;
+    font-size: 16px;
+    width: calc(100% - 20px);
+    border: 1px solid lightgrey;
+}
 
+.mPSelected #formProd textarea{
+    border-radius: 10px;
+    font-size: 16px;
+    border: 1px solid lightgrey;
+    resize: none;
+    width: calc(100% - 20px);
+    padding: 10px;
+}
 
+.mPSelected #formProd div:last-child{
+    padding-top: 10px;
+    text-align: center;
+}
+
+.mPSelected #formProd button{
+    cursor: pointer;
+    margin: 4px 0;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    padding: 7px 20px;
+    color: white;
+}
+
+.mPSelected #formProd button:first-child{
+    background: #00adec;
+}
+
+.mPSelected #formProd button:first-child:hover{
+    background: #4ec3ef;
+}
+
+.mPSelected #formProd button:last-child{
+    background: #a22626;
+}
+
+.mPSelected #formProd button:last-child:hover{
+    background: #a24b4b;
+}
+
+.mPSelected .deleteProd{
+    display: none;
+    background: rgba(255, 0, 0, 0.2);
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.mPSelected .deleteProd p{
+    text-align: center;
+}
+
+.mPSelected .deleteProd form{
+    justify-content: flex-end;
+    display: flex;
+}
+
+.mPSelected .deleteProd form button{
+    cursor: pointer;
+    margin: 5px;
+    outline: none;
+    border:none;
+    padding: 5px 10px;
+    height: 30px;
+    width: 100px;
+    max-width: 100%;
+    color: white;
+}
+
+.mPSelected .deleteProd #yes{
+    background: #c93030 !important;
+}
+
+.mPSelected .deleteProd #yes:hover{
+    background: #c46363 !important;
+}
+
+.mPSelected .deleteProd #noDelete{
+    background: #85b97e !important;
+}
+
+.mPSelected .deleteProd #noDelete:hover{
+    background: #a3bb9f !important;
+}
 
 
 

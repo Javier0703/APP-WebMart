@@ -161,7 +161,7 @@ else{
 
         $st->close();
         $prod= $_GET["id_prod"];
-        $sql = "SELECT c.NOMBRE N_CAT, s.NOMBRE N_SUB ,p.TITULO, p.DESCRIPCION, DATE_FORMAT(FECHA_SUBIDA, '%d/%m/%Y a las %H:%i') FECHA, p.PESO, p.PRECIO, p.FECHA_SUBIDA, p.ID_RESERVA, p.ID_COMPRADOR, p.ID_USU, u.USUARIO, u.ICONO, u.DIRECCION FROM productos p join usuarios u on u.ID_USU = p.ID_USU join subcategorias s on p.ID_SUB = s.ID_SUB join categorias c on s.ID_CAT = c.ID_CAT WHERE p.ID_PROD=$prod";
+        $sql = "SELECT c.NOMBRE N_CAT, s.NOMBRE N_SUB ,p.ID_PROD, p.TITULO, p.DESCRIPCION, DATE_FORMAT(FECHA_SUBIDA, '%d/%m/%Y a las %H:%i') FECHA, p.PESO, p.PRECIO, p.FECHA_SUBIDA, p.ID_RESERVA, p.ID_COMPRADOR, p.ID_USU, u.USUARIO, u.ICONO, u.DIRECCION FROM productos p join usuarios u on u.ID_USU = p.ID_USU join subcategorias s on p.ID_SUB = s.ID_SUB join categorias c on s.ID_CAT = c.ID_CAT WHERE p.ID_PROD=$prod";
         $fila = $con->query($sql)->fetch_assoc();
         //Desde aqui hacer los sections
         $idSes=IDUSU;
@@ -216,7 +216,16 @@ else{
 
                 <div>
                     <span class="material-symbols-outlined">location_on</span>
-                    <p><?=$fila["DIRECCION"]?></p>
+                    <p>
+                        <?php
+                        if ($fila["DIRECCION"]==null){
+                            echo "Sin dirección";
+                        }
+                        else{
+                            echo $fila["DIRECCION"];
+                        }
+                        ?>
+                    </p>
                 </div>
 
                 <p class="tipo">
@@ -305,11 +314,37 @@ else{
         if ($fila["ID_USU"]==$idSes && $fila["ID_COMPRADOR"]==null){
             ?>
 
-            <form action="modifProduct.php" method="POST">
+            <form action="modifProduct.php" method="POST" id="formProd">
+                <label for="titulo">Título:</label><br>
+                <input id="titulo" type="text" name="titulo" placeholder="Título" value="<?=$fila["TITULO"]?>" maxlength="50"><br><br>
 
+                <label for="precio">Precio:</label><br>
+                <input type="number" min="0" max="999999" id="precio" name="precio" value="<?=$fila["PRECIO"]?>"><br><br>
+                
+                <label for="desc">Descripción</label><br>
+                <textarea name="desc" id="desc" maxlength="500" rows="6"><?=$fila["DESCRIPCION"]?></textarea>
 
+                <input type="hidden" name="id_prod" value="<?=$fila["ID_PROD"]?>">
 
+                <div>
+                    <button id="saveProduct">Guardad</button>
+                    <button id="dropProduct">Eliminar Producto</button>
+                </div>
             </form>
+
+            <section class="deleteProd">
+
+                <article>
+
+                    <p>¡CUIDADO! Vas a eliminar de forma permanente el producto. ¿Quieres hacerlo?</p>
+                        <form action="deleteProduct.php" method="POST">
+                            <input type="hidden" name="id_prod" value="<?=$fila["ID_PROD"]?>">
+                            <button id="yes">Sí</button>
+                            <button id="noDelete">No</button>
+                        </form>
+                </article>
+
+            </section>
 
 
         <?php
@@ -329,10 +364,13 @@ else{
                 <?php
                     $favorite = "SELECT ID_PROD FROM favoritos WHERE ID_PROD=$prod AND ID_USU=$idSes";
                     $numFavs = $con->query($favorite)->num_rows;
+
+                if ($fila["ID_USU"]!=$idSes){
+                    ?>
+                    <span id="spanFavourite" <?php if ($numFavs==1){echo 'class="fav"';} ?>onclick="addFav(<?=$prod?>,<?=$idSes?>)">&#10084;</span>
+                <?php
+                }
                 ?>
-
-                <span id="spanFavourite" <?php if ($numFavs==1){echo 'class="fav"';} ?>onclick="addFav(<?=$prod?>,<?=$idSes?>)">&#10084;</span>
-
             </section>
     <?php
     $con->query($favorite)->close();
@@ -376,6 +414,6 @@ else{
 </body>
 
 <script src="../JS_APP/header.js"></script>
-
 <script src="../JS_APP/pProd.js"></script>
+<script src="../JS_APP/productBoton.js"></script>
 </html>

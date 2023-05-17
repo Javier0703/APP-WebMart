@@ -84,7 +84,7 @@ if (isset($_POST["id_prod"]) && isset($_POST["id_usu"]) && strlen(trim($_POST["i
 
             if ($fila){
 
-                if($fila["ID_COMPRADOR"]==null && $fila["ID_USU"]!=$idSes){
+                if($fila["ID_USU"]!=$idSes){
                     $compFav="SELECT ID_PROD, ID_USU FROM favoritos WHERE ID_PROD=$prod AND ID_USU=$idSes";
                     $filaFav = $con->query($compFav)->fetch_assoc();
                     if ($filaFav){

@@ -39,8 +39,6 @@ document.addEventListener("DOMContentLoaded",function (e){
             imgSiguiente.classList.add("showed");
         }
 
-
     });
-
 
 });
