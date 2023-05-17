@@ -99,6 +99,8 @@ else{
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,-25" />
     <title>WebMart</title>
     <link rel="stylesheet" href="../CSS/estilos.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.2/jquery.min.js"></script>
+    <script src="../JS_APP/AJAX/reserva.js"></script>
 </head>
 
 <body>
@@ -179,13 +181,13 @@ else{
             <section class="comprado">
                 <?php
                 if ($fila["ID_COMPRADOR"]!=$idSes && $fila["ID_USU"]==$idSes){
-                    echo "<p>Este producto ha sido vendido por tí, lo que no podrás editarlo</p>";
+                    echo "<p>Este producto ha sido vendido por tí, lo que ya no podrás editarlo.</p>";
                 }
                 else if ($fila["ID_COMPRADOR"]==$idSes && $fila["ID_USU"]!=$idSes){
                     echo "<p>Este producto ha sido comprado por tí</p>";
                 }
                 else{
-                    echo "<p>Oops! Este producto ya ha sido comprado por otro usuario, has llegado tarde :(</p>";
+                    echo "<p>Oops! Este producto ya ha sido comprado por otro usuario... :(</p>";
                 }
                 ?>
             </section>
@@ -217,9 +219,54 @@ else{
                     <p><?=$fila["DIRECCION"]?></p>
                 </div>
 
+                <p class="tipo">
+                    <?=$fila["N_CAT"]?> > <?=$fila["N_SUB"]?>
+                </p>
+                <?php
+
+                if ($fila["ID_RESERVA"]==null && $fila["ID_USU"]!=$idSes && $fila["ID_COMPRADOR"]==null){
+                    $reserva="SELECT ID_PROD, ID_USU FROM reservas WHERE ID_PROD=$prod AND ID_USU=$idSes";
+                    $comp = $con->query($reserva)->num_rows;
+                    ?>
+
+                    <button class="reservar" id="bReservar" onclick="reservarProd(<?=$prod?>,<?=$idSes?>)" <?php if ($comp==1)echo"disabled"; ?>>
+                        <div>
+                            <span class="material-symbols-outlined">shopping_cart_checkout</span>
+                            <p>
+                                <?php
+                                if ($comp==1){
+                                    echo "Reserva enviada";
+                                }
+                                else{
+                                    echo "Reservar";
+                                }
+                                ?>
+                            </p>
+                        </div>
+                    </button>
 
 
+                <?php
+                    $con->query($reserva)->close();
+                }
 
+                elseif ($fila["ID_RESERVA"]!=$idSes){
+                    ?>
+                    <div class="reservados">
+                        <p>Producto reservado</p>
+                    </div>
+                <?php
+                }
+
+                elseif ($fila["ID_RESERVA"]==$idSes){
+                    ?>
+                    <div class="reservados">
+                        <p>Producto reservado para tí :)</p>
+                    </div>
+                <?php
+                }
+
+                ?>
 
                 <p class="abajo">Artículo subido el <?=$fila["FECHA"]?></p>
             </div>
@@ -229,6 +276,7 @@ else{
                 $con2=conexUsu();
                 $sql2="SELECT FOTO FROM fotos WHERE ID_PROD=$prod";
                 $res2= $con2->query($sql2);
+                $numRows= $res2->num_rows;
                 $fila2 = $res2->fetch_assoc();
                 while ($fila2){
                     ?>
@@ -236,26 +284,79 @@ else{
                     <?php
                     $fila2= $res2->fetch_assoc();
                 }
+                if ($numRows>1){
+                   ?>
+                    <div id="left">
+                        <span class="material-symbols-outlined">arrow_back_ios</span>
+                    </div>
+
+                    <div id="right">
+                        <span class="material-symbols-outlined">arrow_forward_ios</span>
+                    </div>
+                <?php
+                }
                 $res2->close();
                 $con2->close();
                 ?>
-
-                <div id="left">
-                    <span class="material-symbols-outlined">arrow_back_ios</span>
-                </div>
-
-                <div id="right">
-                    <span class="material-symbols-outlined">arrow_forward_ios</span>
-                </div>
-
             </div>
 
         </section>
+        <?php
+        if ($fila["ID_USU"]==$idSes && $fila["ID_COMPRADOR"]==null){
+            ?>
+
+            <form action="modifProduct.php" method="POST">
 
 
 
+            </form>
+
+
+        <?php
+        }
+
+
+
+
+
+
+        else{
+            ?>
+
+            <section class="tituloyFav">
+
+                <h2><?=$fila["TITULO"]?></h2>
+                <?php
+                    $favorite = "SELECT ID_PROD FROM favoritos WHERE ID_PROD=$prod AND ID_USU=$idSes";
+                    $numFavs = $con->query($favorite)->num_rows;
+                ?>
+
+                <span id="spanFavourite" <?php if ($numFavs==1){echo 'class="fav"';} ?>onclick="addFav(<?=$prod?>,<?=$idSes?>)">&#10084;</span>
+
+            </section>
+    <?php
+    $con->query($favorite)->close();
+    ?>
+        <section>
+            <h2><?=number_format($fila["PRECIO"], 0, '', '.')?> €</h2>
+        </section>
+
+        <section class="descripcion">
+            <p style="font-weight: bold;">Descripción: </p>
+            <?php
+            if ($fila["DESCRIPCION"]==null){
+                echo "<p style='color: grey'>Sin descripción</p>";
+            }
+            else{
+                echo "<p>".$fila["DESCRIPCION"]."</p>";
+            }
+            ?>
+
+        </section>
 
     <?php
+        }
+
     }
     ?>
 </main>
@@ -275,5 +376,6 @@ else{
 </body>
 
 <script src="../JS_APP/header.js"></script>
+
 <script src="../JS_APP/pProd.js"></script>
 </html>
