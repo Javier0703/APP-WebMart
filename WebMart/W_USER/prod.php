@@ -231,6 +231,34 @@ else{
                 <p class="tipo">
                     <?=$fila["N_CAT"]?> > <?=$fila["N_SUB"]?>
                 </p>
+
+                <p style="font-weight: bold; padding-bottom: 5px;">
+                    <?php
+                    if ($fila["PESO"]==0){
+                        echo "Entre 0 y 2 ";
+                    }
+                    elseif ($fila["PESO"]==2){
+                        echo "Entre 2 y 5 ";
+                    }
+                    elseif ($fila["PESO"]==5){
+                        echo "Entre 5y 10 ";
+                    }
+                    elseif ($fila["PESO"]==10){
+                        echo "Entre 10 y 20 ";
+                    }
+                    elseif ($fila["PESO"]==20){
+                        echo "Entre 20 y 30 ";
+                    }
+                    elseif ($fila["PESO"]==30){
+                        echo "Entre 30 y 50 ";
+                    }
+                    else{
+                        echo "Más de ";
+                    }
+                    ?>
+
+                    kilogramos.
+                </p>
                 <?php
 
                 if ($fila["ID_RESERVA"]==null && $fila["ID_USU"]!=$idSes && $fila["ID_COMPRADOR"]==null){
@@ -351,10 +379,6 @@ else{
         }
 
 
-
-
-
-
         else{
             ?>
 
@@ -396,6 +420,7 @@ else{
         }
 
     }
+    $con->close();
     ?>
 </main>
 

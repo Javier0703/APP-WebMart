@@ -2105,11 +2105,6 @@ form.formOpinar button{
 }
 
 
-
-
-
-
-
     /* PERFIL */
 
 /* Página de Perfil */
@@ -2660,6 +2655,52 @@ form.formOpinar button{
 #opinionesRec>div section:last-child::-webkit-scrollbar {height: 8px; width: 8px}
 #opinionesRec>div section:last-child::-webkit-scrollbar-thumb {background-color: grey; border-radius: 5px;}
 #opinionesRec>div section:last-child::-webkit-scrollbar-thumb:hover {background-color: rgb(180, 180, 180);}
+
+/* Reservas */
+
+.sReservas>section{
+    margin: auto;
+    width: 1200px;
+    max-width: 95%;
+}
+
+.sReservas .titulo{
+    padding-top: 20px;
+    text-align: center;
+}
+
+.sReservas .titulo p:first-child{
+    padding-bottom: 5px;
+    font-size: 20px;
+}
+
+.sReservas .menus{
+    padding-top: 20px;
+}
+
+.sReservas .menus section{
+    padding-top: 20px;
+    display: none;
+}
+
+.sReservas .menus section.active{
+    display: grid;
+}
+
+.sReservas .menus ul{
+    list-style: none;
+}
+
+.sReservas .menus ul li{
+    cursor: pointer;
+    padding: 5px 10px;
+    display: inline-block;
+}
+
+.sReservas .menus ul li.active{
+    color: #00adec;
+    border-bottom: 2px solid #00adec;
+}
 
 
 
