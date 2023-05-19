@@ -1,11 +1,5 @@
 <?php
 
-if (isset($_COOKIE["correo"])) {
-    $cookie=$_COOKIE["correo"];
-    setcookie("correo",false);
-}
-
-
 include ("../../conexDB.php");
 session_set_cookie_params(sesTime());
 session_start();
@@ -86,8 +80,9 @@ else{
     <link rel="shortcut icon" href="../../IMG/LOGOS_ERRORES/logo.png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,-25"/>
     <title>WebMart</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
     <link rel="stylesheet" href="../../CSS/estilos.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.2/jquery.min.js"></script>
+    <script src="../../JS_APP/AJAX/reservas.js"></script>
 </head>
 
 <body>
@@ -303,9 +298,10 @@ else{
                             <p>Estas son las solicitudes que hay para tus productos. Al aceptar uno, se borrará el resto se solicitudes de ese producto:</p>
                             <section class="pSolicitudes">
                                 <?php
+                                $cent = 1;
                                 while ($fila){
                                     ?>
-                                        <div>
+                                        <div id="<?=$cent?>">
 
                                             <section class="s1">
                                                 <p><?=$fila["TITULO"]?></p>
@@ -321,13 +317,13 @@ else{
                                                     <?php $prod=$fila["P_RES"] ?>
                                                         <?php
                                                         $cU=conexAdmin();
-                                                        $list="SELECT r.ID_PROD, u.USUARIO U from reservas r join usuarios u USING(ID_USU) WHERE ID_PROD=$prod";
+                                                        $list="SELECT r.ID_PROD, u.USUARIO U, u.ID_USU USU from reservas r join usuarios u USING(ID_USU) WHERE ID_PROD=$prod";
                                                         $r = $cU->query($list);
                                                         $f= $r->fetch_assoc();
                                                         while ($f){
                                                             ?>
                                                             <div>
-                                                                <p><?=$f["U"]?></p><button><span class="material-symbols-outlined">done</span></button>
+                                                                <p><?=$f["U"]?></p><button onclick="reserUsu(<?=$prod?>,<?=$f["USU"]?>,<?=$cent?>)">✓</button>
                                                             </div>
                                                             <?php
                                                             $f = $r->fetch_assoc();
@@ -341,6 +337,7 @@ else{
                                         </div>
 
                                     <?php
+                                    $cent++;
                                     $fila= $res->fetch_assoc();
                                 }
                                 ?>
