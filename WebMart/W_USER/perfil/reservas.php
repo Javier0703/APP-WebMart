@@ -250,7 +250,7 @@ else{
                     <section class="active reservas">
                         <?php
                         $idSes = IDUSU;
-                        $sql= "SELECT ID_PROD, TITULO, FOTO FROM productos JOIN fotos f using (ID_PROD) WHERE ID_RESERVA=$idSes GROUP BY (ID_PROD) ORDER BY FECHA_SUBIDA DESC";
+                        $sql= "SELECT ID_PROD, TITULO, FOTO FROM productos JOIN fotos f using (ID_PROD) WHERE ID_RESERVA=$idSes AND ID_COMPRADOR IS NULL GROUP BY (ID_PROD) ORDER BY FECHA_SUBIDA DESC";
                         $res = $con->query($sql);
                         if (!$fila = $res->fetch_assoc()){
                         ?>
@@ -262,7 +262,7 @@ else{
                         }
                         else{
                             ?>
-                            <p>Estos son los productos que estan reservados para tí.</p>
+                            <p>Estos son los productos que están reservados para tí.</p>
                             <section class="products">
                                 <?php
                                 while ($fila){
@@ -286,7 +286,68 @@ else{
                     </section>
 
                     <section class="solicitudes">
+                        <?php
+                        $idSes = IDUSU;
+                        $sql="SELECT f.FOTO, p.ID_USU USU_PROPIETARIO, p.TITULO, r.ID_PROD P_RES FROM reservas r join productos p using (ID_PROD) join fotos f on p.ID_PROD = f.ID_PROD WHERE p.ID_USU=$idSes GROUP BY p.ID_PROD;";
+                        $res = $con->query($sql);
+                        if (!$fila = $res->fetch_assoc()){
+                            ?>
+                            <div class="noResult">
+                                <p>Parece que nadie ha solicitado reservar tus productos :(</p>
+                                <img src="../../IMG/LOGOS_ERRORES/noSolicitudes.jpg" alt="noFound">
+                            </div>
+                        <?php
+                        }
+                        else{
+                            ?>
+                            <p>Estas son las solicitudes que hay para tus productos. Al aceptar uno, se borrará el resto se solicitudes de ese producto:</p>
+                            <section class="pSolicitudes">
+                                <?php
+                                while ($fila){
+                                    ?>
+                                        <div>
 
+                                            <section class="s1">
+                                                <p><?=$fila["TITULO"]?></p>
+                                            </section>
+
+                                            <section class="s2">
+
+                                                <article>
+                                                    <img src="data:image/jpg;base64,<?=base64_encode($fila["FOTO"])?>">
+                                                </article>
+
+                                                <article>
+                                                    <?php $prod=$fila["P_RES"] ?>
+                                                        <?php
+                                                        $cU=conexAdmin();
+                                                        $list="SELECT r.ID_PROD, u.USUARIO U from reservas r join usuarios u USING(ID_USU) WHERE ID_PROD=$prod";
+                                                        $r = $cU->query($list);
+                                                        $f= $r->fetch_assoc();
+                                                        while ($f){
+                                                            ?>
+                                                            <div>
+                                                                <p><?=$f["U"]?></p><button><span class="material-symbols-outlined">done</span></button>
+                                                            </div>
+                                                            <?php
+                                                            $f = $r->fetch_assoc();
+                                                        }
+                                                        $cU->close();
+                                                        ?>
+                                                </article>
+
+                                            </section>
+
+                                        </div>
+
+                                    <?php
+                                    $fila= $res->fetch_assoc();
+                                }
+                                ?>
+                            </section>
+                        <?php
+                        }
+                        ?>
                     </section>
 
                     <section class="enCamino">

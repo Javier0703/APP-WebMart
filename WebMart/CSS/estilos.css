@@ -2717,6 +2717,66 @@ form.formOpinar button{
     display: grid;
 }
 
+.sReservas .menus .solicitudes .pSolicitudes{
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 1fr 1fr;
+    padding: 10px 0 20px 0;
+    width: 100%;
+}
+
+.sReservas .menus .solicitudes .pSolicitudes>div{
+    border-radius: 10px;
+    background: white;
+    grid-column: span 1;
+    overflow: hidden;
+}
+
+.sReservas .menus .solicitudes .pSolicitudes>div>section{
+    width: 100%;
+    display: flex;
+}
+
+.sReservas .menus .solicitudes .pSolicitudes>div>.s1{
+    border-bottom: 1px solid lightgrey;
+    place-content: center;
+    margin: 5px;
+}
+
+.sReservas .menus .solicitudes .pSolicitudes>div>section>p{
+    font-weight: bold;
+    padding: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sReservas .menus .solicitudes .pSolicitudes>div>.s2 article{
+    margin: 5px;
+}
+
+.sReservas .menus .solicitudes .pSolicitudes>div>.s2 article:first-child{
+    position: relative;
+    width: 150px;
+    height: 150px;
+    background: lightgrey;
+}
+
+.sReservas .menus .solicitudes .pSolicitudes>div>.s2 article:first-child img{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.sReservas .menus .solicitudes .pSolicitudes>div>.s2 article:last-child{
+    height: 150px;
+}
+
 
 
 
