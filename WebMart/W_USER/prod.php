@@ -96,12 +96,19 @@ else{
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" href="../IMG/LOGOS_ERRORES/logo.png">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,-25" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,-25" />
     <title>WebMart</title>
     <link rel="stylesheet" href="../CSS/estilos.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.2/jquery.min.js"></script>
     <script src="../JS_APP/AJAX/reserva.js"></script>
 </head>
+<style>
+    .mPSelected .tituloyFav span.fav{
+        color: #00adec;
+    }
+
+
+</style>
 
 <body>
 
@@ -287,7 +294,7 @@ else{
                     $con->query($reserva)->close();
                 }
 
-                elseif ($fila["ID_RESERVA"]!=$idSes){
+                elseif ($fila["ID_RESERVA"]!=$idSes && $fila["ID_USU"]!=$idSes){
                     ?>
                     <div class="reservados">
                         <p>Producto reservado</p>
@@ -301,6 +308,14 @@ else{
                         <p>Producto reservado para tí :)</p>
                     </div>
                 <?php
+                }
+
+                elseif ($fila["ID_RESERVA"]!=null && $fila["ID_COMPRADOR"]==null && $fila["ID_USU"]==$idSes){
+                    ?>
+                    <div class="reservados eliminar">
+                        <p>Reservado:</p><aside id="asideRemove" onclick="removeReserve(<?=$fila["ID_PROD"]?>)"><span class="material-symbols-outlined">delete_forever</span><p>Eliminar</p></aside>
+                    </div>
+                    <?php
                 }
 
                 ?>
@@ -391,7 +406,7 @@ else{
 
                 if ($fila["ID_USU"]!=$idSes){
                     ?>
-                    <span id="spanFavourite" <?php if ($numFavs==1){echo 'class="fav"';} ?>onclick="addFav(<?=$prod?>,<?=$idSes?>)">&#10084;</span>
+                    <span id="spanFavourite" class="material-symbols-outlined <?php if ($numFavs==1){echo 'fav';} ?>"onclick="addFav(<?=$prod?>,<?=$idSes?>)">favorite</span>
                 <?php
                 }
                 ?>

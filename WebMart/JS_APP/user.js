@@ -6,7 +6,7 @@ window.addEventListener("DOMContentLoaded",function (e){
     let z = 5;
 
     if (address === 'Sin dirección'){
-        x= 40.4149893;
+        x = 40.4149893;
         y = -3.7059115;
 
         let map = L.map('map').setView([x, y], z);

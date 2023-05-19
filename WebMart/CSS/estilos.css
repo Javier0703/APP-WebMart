@@ -1915,6 +1915,22 @@ form.formOpinar button{
     color: black;
 }
 
+.mPSelected>.gridFyP .profile .eliminar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mPSelected>.gridFyP .profile .eliminar aside{
+    display: flex;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.mPSelected>.gridFyP .profile .eliminar aside p{
+    text-decoration: underline;
+}
+
 
 
 
@@ -2093,10 +2109,6 @@ form.formOpinar button{
     font-size: 25px;
     color: lightgrey;
     cursor: pointer;
-}
-
-.mPSelected .tituloyFav span.fav{
-    color: #00adec;
 }
 
 .mPSelected .descripcion{
@@ -2652,9 +2664,9 @@ form.formOpinar button{
     overflow: auto;
 }
 
-#opinionesRec>div section:last-child::-webkit-scrollbar {height: 8px; width: 8px}
-#opinionesRec>div section:last-child::-webkit-scrollbar-thumb {background-color: grey; border-radius: 5px;}
-#opinionesRec>div section:last-child::-webkit-scrollbar-thumb:hover {background-color: rgb(180, 180, 180);}
+.sReservas .select ul::-webkit-scrollbar, #opinionesRec>div section:last-child::-webkit-scrollbar {height: 6px; width: 6px}
+.sReservas .select ul::-webkit-scrollbar-thumb, #opinionesRec>div section:last-child::-webkit-scrollbar-thumb {background-color: grey; border-radius: 3px;}
+.sReservas .select ul::-webkit-scrollbar-thumb:hover, #opinionesRec>div section:last-child::-webkit-scrollbar-thumb:hover {background-color: rgb(180, 180, 180);}
 
 /* Reservas */
 
@@ -2674,33 +2686,37 @@ form.formOpinar button{
     font-size: 20px;
 }
 
-.sReservas .menus{
-    padding-top: 20px;
+.sReservas .select ul{
+    top: 10px;
+    padding: 2px 0;
+    list-style-type: none;
+    white-space: nowrap;
+    overflow-x: auto;
 }
 
-.sReservas .menus section{
-    padding-top: 20px;
-    display: none;
-}
-
-.sReservas .menus section.active{
-    display: grid;
-}
-
-.sReservas .menus ul{
-    list-style: none;
-}
-
-.sReservas .menus ul li{
+.sReservas .select ul li{
+    display: inline-block;
     cursor: pointer;
     padding: 5px 10px;
-    display: inline-block;
 }
 
-.sReservas .menus ul li.active{
+.sReservas .select ul li.active{
     color: #00adec;
     border-bottom: 2px solid #00adec;
 }
+
+.sReservas .menus{
+    padding-top: 10px;
+}
+
+.sReservas .menus>section{
+    display: none;
+}
+
+.sReservas .menus>section.active{
+    display: grid;
+}
+
 
 
 

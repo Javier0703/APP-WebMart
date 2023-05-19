@@ -32,11 +32,11 @@ if ((isset($_COOKIE["usu"]) && isset($_COOKIE["pass"])) || (isset($_SESSION["usu
 
         try {
             $con=conexUsu();
-            $sql="SELECT ESTADO,ROL FROM usuarios WHERE USUARIO=? AND CONTRASEÑA=?";
+            $sql="SELECT ID_USU, ESTADO,ROL FROM usuarios WHERE USUARIO=? AND CONTRASEÑA=?";
             $st=$con->prepare($sql);
             $st->bind_param("ss",$usu,$pass);
             $st->execute();
-            $st->bind_result($estado,$rol);
+            $st->bind_result($id_usu,$estado,$rol);
 
             if ($st->fetch()){
 
@@ -59,6 +59,7 @@ if ((isset($_COOKIE["usu"]) && isset($_COOKIE["pass"])) || (isset($_SESSION["usu
                 $con->close();
                 define("USU",$usu);
                 define("PASS",$pass);
+                define("IDUSU",$id_usu);
 
             }
         }
@@ -234,29 +235,98 @@ else{
 
                 <section class="titulo">
                     <p>Productos reservados</p>
-                    <p>Aquí podrás ver todas las reservas que tengas, tanto las de tus productos</p>
                 </section>
 
-            <section class="menus">
-                <ul>
-                    <li class="active">RESERVAS</li>
-                    <li>SOLICITUDES</li>
-                    <li>EN CAMINO</li>
-                </ul>
-
-                <section class="active">
-                Hola1
+                <section class="select">
+                    <ul>
+                        <li class="active">RESERVAS</li>
+                        <li>SOLICITUDES</li>
+                        <li>TUS PRODUCTOS</li>
+                    </ul>
                 </section>
 
-                <section>
-                Hola2
-                </section>
+                <section class="menus">
 
-                <section>
-                Hola3
-                </section>
+                    <section class="active reservas">
+                        <?php
+                        $idSes = IDUSU;
+                        $sql= "SELECT ID_PROD, TITULO, FOTO FROM productos JOIN fotos f using (ID_PROD) WHERE ID_RESERVA=$idSes GROUP BY (ID_PROD) ORDER BY FECHA_SUBIDA DESC";
+                        $res = $con->query($sql);
+                        if (!$fila = $res->fetch_assoc()){
+                        ?>
+                        <div class="noResult">
+                            <p>Parece que no tienes ningún producto reservado :(</p>
+                            <img src="../../IMG/LOGOS_ERRORES/no_prods.jpg" alt="noFound">
+                        </div>
+                            <?php
+                        }
+                        else{
+                            ?>
+                            <p>Estos son los productos que estan reservados para tí.</p>
+                            <section class="products">
+                                <?php
+                                while ($fila){
+                                    ?>
+                                    <a href="../prod.php?id_prod=<?=$fila["ID_PROD"]?>" target="_blank">
+                                        <div style="background-image: url('data:image/jpg;base64,<?=base64_encode($fila["FOTO"])?>')"></div>
+                                        <section>
+                                            <p style="text-align: center"><?=strtoupper($fila["TITULO"])?></p>
+                                        </section>
+                                    </a>
+                                    <?php
+                                    $fila= $res->fetch_assoc();
+                                }
+                                ?>
+                            </section>
+                            <?php
+                        }
+                        $res->close();
+                        ?>
 
-            </section>
+                    </section>
+
+                    <section class="solicitudes">
+
+                    </section>
+
+                    <section class="enCamino">
+                        <?php
+                        $idSes = IDUSU;
+                        $sql= "SELECT ID_PROD, TITULO, FOTO FROM productos JOIN fotos f using (ID_PROD) WHERE ID_USU=$idSes AND ID_RESERVA is not null AND ID_COMPRADOR is null GROUP BY (ID_PROD) ORDER BY FECHA_SUBIDA DESC";
+                        $res = $con->query($sql);
+                        if (!$fila = $res->fetch_assoc()){
+                            ?>
+                            <div class="noResult">
+                                <p>Parece que ninguno de tus productos está reservado :(</p>
+                                <img src="../../IMG/LOGOS_ERRORES/no_prods.jpg" alt="noFound">
+                            </div>
+                            <?php
+                        }
+                        else{
+                            ?>
+                            <p>Estos son tus productos que tienen usuarios reservados.</p>
+                            <section class="products">
+                                <?php
+                                while ($fila){
+                                    ?>
+                                    <a href="../prod.php?id_prod=<?=$fila["ID_PROD"]?>" target="_blank">
+                                        <div style="background-image: url('data:image/jpg;base64,<?=base64_encode($fila["FOTO"])?>')"></div>
+                                        <section>
+                                            <p style="text-align: center"><?=strtoupper($fila["TITULO"])?></p>
+                                        </section>
+                                    </a>
+                                    <?php
+                                    $fila= $res->fetch_assoc();
+                                }
+                                ?>
+                            </section>
+                            <?php
+                        }
+                        $res->close();
+                        ?>
+                    </section>
+
+                </section>
 
 
             </section>

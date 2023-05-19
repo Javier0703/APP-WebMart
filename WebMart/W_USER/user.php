@@ -166,14 +166,14 @@ if ($idDB==$_GET["id_usu"]){
              </aside>
             <aside class="info">
                 <?php
-                    if ($nombre===null && $apellido1===null && $apellido2===null){
+                    if ($nombre==null && $apellido1==null && $apellido2==null){
                         echo "<p style='color: gray'>Sin nombre</p>";
                     }
                     else{
                         echo "<p>$nombre $apellido1 $apellido2</p>";
                     }
 
-                    if ($desc===null){
+                    if ($desc==null){
                         echo "<p style='color: gray'>Sin descripción</p>";
                     }
                     else{
@@ -186,7 +186,7 @@ if ($idDB==$_GET["id_usu"]){
                 <div>
                     <span class="material-symbols-outlined">location_on</span>
                     <?php
-                    if ($direc===null){
+                    if ($direc==null){
                         echo "<p style='color: gray'>Sin dirección</p>";
                     }
                     else{
@@ -234,7 +234,7 @@ if ($idDB==$_GET["id_usu"]){
                             <div>
                                 <p><?=number_format($fila["PRECIO"], 0, '', '.')?> €</p>
                                 <?php
-                                if ($fila["R"] !== null)echo "<p class='reserved'>Reservado</p>";
+                                if ($fila["R"] != null)echo "<p class='reserved'>Reservado</p>";
                                 ?>
                             </div>
                         </section>
