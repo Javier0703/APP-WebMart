@@ -208,13 +208,13 @@ else{
                 <a href="user.php?id_usu=<?=$fila["ID_USU"]?>">
                     <img src="data:image/jpg;base64, <?=base64_encode($fila["ICONO"]);?>"/>
                     <div>
-                        <p><?=$fila["USUARIO"]?></p>
+                        <p class="pProfile"><?=$fila["USUARIO"]?></p>
                         <?php
                         $idCount=$fila["ID_USU"];
                         $cProds="SELECT COUNT(ID_PROD) N FROM productos WHERE ID_USU=$idCount";
                         $sum = $con->query($cProds)->fetch_assoc();
                         ?>
-                        <p><?=$sum["N"]?> productos</p>
+                        <p class="pProfile"><?=$sum["N"]?> productos</p>
                         <?php
                         $con->query($cProds)->close();
                         ?>
@@ -260,7 +260,7 @@ else{
                         echo "Entre 30 y 50 ";
                     }
                     else{
-                        echo "Más de ";
+                        echo "Más de 50 ";
                     }
                     ?>
 
@@ -316,6 +316,17 @@ else{
                         <p>Reservado:</p><aside id="asideRemove" onclick="removeReserve(<?=$fila["ID_PROD"]?>)"><span class="material-symbols-outlined">delete_forever</span><p>Eliminar</p></aside>
                     </div>
                     <?php
+                }
+
+                if ($fila["ID_USU"]!=$idSes && $fila["ID_COMPRADOR"]==null){
+                    ?>
+                    <a href="" class="message">
+                        <div>
+                            <span class="material-symbols-outlined">chat</span>
+                            <p>Mensaje</p>
+                        </div>
+                    </a>
+                <?php
                 }
 
                 ?>

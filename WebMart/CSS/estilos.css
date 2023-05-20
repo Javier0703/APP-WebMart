@@ -1829,7 +1829,7 @@ form.formOpinar button{
 
 }
 
-.mPSelected>.gridFyP .profile a p{
+.mPSelected>.gridFyP .profile a p.pProfile{
     display: flex;
     place-items: center;
     margin-left: 10px;
@@ -1931,6 +1931,29 @@ form.formOpinar button{
     text-decoration: underline;
 }
 
+.mPSelected>.gridFyP .profile .message{
+    margin-top: 10px;
+    background: #00adec;
+    color: white !important;
+}
+.mPSelected>.gridFyP .profile .message div{
+    display: flex;
+    place-content: center;
+    padding: 3px 0;
+}
+
+.mPSelected>.gridFyP .profile .message div>p{
+    color: white !important;
+    margin-left: 5px;
+}
+
+.mPSelected>.gridFyP .profile .message div>span{
+    margin-top:3px;
+}
+
+.mPSelected>.gridFyP .profile .message:hover{
+    background: #4ec3ef;
+}
 
 
 
