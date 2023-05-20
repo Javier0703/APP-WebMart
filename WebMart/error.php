@@ -1,6 +1,6 @@
 <?php
 if (!isset($_COOKIE["error"])){
-    header("Location:index.php");
+    header("Location: index.php");
 }
 
 ?>
