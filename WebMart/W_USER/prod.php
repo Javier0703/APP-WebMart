@@ -1,4 +1,5 @@
 <?php
+
 include ("../conexDB.php");
 session_set_cookie_params(sesTime());
 session_start();
@@ -10,7 +11,7 @@ if (isset($_GET["id_prod"]) && strlen(trim($_GET["id_prod"]))>0 ){
             header("Location: block.php");
         }
 
-        if ($_GET["id_prod"]<=0){
+        if ($_GET["id_prod"]<1){
             header("Location: productos.php");
         }
 }
@@ -320,7 +321,7 @@ else{
 
                 if ($fila["ID_USU"]!=$idSes && $fila["ID_COMPRADOR"]==null){
                     ?>
-                    <a href="" class="message">
+                    <a href="pasarela.php?id_prod=<?=$fila["ID_PROD"]?>" class="message">
                         <div>
                             <span class="material-symbols-outlined">chat</span>
                             <p>Mensaje</p>
