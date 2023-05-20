@@ -25,11 +25,11 @@ if ((isset($_COOKIE["usu"]) && isset($_COOKIE["pass"])) || (isset($_SESSION["usu
 
         try {
             $con=conexUsu();
-            $sql="SELECT ESTADO,ROL FROM usuarios WHERE USUARIO=? AND CONTRASEÑA=?";
+            $sql="SELECT ID_USU,ESTADO,ROL FROM usuarios WHERE USUARIO=? AND CONTRASEÑA=?";
             $st=$con->prepare($sql);
             $st->bind_param("ss",$usu,$pass);
             $st->execute();
-            $st->bind_result($estado,$rol);
+            $st->bind_result($id_usu,$estado,$rol);
 
             if ($st->fetch()){
 
@@ -52,6 +52,7 @@ if ((isset($_COOKIE["usu"]) && isset($_COOKIE["pass"])) || (isset($_SESSION["usu
                 $con->close();
                 define("USU",$usu);
                 define("PASS",$pass);
+                define("IDUSU",$id_usu);
 
             }
         }
@@ -66,7 +67,7 @@ if ((isset($_COOKIE["usu"]) && isset($_COOKIE["pass"])) || (isset($_SESSION["usu
 }
 
 else{
-    header("Location:../cierre.php");
+    header("Location: cierre.php");
 }
 ?>
 <!doctype html>
@@ -222,8 +223,61 @@ else{
 
         <aside id="a2">
 
-            <section>
+            <section id="msj">
 
+                <section class="titulo">
+                    <p>Aquí verás todos tus chats</p>
+                </section>
+
+                <section class="sectionMSG" id="chatsEnv">
+                    <h3>En búsqueda de compras...</h3>
+                    <?php
+                    $con=conexUsu();
+                    $idSes = IDUSU;
+                    $sql = "SELECT f.FOTO, p.titulo, c.ID_CHAT, c.ID_PROD, c.ID_USU, c.ULTIMA_CONEX_USU, m.ID_MENSAJE, m.MENSAJE, m.ID_ENVIADOR, m.HORA
+                    FROM chats c LEFT JOIN mensajes m ON c.ID_CHAT = m.ID_CHAT JOIN productos p ON c.ID_PROD = p.ID_PROD JOIN fotos f ON p.ID_PROD = f.ID_PROD
+                    WHERE (m.ID_MENSAJE IN (SELECT MAX(ID_MENSAJE) FROM mensajes WHERE m.ID_CHAT = c.ID_CHAT) OR m.ID_CHAT IS NULL) AND c.ID_USU = $idSes
+                    GROUP BY c.ID_CHAT ORDER BY m.HORA desc";
+                    $res= $con->query($sql);
+                    $nR = $res->num_rows;
+                    if ($nR > 1){
+
+                    }
+                    else{
+                        ?>
+                        <div class="noResult">
+                            <p>Vaya... parece no has contactado con nadie ... :( <a href="../../productos.php">¡Busca alguno!</a> </p>
+                            <img src="../../../IMG/LOGOS_ERRORES/noChat.jpg" alt="noFound">
+                        </div>
+                    <?php
+                    }
+                    ?>
+                </section>
+
+                <section class="sectionMSG" id="chatsRec">
+                    <h3>En búsqueda de compras...</h3>
+                    <?php
+                    $con=conexUsu();
+                    $idSes = IDUSU;
+                    $sql = "SELECT f.FOTO, p.titulo, c.ID_CHAT, c.ID_PROD, c.ID_USU, c.ULTIMA_CONEX_USU, m.ID_MENSAJE, m.MENSAJE, m.ID_ENVIADOR, m.HORA
+                    FROM chats c LEFT JOIN mensajes m ON c.ID_CHAT = m.ID_CHAT JOIN productos p ON c.ID_PROD = p.ID_PROD JOIN fotos f ON p.ID_PROD = f.ID_PROD
+                    WHERE (m.ID_MENSAJE IN (SELECT MAX(ID_MENSAJE) FROM mensajes WHERE m.ID_CHAT = c.ID_CHAT) OR m.ID_CHAT IS NULL)
+                    AND c.ID_PROD IN (SELECT ID_PROD from productos p WHERE p.ID_USU=1) GROUP BY c.ID_CHAT ORDER BY m.HORA desc";
+                    $res= $con->query($sql);
+                    $nR = $res->num_rows;
+                    if ($nR > 8){
+
+                    }
+                    else{
+                        ?>
+                        <div class="noResult">
+                            <p>Vaya... parece que nadie ha contactado con usted :(</p>
+                            <img src="../../../IMG/LOGOS_ERRORES/noChat2.jpg" alt="noFound">
+                        </div>
+                        <?php
+                    }
+                    ?>
+                </section>
 
             </section>
 

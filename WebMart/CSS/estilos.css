@@ -1955,14 +1955,6 @@ form.formOpinar button{
     background: #4ec3ef;
 }
 
-
-
-
-
-
-
-
-
 .mPSelected>.gridFyP .image{
     overflow: hidden;
     position: relative;
@@ -2115,10 +2107,6 @@ form.formOpinar button{
 .mPSelected .deleteProd #noDelete:hover{
     background: #a3bb9f !important;
 }
-
-
-
-
 
 .mPSelected .tituloyFav{
     display: flex;
@@ -2827,7 +2815,34 @@ form.formOpinar button{
     cursor: pointer;
 }
 
+/* Mensajes */
 
+#msj>section{
+    width: 1200px;
+    max-width: 95%;
+    margin: auto;
+}
+
+#msj .titulo{
+    padding: 20px 0 10px 0;
+    font-size: 24px;
+    text-align: center;
+}
+
+#msj .sectionMSG{
+    background: white;
+    margin: 10px auto;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+#msj .sectionMSG:last-child{
+    margin-bottom: 20px;
+}
+
+#msj .sectionMSG h3{
+    text-align: center;
+}
 
 /* MEDIA QUERY */
 
