@@ -82,6 +82,16 @@ else {
 if ($idDB==$_GET["id_usu"]){
     header("Location: perfil/perfil.php");
 }
+
+$con=conexUsu();
+$iD=$_GET["id_usu"];
+$busqueda = "SELECT ID_USU FROM usuarios WHERE ID_USU=$iD";
+$res = $con->query($busqueda);
+$f = $res->fetch_assoc();
+$con->close();
+if (!$f){
+    header("Location: usuarios.php");
+}
 ?>
 
 <!doctype html>
