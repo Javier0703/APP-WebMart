@@ -80,6 +80,9 @@ else{
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,-25"/>
     <title>WebMart</title>
     <link rel="stylesheet" href="../../../CSS/estilos.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.2/jquery.min.js"></script>
+    <script src="../../../JS_APP/AJAX/muestraChats.js"></script>
+
 </head>
 
 <body>
@@ -230,197 +233,11 @@ else{
                 </section>
 
                 <section class="sectionMSG" id="chatsEnv">
-                    <h3>En búsqueda de compras...</h3>
-                    <?php
-                    $con=conexUsu();
-                    $idSes = IDUSU;
-                    $sql = "SELECT f.FOTO, p.TITULO, c.ID_CHAT, c.ID_PROD, c.ID_USU, c.ULTIMA_CONEX_USU, m.ID_MENSAJE, m.MENSAJE, m.ID_ENVIADOR, m.HORA
-                    FROM chats c LEFT JOIN mensajes m ON c.ID_CHAT = m.ID_CHAT JOIN productos p ON c.ID_PROD = p.ID_PROD JOIN fotos f ON p.ID_PROD = f.ID_PROD
-                    WHERE c.ID_USU = $idSes AND (m.ID_MENSAJE IN (SELECT MAX(ID_MENSAJE) from mensajes WHERE m.ID_CHAT=c.ID_CHAT GROUP BY ID_CHAT) OR m.ID_CHAT IS NULL)
-                    GROUP BY c.ID_CHAT
-                    ORDER BY m.HORA desc";
-                    $res= $con->query($sql);
-                    $nR = $res->num_rows;
 
-                    if ($nR > 0){
-                        $fila = $res->fetch_assoc();
-
-                        while ($fila){
-                            ?>
-                            <a href="chat.php?id_chat=<?=$fila["ID_CHAT"]?>">
-
-                                <div style="background-image: url('data:image/jpg;base64,<?=base64_encode($fila["FOTO"])?>')">
-
-                                </div>
-
-                                <div>
-
-                                   <section>
-
-                                       <p>
-                                           <?=$fila["TITULO"]?>
-                                       </p>
-                                       <span>
-                                           <?php
-
-                                           date_default_timezone_set('Europe/Madrid');
-                                           $fechaHoy = date('Y-m-d');
-                                           $fechaAyer = date('Y-m-d', strtotime('-1 day'));
-
-                                           $fechaDB = strtotime($fila["HORA"]);
-                                           $fechaF= date('Y-m-d', $fechaDB);
-
-                                           if ($fechaF == $fechaHoy){
-                                               $hora = date('H', strtotime($fila["HORA"]));
-                                               $minutos = date('i', strtotime($fila["HORA"]));
-                                               echo $hora.":".$minutos;
-                                           }
-
-                                           elseif ($fechaF == $fechaAyer){
-                                               echo "Ayer";
-                                           }
-
-                                           else{
-                                               date('Y-m-d', $fila["HORA"]);
-                                           }
-
-                                           ?>
-                                       </span>
-
-                                   </section>
-
-                                    <?php
-                                    if ($fila["ID_ENVIADOR"]!=$idSes && $fila["ULTIMA_CONEX_USU"]<=$fila["HORA"]){
-                                       ?>
-                                        <p style="font-weight: bold"><?=$fila["MENSAJE"]?></p>
-                                    <?php
-                                    }
-                                    elseif ($fila["ID_ENVIADOR"]!=$idSes && $fila["ULTIMA_CONEX_USU"]>$fila["HORA"]){
-                                        ?>
-                                        <p><?=$fila["MENSAJE"]?></p>
-                                        <?php
-                                    }
-                                    elseif ($fila["ID_ENVIADOR"]==$idSes){
-                                        ?>
-                                        <p>Tú: <?=$fila["MENSAJE"]?></p>
-                                        <?php
-                                    }
-                                    ?>
-                                </div>
-
-                            </a>
-                            <?php
-                            $fila = $res->fetch_assoc();
-                        }
-                        $res->close();
-                    }
-
-                    else{
-                        ?>
-                        <div class="noResult">
-                            <p>Vaya... parece no has contactado con nadie ... :( <a href="../../productos.php">¡Busca alguno!</a> </p>
-                            <img src="../../../IMG/LOGOS_ERRORES/noChat.jpg" alt="noFound">
-                        </div>
-                    <?php
-                    }
-                    ?>
                 </section>
 
                 <section class="sectionMSG" id="chatsRec">
-                    <h3>En búsqueda de ventas...</h3>
-                    <?php
-                    $con=conexUsu();
-                    $idSes = IDUSU;
-                    $sql = "SELECT f.FOTO, p.TITULO, c.ID_CHAT, c.ID_PROD, c.ID_USU, c.ULTIMA_CONEX_USU, m.ID_MENSAJE, m.MENSAJE, m.ID_ENVIADOR, m.HORA
-                    FROM chats c LEFT JOIN mensajes m ON c.ID_CHAT = m.ID_CHAT JOIN productos p ON c.ID_PROD = p.ID_PROD JOIN fotos f ON p.ID_PROD = f.ID_PROD
-                    WHERE (m.ID_MENSAJE IN (SELECT MAX(ID_MENSAJE) from mensajes WHERE m.ID_CHAT=c.ID_CHAT GROUP BY ID_CHAT) OR m.ID_CHAT IS NULL)
-                    AND c.ID_PROD IN (SELECT ID_PROD from productos p WHERE p.ID_USU=$idSes) GROUP BY c.ID_CHAT ORDER BY m.HORA desc";
-                    $res= $con->query($sql);
-                    $nR = $res->num_rows;
 
-                    if ($nR > 0){
-                        $fila = $res->fetch_assoc();
-
-                        while ($fila){
-                            ?>
-                            <a href="chat.php?id_chat=<?=$fila["ID_CHAT"]?>">
-
-                                <div style="background-image: url('data:image/jpg;base64,<?=base64_encode($fila["FOTO"])?>')">
-
-                                </div>
-
-                                <div>
-
-                                    <section>
-
-                                        <p>
-                                            <?=$fila["TITULO"]?>
-                                        </p>
-                                        <span>
-                                           <?php
-                                           date_default_timezone_set('Europe/Madrid');
-                                           $fechaHoy = date('Y-m-d');
-                                           $fechaAyer = date('Y-m-d', strtotime('-1 day'));
-
-                                           $fechaDB = strtotime($fila["HORA"]);
-                                           $fechaF= date('Y-m-d', $fechaDB);
-
-                                           if ($fechaF == $fechaHoy){
-                                               $hora = date('H', strtotime($fila["HORA"]));
-                                               $minutos = date('i', strtotime($fila["HORA"]));
-                                               echo $hora.":".$minutos;
-                                           }
-
-                                           elseif ($fechaF == $fechaAyer){
-                                               echo "Ayer";
-                                           }
-
-                                           else{
-                                               date('Y-m-d', $fila["HORA"]);
-                                           }
-
-                                           ?>
-                                       </span>
-
-                                    </section>
-
-                                    <?php
-                                    if ($fila["ID_ENVIADOR"]!=$idSes && $fila["ULTIMA_CONEX_USU"]<=$fila["HORA"]){
-                                        ?>
-                                        <p style="font-weight: bold"><?=$fila["MENSAJE"]?></p>
-                                        <?php
-                                    }
-                                    elseif ($fila["ID_ENVIADOR"]!=$idSes && $fila["ULTIMA_CONEX_USU"]>$fila["HORA"]){
-                                        ?>
-                                        <p><?=$fila["MENSAJE"]?></p>
-                                        <?php
-                                    }
-                                    elseif ($fila["ID_ENVIADOR"]==$idSes){
-                                        ?>
-                                        <p>Tú: <?=$fila["MENSAJE"]?></p>
-                                        <?php
-                                    }
-                                    ?>
-
-                                </div>
-
-                            </a>
-                            <?php
-                            $fila = $res->fetch_assoc();
-                        }
-                        $res->close();
-
-                    }
-
-                    else{
-                        ?>
-                        <div class="noResult">
-                            <p>Vaya... parece que nadie ha contactado con usted :(</p>
-                            <img src="../../../IMG/LOGOS_ERRORES/noChat2.jpg" alt="noFound">
-                        </div>
-                        <?php
-                    }
-                    ?>
                 </section>
 
             </section>
