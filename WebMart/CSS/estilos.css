@@ -2832,7 +2832,7 @@ form.formOpinar button{
 #msj .sectionMSG{
     background: white;
     margin: 10px auto;
-    padding: 5px;
+    padding: 10px;
     border-radius: 10px;
 }
 
@@ -2842,7 +2842,67 @@ form.formOpinar button{
 
 #msj .sectionMSG h3{
     text-align: center;
+    padding: 5px;
 }
+
+#msj .sectionMSG a{
+    border-top: 1px solid rgba(211, 211, 211, 0.5);
+    display: flex;
+    padding: 5px;
+    text-decoration: none;
+    color: black;
+}
+
+#msj .sectionMSG a:hover{
+    background: rgb(211, 211, 211);
+}
+
+#msj .sectionMSG a div:first-child{
+    width: 60px;
+    height: 60px;
+    background-position: center;
+    background-size: cover;
+    border-radius: 40px;
+}
+
+#msj .sectionMSG a div:last-child{
+    overflow: hidden;
+    flex: 1;
+    margin-left: 10px;
+}
+
+#msj .sectionMSG a div:last-child p{
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#msj .sectionMSG a div:last-child section{
+    display: flex;
+}
+
+#msj .sectionMSG a div:last-child section>p, #msj .sectionMSG a div:last-child section>span{
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    height: 30px;
+    font-weight: bolder;
+}
+
+#msj .sectionMSG a div:last-child section>span{
+    margin-left: auto;
+    padding-left: 5px;
+}
+
+#msj .sectionMSG a div:last-child>p{
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    height: 30px;
+}
+
+
 
 /* MEDIA QUERY */
 
