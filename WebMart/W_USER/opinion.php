@@ -8,7 +8,7 @@ if (isset($_GET["id_prod"])){
         header("Location: usuarios.php");
     }
     if (!is_numeric($_GET["id_prod"]) || $_GET["id_prod"]<=0){
-        header("Location: usuarios.php");
+        header("Location: .usuarios.php");
     }
 }
 
@@ -31,7 +31,7 @@ if ((isset($_COOKIE["usu"]) && isset($_COOKIE["pass"])) || (isset($_SESSION["usu
     if (conexUsu() == 0) {
         $cod = conexUsu();
         setcookie("error", "Error $cod, no se puede establecer conexión con la Base de Datos :(");
-        header("Location:error.php");
+        header("Location: ../error.php");
     } else {
 
         try {
@@ -70,7 +70,7 @@ if ((isset($_COOKIE["usu"]) && isset($_COOKIE["pass"])) || (isset($_SESSION["usu
             $cod = $e->getCode();
             $msgError = $e->getMessage();
             setcookie("error", "Error $cod, $msgError");
-            header("Location:error.php");
+            header("Location: ../error.php");
         }
     }
 }

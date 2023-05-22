@@ -49,8 +49,10 @@ if ((isset($_COOKIE["usu"]) && isset($_COOKIE["pass"])) || (isset($_SESSION["usu
     if (conexUsu() == 0) {
         $cod = conexUsu();
         setcookie("error", "Error $cod, no se puede establecer conexión con la Base de Datos :(");
-        header("Location:error.php");
-    } else {
+        header("Location: ../error.php");
+    }
+
+    else {
 
         try {
             $con = conexUsu();
