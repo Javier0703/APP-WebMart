@@ -135,6 +135,10 @@ footer table td{
     place-items: center;
 }
 
+footer table td a{
+    color: white;
+}
+
 footer table td:first-child{
     padding-top: 8px;
 }
@@ -427,5 +431,18 @@ footer table td:first-child{
 
     .mIndex #login form{
         padding: 24px 20px 24px 15px;
+    }
+}
+
+
+@media (max-width: 280px) {
+    :root{
+        --altura-footer: 100px;
+    }
+}
+
+@media (max-width: 220px) {
+    :root{
+        --altura-footer: 130px;
     }
 }

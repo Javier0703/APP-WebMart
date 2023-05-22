@@ -33,7 +33,12 @@
 <footer>
     <div>
         <p>Creado por Javier Calvo Porro</p>
-        <img id="github" src="IMG/LOGOS_ERRORES/github.png" alt="Github"> Proyecto subido a Github
+        <table>
+            <tr>
+                <td><img id="github" src="IMG/LOGOS_ERRORES/github.png" alt="Github"></td>
+                <td><a href="https://github.com/Javier0703/APP-WebMart" target="_blank">Disponible en GitHub</a></td>
+            </tr>
+        </table>
     </div>
 </footer>
 </body>

@@ -7,7 +7,8 @@
     --coloc-imagen: calc((var(--altura-header) - var(--tam-img)) / 2 );
     --tam-iconos:30px;
     --coloc-iconos: calc((var(--altura-header) - var(--tam-iconos)) / 4);
-    --tam-perfil: 55px;
+    --tam-perfil: 50px;
+    --coloc-perfil: calc( (var(--altura-header) - var(--tam-perfil)) / 2);
     --altura-footer: 80px;
     --tam-sec2popUp: 30px;
     --s2popUp-col: calc( var(--tam-sec2popUp) / 4.3);
@@ -39,76 +40,93 @@ header{
     display: flex;
 }
 
-header>nav>section{
-    float: right;
-    display: flex;
+header a#logo{
+    display: none;
 }
 
+header>a>img, header>nav>section #fDesplig{
+     height: var(--tam-img);
+     margin-top: var(--coloc-imagen);
+     margin-left: var(--coloc-imagen);
+}
 
 header>nav{
     width: 100%;
 }
 
-header>a>img{
-    height: var(--tam-img);
-    margin-top: var(--coloc-imagen);
-    margin-left: var(--coloc-imagen);
-}
-
-header>nav>section>a>img{
-    width: var(--tam-iconos);
-    padding: var(--coloc-iconos);
-    margin-top: var(--coloc-iconos);
-    margin-left: 5px;
-    border-radius: 5px;
-}
-
-header>nav>section>a>img:hover{
-    background: lightgrey;
-}
-
-header>nav>section>a span{
-    right: 300px;
-    top: calc(var(--altura-header) /2.5);
-    position: absolute;
-    display: none;
-    text-decoration: none;
-    color: black;
-}
-
-header>nav>section>a:hover span{
-    display: block;
-}
-
-header>nav>section>div:hover{
-    cursor: pointer;
-    background: lightgrey;
-}
-
-header>nav>section>div{
-    margin-left:5px;
-    padding: 0 10px;
-}
-
-header>nav>section>div{
-    width: var(--altura-header);
-    height: var(--altura-header);
+header>nav>section{
+    float: right;
     display: flex;
 }
 
-header>nav>section>div>img{
-    margin: auto;
+header>nav>section #fDesplig{
+    display: none;
+}
+
+header>nav>section>section{
+    display: block;
+}
+
+header>nav>section>section.show{
+    display: block;
+}
+
+header>nav>section>section a{
+    color: black;
+    text-decoration: none;
+}
+
+header>nav>section>section a>img{
+    border-radius: 12px;
+    width: var(--tam-iconos);
+    height: var(--tam-iconos);
+    padding: var(--coloc-iconos);
+    margin-top:var(--coloc-iconos);
+}
+
+header>nav>section>section a>img:hover{
+    background: rgba(211, 211, 211, 0.5);
+}
+
+header>nav>section>section a>span{
+    position: absolute;
+    display: none;
+    right: 300px;
+    top: calc(var(--altura-header) /2.5);
+}
+
+header>nav>section>section a:hover span{
+    display: block;
+}
+
+header>nav>section> #profileIcon{
+    height: var(--altura-header);
+    display: flex;
+    padding: 0 15px;
+}
+
+header>nav>section> #profileIcon:hover{
+    background: lightgrey;
+}
+
+header>nav>section> #profileIcon img{
     border-radius: 50%;
+    margin-top: var(--coloc-perfil);
     width: var(--tam-perfil);
     height: var(--tam-perfil);
 }
 
-header>nav>section>div>span{
-    height: 20px;
-    margin-top: calc((var(--altura-header) - 20px) / 2);
+
+header>nav>section> #profileIcon span{
+    margin-top: 25px;
+    padding: 5px;
 }
 
+/*PopUP del perfil */
+
 header nav .profile{
+    max-height: 100%;
+    overflow: auto;
     background: white;
     display: none;
     position: fixed;
@@ -142,7 +160,7 @@ header nav .profile div a{
 }
 
 header nav .profile div a>span{
-    padding: 0 2px;
+    padding: 0 10px 0 0;
 }
 
 /* Main */
@@ -182,6 +200,10 @@ footer table td{
     padding:5px 2px;
     text-align: center;
     place-items: center;
+}
+
+footer table td a{
+    color: white;
 }
 
 footer table td:first-child{
@@ -277,6 +299,7 @@ footer table td:first-child{
     height: 500px;
     overflow-y: auto;
 }
+
 .sIndex2 .sec2popUp aside{
     display: none;
 }
@@ -389,7 +412,8 @@ footer table td:first-child{
 }
 
 .sProd1 .sec2::-webkit-scrollbar, body::-webkit-scrollbar,.sIndex3::-webkit-scrollbar, .sIndex2 .popUp  .sec2popUp::-webkit-scrollbar {height: 8px; width: 10px}
-.sProd1 .sec2::-webkit-scrollbar-thumb, body::-webkit-scrollbar-thumb,.sIndex3::-webkit-scrollbar-thumb, .sIndex2 .popUp  .sec2popUp::-webkit-scrollbar-thumb {background-color: lightgrey; border-radius: 5px;}
+.sProd1 .sec2::-webkit-scrollbar-thumb,.sIndex3::-webkit-scrollbar-thumb, .sIndex2 .popUp  .sec2popUp::-webkit-scrollbar-thumb {background-color: lightgrey; border-radius: 5px;}
+body::-webkit-scrollbar-thumb{background-color: lightgrey;}
 .sProd1 .sec2::-webkit-scrollbar-thumb:hover, body::-webkit-scrollbar-thumb:hover,.sIndex3::-webkit-scrollbar-thumb:hover, .sIndex2 .popUp  .sec2popUp::-webkit-scrollbar-thumb:hover {background-color: rgb(180, 180, 180);}
 
 .sIndex3 a{
@@ -2984,6 +3008,49 @@ form.formOpinar button{
 
 }
 
+@media (max-width: 750px){
+
+    header>nav>section #fDesplig{
+        margin-left: 5px;
+        margin-right: 5px;
+        display: block;
+    }
+
+    header>nav>section>section{
+        background: white;
+        overflow: hidden;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        border-radius: 0 0 0 10px;
+        position: fixed;
+        top: var(--altura-header);
+        right: 0;
+        display: none;
+    }
+
+    header>nav>section>section a{
+        margin: 5px 0;
+        padding: 0 5px;
+        float: none;
+        display: flex;
+    }
+
+    header>nav>section>section a>img{
+        margin-top: 0;
+    }
+
+    header>nav>section>section a:hover{
+        background: lightgrey;
+    }
+
+    header>nav>section>section a span{
+        position: relative;
+        display: block;
+        right: 0;
+        margin-top: -15px;
+    }
+
+}
+
 
 @media (max-width: 715px) {
 
@@ -3028,6 +3095,17 @@ form.formOpinar button{
 
     .mUser>section{
         grid-template-columns: 1fr !important;
+    }
+}
+
+@media (max-width: 450px){
+
+    header a#logo{
+        display: block;
+    }
+
+    header a#logoE{
+        display: none;
     }
 }
 
@@ -3077,10 +3155,52 @@ form.formOpinar button{
 }
 
 @media (max-width: 440px) {
+
     .mOpinion .producto{
         height: 150px;
     }
     .mOpinion .producto p{
         font-size: 12px;
+    }
+
+    #popUpSelectProd>div{
+        width: 100%;
+    }
+
+    .sProd1 .sec2 div,  .sIndex2 .sec2popUp div{
+        width: 92%;
+    }
+
+    .sProd1 .typePrice>div{
+        text-align: center;
+        width: 100%;
+    }
+
+    .sProd1 .typePrice>div button{
+        width: 50%;
+    }
+
+
+}
+
+@media (max-width: 280px) {
+        :root{
+            --altura-footer: 100px;
+        }
+}
+
+@media (max-width: 220px) {
+    :root{
+        --altura-footer: 130px;
+    }
+}
+
+
+/* Trans-Query */
+
+@media (max-height: 600px) {
+
+    .sProd1 .sec2,  .sIndex2 .sec2popUp{
+        height: 350px;
     }
 }
