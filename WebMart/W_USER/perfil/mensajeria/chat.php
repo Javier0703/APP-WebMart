@@ -44,7 +44,7 @@ if ((isset($_COOKIE["usu"]) && isset($_COOKIE["pass"])) || (isset($_SESSION["usu
                 if ($rol==1){
                     $st->close();
                     $con->close();
-                    header("Location: ../../W_ADMIN/index.php");
+                    header("Location: ../../../W_ADMIN/index.php");
                 }
 
                 if ($estado==0){
@@ -69,7 +69,7 @@ if ((isset($_COOKIE["usu"]) && isset($_COOKIE["pass"])) || (isset($_SESSION["usu
             $cod=$e ->getCode();
             $msgError=$e->getMessage();
             setcookie("error","Error $cod, $msgError");
-            header("Location: ../../error.php");
+            header("Location: ../../../error.php");
         }
     }
 }

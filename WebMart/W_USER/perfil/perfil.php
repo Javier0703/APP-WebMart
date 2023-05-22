@@ -25,7 +25,7 @@ if ((isset($_COOKIE["usu"]) && isset($_COOKIE["pass"])) || (isset($_SESSION["usu
     if (conexUsu()==0){
         $cod=conexUsu();
         setcookie("error","Error $cod, no se puede establecer conexión con la Base de Datos :(");
-        header("Location:../../error.php");
+        header("Location: ../../error.php");
     }
 
     else{
@@ -67,13 +67,13 @@ if ((isset($_COOKIE["usu"]) && isset($_COOKIE["pass"])) || (isset($_SESSION["usu
             $cod=$e ->getCode();
             $msgError=$e->getMessage();
             setcookie("error","Error $cod, $msgError");
-            header("Location:../../error.php");
+            header("Location: ../../error.php");
         }
     }
 }
 
 else{
-    header("Location:../../cierre.php");
+    header("Location: ../../cierre.php");
 }
 ?>
 <!doctype html>
