@@ -96,10 +96,18 @@ else{
         }
     }
 
+
     $str = $_POST["nombre"];
-    $rpl = str_replace('&nbsp', '', $str);
-    $html = htmlspecialchars_decode($rpl);
-    $dec= strip_tags($html);
+    $iTrimed = trim($str);
+
+    if (empty($iTrimed)){
+        $dec = null;
+    }
+    else{
+        $rpl = str_replace('&nbsp', '', $str);
+        $html = htmlspecialchars_decode($rpl);
+        $dec= strip_tags($html);
+    }
     if(strlen($dec) <= 30){
         $sql = "UPDATE usuarios SET NOMBRE=? WHERE ID_USU=$id_usu";
         $st = $con->prepare($sql);
@@ -110,9 +118,16 @@ else{
 
 
     $str = $_POST["ape1"];
-    $rpl = str_replace('&nbsp', '', $str);
-    $html = htmlspecialchars_decode($rpl);
-    $dec= strip_tags($html);
+    $iTrimed = trim($str);
+
+    if (empty($iTrimed)){
+        $dec = null;
+    }
+    else{
+        $rpl = str_replace('&nbsp', '', $str);
+        $html = htmlspecialchars_decode($rpl);
+        $dec= strip_tags($html);
+    }
     if(strlen($dec) <= 30){
         $sql = "UPDATE usuarios SET APELLIDO1=? WHERE ID_USU=$id_usu";
         $st = $con->prepare($sql);
@@ -123,9 +138,17 @@ else{
 
 
     $str = $_POST["ape2"];
-    $rpl = str_replace('&nbsp', '', $str);
-    $html = htmlspecialchars_decode($rpl);
-    $dec= strip_tags($html);
+    $iTrimed = trim($str);
+
+    if (empty($iTrimed)){
+        $dec = null;
+    }
+    else{
+        $rpl = str_replace('&nbsp', '', $str);
+        $html = htmlspecialchars_decode($rpl);
+        $dec= strip_tags($html);
+    }
+
     if(strlen($dec) <= 30){
         $sql = "UPDATE usuarios SET APELLIDO2=? WHERE ID_USU=$id_usu";
         $st = $con->prepare($sql);
@@ -173,9 +196,17 @@ else{
 
 
     $str = $_POST["desc"];
-    $rpl = str_replace('&nbsp', '', $str);
-    $html = htmlspecialchars_decode($rpl);
-    $dec= strip_tags($html);
+    $iTrimed = trim($str);
+
+    if (empty($iTrimed)){
+        $dec = null;
+    }
+    else{
+        $rpl = str_replace('&nbsp', '', $str);
+        $html = htmlspecialchars_decode($rpl);
+        $dec= strip_tags($html);
+    }
+
     if(strlen($dec) <= 400){
         $sql = "UPDATE usuarios SET DESCRIPCION=? WHERE ID_USU=$id_usu";
         $st = $con->prepare($sql);
