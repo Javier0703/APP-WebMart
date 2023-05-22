@@ -29,15 +29,24 @@ if (isset($_COOKIE["msg"])) {
     <link rel="stylesheet" href="CSS/index.css">
 </head>
 <body>
+
 <header>
-    <a href="index.php"><img src="IMG/LOGOS_ERRORES/logoEntero.png" alt="Logo"></a>
+
+    <a id="logo" href="index.php"><img src="IMG/LOGOS_ERRORES/logo.png" alt="Logo"></a>
+    <a id="logoE" href="index.php"><img src="IMG/LOGOS_ERRORES/logoEntero.png" alt="Logo"></a>
+
     <nav>
         <ul>
-            <a class="liActive" href="index.php"><li>Inicio</li></a>
+            <a class="liActive" href="index.php">
+                <li>Inicio</li>
+            </a>
             <a href="información.html"><li>Información</li></a>
             <a href="contacto.php"><li>Contacto</li></a>
         </ul>
     </nav>
+
+    <img id="desplegable" class="desplegable" src="IMG/LOGOS_ERRORES/despleg.png" alt="Desplegable">
+
 </header>
 
 <main class="mIndex" id="mIndex">
@@ -144,4 +153,5 @@ if (isset($_COOKIE["msg"])) {
 
 </body>
 <script src="JS/index.js"></script>
+<script src="JS/openMenu.js"></script>
 </html>

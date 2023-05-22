@@ -33,25 +33,37 @@ header{
     background-color: white;
 }
 
-header>a>img{
+header #logo{
+    display: none;
+}
+
+header img{
     height: var(--tam-img);
     width: calc((1600px * var(--tam-img)) / 200);
     padding-top: var(--coloc-imagen);
     padding-left: var(--coloc-imagen);
 }
 
+header img.desplegable{
+    padding-right: var(--coloc-imagen);
+    display: none;
+    margin-left: auto;
+}
+
 header>nav{
     width: 100%;
+}
+
+header>nav.open{
+    display: block;
 }
 
 ul{
     float: right;
     list-style: none;
-    overflow: hidden;
 }
 
 ul>a{
-    background: white;
     font-size: var(--tam-li);
     padding: var(--padding-li);
     float: left;
@@ -306,4 +318,56 @@ footer table td:first-child{
     justify-content: center;
     padding: 10px 0;
     margin: auto;
+}
+
+/* Media query */
+
+@media (max-width: 385px) {
+
+    header #logo{
+        display: block;
+    }
+
+    header #logoE{
+        display: none;
+    }
+
+}
+
+@media (max-width: 740px) {
+
+    header>nav{
+        background: white;
+        width: auto;
+        right: 0;
+        border: 1px solid #2e3094;
+        display: none;
+        position: fixed;
+        top: var(--altura-header);
+    }
+
+    header>nav ul a{
+        display: block;
+        float: revert;
+    }
+
+    .liActive{
+        border-top: none;
+        font-weight: bolder;
+        background: #2e3094;
+        color: white;
+    }
+
+    ul>a:hover{
+        border-top: none;
+        background: #2e3094;
+        color: white;
+        font-weight: normal;
+    }
+
+
+    header img.desplegable{
+        display: block;
+    }
+    
 }
