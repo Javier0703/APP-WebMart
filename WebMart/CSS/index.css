@@ -289,14 +289,10 @@ footer table td:first-child{
     outline: 0 !important;
     background: rgba(255, 255, 255, 0.5) !important;
     z-index: -1 !important;
-    transition: 1s;
-    margin-left: -270px !important;
-    margin-top: -185px !important;
 }
 
 .atras>form, .atras>aside{
-    opacity: 0;
-    transition: 1s;
+    display: none;
 }
 
 .colorRed{
@@ -322,19 +318,22 @@ footer table td:first-child{
 
 /* Media query */
 
-@media (max-width: 385px) {
+@media (min-height: 250px){
 
-    header #logo{
-        display: block;
-    }
 
-    header #logoE{
-        display: none;
+    main{
+        height: 500px;
     }
 
 }
 
-@media (max-width: 740px) {
+@media (min-height: 500px){
+    main{
+        height: 700px;
+    }
+}
+
+@media (max-width: 760px) {
 
     header>nav{
         background: white;
@@ -370,4 +369,63 @@ footer table td:first-child{
         display: block;
     }
     
+}
+
+@media (max-width: 600px) {
+
+    .mIndex>div>section{
+        border-radius: 20px;
+        outline: 1px solid #00adec;
+        display: block;
+    }
+
+    #login, #registro{
+        margin-left: -155px;
+        margin-top: -250px;
+    }
+
+    .mIndex>div aside{
+        border-radius: 20px 20px 0 0;
+    }
+    .mIndex>div aside h3{
+        padding: 5px 0;
+    }
+
+    .mIndex>div form{
+        border-radius: 0 0 20px 20px;
+    }
+
+    .mIndex>div>section aside>div>img{
+        display: none;
+    }
+
+}
+
+
+@media (max-width: 385px) {
+
+    header #logo{
+        display: block;
+    }
+
+    header #logoE{
+        display: none;
+    }
+
+}
+
+@media (max-width: 320px) {
+
+    #login, #registro{
+        margin-left: -137px;
+        margin-top: -250px;
+    }
+
+    .mIndex form{
+        padding: 20px 20px 20px 15px;
+    }
+
+    .mIndex #login form{
+        padding: 24px 20px 24px 15px;
+    }
 }

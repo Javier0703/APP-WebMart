@@ -21,7 +21,7 @@ if (isset($_COOKIE["msg"])) {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" href="IMG/LOGOS_ERRORES/logo.png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0"/>
@@ -122,7 +122,7 @@ if (isset($_COOKIE["msg"])) {
                         <input type="password" name="passR2" id="passR2">
                     </div>
                 </div>
-                <input type="checkbox" name="sesionR" id="sesionR"><label for="sesionR">Mantener la sesión iniciada.</label><br>
+                <input type="checkbox" name="sesionR" id="sesionR"><label for="sesionR"> Mantener la sesión iniciada.</label><br>
                 <section>
                     <button id="Reg">Registrarse</button>
                 </section>
