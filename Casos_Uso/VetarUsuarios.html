@@ -14,25 +14,25 @@
 <table>
   <tr>
     <th>Id</th>
-    <td>CU4</td>
+    <td>CU14</td>
   </tr>
   <tr>
     <th>Nombre</th>
-    <td>Ver estadísticas</td>
+    <td>Vetar usuarios</td>
   </tr>
   <tr>
     <th>Actores</th>
-    <td>Usuarios</td>
+    <td>Administradores</td>
   </tr>
   <tr>
     <th>Descripción</th>
-    <td>Se podrán ver las estadísticas en la aplicación. (Tipo de articulos más vendido, los mejores valorado de la app, quien es el que más ha vendido / comprado...)</td>
+    <td>Los administradores podrán vetar a los usuarios que no tengan un comportamiento normal en la aplicación</td>
   </tr>
   <tr>
     <th>Precondiciones</th>
     <td>
       <ul>
-        <li>El usuario debe de estar logueado en la app</li>
+        <li>El usuario que queramos vetar no exista o ya este vetado.</li>
       </ul>
     </td>
   </tr>
@@ -40,8 +40,9 @@
     <th>Secuencia normal</th>
     <td>
       <ol>
-        <li>El usuario clicará en el link "Estadísticas" del menú de arriba</li>
-        <li>Accederá a una página de las estadísticas</li>
+        <li>Buscamos al usuario que queramos vetar.</li>
+        <li>Entramos en su perfil y le damos al botón de "vetar"</li>
+        <li>Confirmaremos la acción.</li>
       </ol>
     </td>
   </tr>
@@ -49,13 +50,8 @@
     <th>Postcondiciones</th>
     <td>
       <ul>
-        <li>
-          Una vez en la página de estadísticas, podrá ver:
-          <ol>
-            <li>Una gráfica con los usuarios con más productos vendidos y comprados.</li>
-            <li>Otra gráfica con estadísticas personales como el número de ventas, de compras, de opiniones, de mensajes enviados...</li>
-          </ol>
-        </li>
+        <li>El usuario ha sido vetado de la aplicación</li>
+        <li>Cuando quiera entrar ese usuario le saldrá un mensaje de que su cuenta ha sido suspendida temporalmente</li>
       </ul>
     </td>
   </tr>
@@ -63,7 +59,7 @@
     <th>Secuencia alternativa</th>
     <td>
       <ul>
-        <li>Que no haya podido acceder a ese menú por un fallo en el servidor</li>
+        <li>No hayamos podido vetar al usuario por temas de permisos o de que ya estaba vetado anteriormente.</li>
       </ul>
     </td>
   </tr>

@@ -14,25 +14,26 @@
 <table>
   <tr>
     <th>Id</th>
-    <td>CU13</td>
+    <td>CU13
+    </td>
   </tr>
   <tr>
     <th>Nombre</th>
-    <td>Modificación del usuario</td>
+    <td>Eliminar un producto</td>
   </tr>
   <tr>
     <th>Actores</th>
-    <td>Administradores</td>
+    <td>Usuario</td>
   </tr>
   <tr>
     <th>Descripción</th>
-    <td>Los administradores podrán convertir a un usuario de la app en administrador, pero debemos de tener cuidado porque es irreversible</td>
+    <td>Podemos eliminar productos que nosotros hayamos subido porque hayamos cambiado de opinión o por otras causas.</td>
   </tr>
   <tr>
     <th>Precondiciones</th>
     <td>
       <ul>
-        <li>Que el usuario que se quiera modificar no sea administrador, porque no nos dejará</li>
+        <li>Tener subido el producto que queremos eliminar</li>
       </ul>
     </td>
   </tr>
@@ -40,9 +41,10 @@
     <th>Secuencia normal</th>
     <td>
       <ol>
-        <li>Ir al menu de "Usuarios" y buscar al usuario que queramos.</li>
-        <li>Seleccionar ese usuario y darle al botón de "Cambiar a Administrador".</li>
-        <li>Aceptar los cambios.</li>
+        <li>El usuario va al apartado de productos en venta de su propio perfil. </li>
+        <li>Seleccionamos el producto que queremos eliminar.</li>
+        <li>Le damos al botón de eliminar producto.</li>
+        <li>Confirmamos la eliminación del producto.</li>
       </ol>
     </td>
   </tr>
@@ -50,7 +52,7 @@
     <th>Postcondiciones</th>
     <td>
       <ul>
-        <li>El usuario a partir de ahora será administrador.</li>
+        <li>El producto ya no aparece en el perfil.</li>
       </ul>
     </td>
   </tr>
@@ -58,7 +60,7 @@
     <th>Secuencia alternativa</th>
     <td>
       <ul>
-        <li>No se ha podido modificar su rol porque el usuario que lo ha hecho o no tiene permisos o ese usuario que queremos que sea modificado ya es administrador.</li>
+        <li>No se ha eliminado el producto porque no hemos aceptado posteriormente.</li>
       </ul>
     </td>
   </tr>

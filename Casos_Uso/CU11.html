@@ -18,21 +18,21 @@
   </tr>
   <tr>
     <th>Nombre</th>
-    <td>Eliminar un producto</td>
+    <td>Comprar producto</td>
   </tr>
   <tr>
     <th>Actores</th>
-    <td>Usuario</td>
+    <td>Usuarios</td>
   </tr>
   <tr>
     <th>Descripción</th>
-    <td>Podemos eliminar productos que nosotros hayamos subido porque hayamos cambiado de opinión o por otras causas.</td>
+    <td>Tendremos la opción de comprar un producto que se encuentre dentro de la app</td>
   </tr>
   <tr>
     <th>Precondiciones</th>
     <td>
       <ul>
-        <li>Tener subido el producto que queremos eliminar</li>
+        <li>Que ese producto no este "reservado" para un usuario y que este libre</li>
       </ul>
     </td>
   </tr>
@@ -40,10 +40,10 @@
     <th>Secuencia normal</th>
     <td>
       <ol>
-        <li>El usuario va al apartado de productos en venta de su propio perfil. </li>
-        <li>Seleccionamos el producto que queremos eliminar.</li>
-        <li>Le damos al botón de eliminar producto.</li>
-        <li>Confirmamos la eliminación del producto.</li>
+        <li>Buscamos el producto que queremos</li>
+        <li>Contactamos con el dueño de ese artículo si fuese necesario para concretar un precio y método de transporte del mismo</li>
+        <li>Dar al botón de comprar artículo</li>
+        <li>Esperar que el dueño acepte la compra nuestra</li>
       </ol>
     </td>
   </tr>
@@ -51,7 +51,8 @@
     <th>Postcondiciones</th>
     <td>
       <ul>
-        <li>El producto ya no aparece en el perfil.</li>
+        <li>El producto será guardado como una compra de ese usuario</li>
+        <li>Se añadirá en el apartado de compras de nuestro perfil</li>
       </ul>
     </td>
   </tr>
@@ -59,7 +60,7 @@
     <th>Secuencia alternativa</th>
     <td>
       <ul>
-        <li>No se ha eliminado el producto porque no hemos aceptado posteriormente.</li>
+        <li>Que no lo podamos comprar porque el producto esté reservado.</li>
       </ul>
     </td>
   </tr>

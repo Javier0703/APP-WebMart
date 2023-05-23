@@ -18,22 +18,24 @@
   </tr>
   <tr>
     <th>Nombre</th>
-    <td>Borrar usuarios</td>
+    <td>Añadir una opinión</td>
   </tr>
   <tr>
     <th>Actores</th>
-    <td>Administradores</td>
+    <td>Usuario</td>
   </tr>
   <tr>
     <th>Descripción</th>
-    <td>Los administradores podrán borrar usuarios de la aplicación. La mayoría de estos son los que se han creado para hacer pruebas de testeo de la app.</td>
+    <td>Los usuarios podrán opinar sobre un producto que hayan comprado anteriormente</td>
   </tr>
   <tr>
     <th>Precondiciones</th>
     <td>
       <ul>
-        <li>Tener permisos de administrador</li>
-        <li>Que el usuario que queramos eliminar no sea administrador (no se puede)</li>
+        <li>La opinión es sobre el producto, no sobre la persona</li>
+        <li>Como se ha comentado, haber comprado ese producto</li>
+        <li>Solo se opinará 1 vez por producto</li>
+        <li>Se podrán opinar sobre la misma persona varias veces (tantas como productos suyos hayamos comprado)</li>
       </ul>
     </td>
   </tr>
@@ -41,9 +43,10 @@
     <th>Secuencia normal</th>
     <td>
       <ol>
-        <li>Buscamos el usuario que queramos eliminar</li>
-        <li>Entramos a su perfil y le damos al botón de "Borrar"</li>
-        <li>Confirmamos la acción, ya que es irreversible.</li>
+        <li>El usuario va a sus productos comprados</li>
+        <li>El usuario selecciona y accede al perfil de uno de esos productos comprados</li>
+        <li>El usuario verá si puede opinar sobre algún producto que ha comprado, o si ya lo ha hecho</li>
+        <li>El usuario comienza a realizar la opinión, dando su valoración (1-5) y una pequeña descripción</li>
       </ol>
     </td>
   </tr>
@@ -51,7 +54,7 @@
     <th>Postcondiciones</th>
     <td>
       <ul>
-        <li>El usuario ha sido borrado correctamente</li>
+        <li>La opinión aparecerá tanto en el perfil de ese usuario al que se ha comprado el producto, como en el nuestro en el apartado de mis opiniones</li>
       </ul>
     </td>
   </tr>
@@ -59,7 +62,7 @@
     <th>Secuencia alternativa</th>
     <td>
       <ul>
-        <li>No podemos borrar un usuario por causas que se han comentado en las precondiciones ( permisos o que es administrador)</li>
+        <li>No hemos podido opinar porque a ese usuario no hemos comprado ningún producto</li>
       </ul>
     </td>
   </tr>

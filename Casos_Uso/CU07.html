@@ -14,11 +14,11 @@
 <table>
   <tr>
     <th>Id</th>
-    <td>CU7</td>
+    <td>CU07</td>
   </tr>
   <tr>
     <th>Nombre</th>
-    <td>Listar productos</td>
+    <td>Enviar mensajes</td>
   </tr>
   <tr>
     <th>Actores</th>
@@ -26,31 +26,50 @@
   </tr>
   <tr>
     <th>Descripción</th>
-    <td>Podremos filtrar los productos que queramos en la aplicación, aparte de buscar algún producto específico que queramos</td>
+    <td>En la aplicación podemos enviar un mensaje a otro usuario para la compra de uno de los productos que tiene en venta</td>
   </tr>
   <tr>
     <th>Precondiciones</th>
     <td>
       <ul>
-        <li>Debemos de estar logueados en la aplicación</li>
+        <li>Estar registrado o iniciado la sesión en la aplicación</li>
+        <li>Que haya un producto de por medio para poder negociar, si no no se podrá</li>
       </ul>
     </td>
   </tr>
   <tr>
     <th>Secuencia normal</th>
     <td>
-      <ol>
-        <li>Iremos a la pantalla inicial de la aplicación que es la lista de los productos de la aplicación.</li>
-        <li>Filtraremos y buscaremos los productos que queramos.</li>
-      </ol>
+      <ul>
+        <li>
+            Se pueden diferenciar 2 casos depende del usuario:
+            <ol>
+              <li>
+                Un usuario que está en busca de un producto.
+                <ul>
+                  <li>Buscamos un producto que esté en venta en la app</li>
+                  <li>Le damos al botón de "Mensaje"</li>
+                  <li>Nos saltará a un chat para poder enviarle un mensaje a ese usuario</li>
+                </ul>
+              </li>
+              <li>
+                Un usuario que está vendiendo el producto.
+                <ul>
+                  <li>Recibimos un mensaje de un usuario que quiere nuestro producto</li>
+                  <li>Enviamos el mensaje de respuesta que queramos</li>
+                </ul>
+              </li>
+            </ol>
+        </li>
+      </ul>
     </td>
   </tr>
   <tr>
     <th>Postcondiciones</th>
     <td>
       <ul>
-        <li>Nos mostrará la lista con todos los productos que hemos filtrado</li>
-        <li>Podemos seleccionar el producto que queramos y nos mostrara toda la información, con su vendedor y la opción de agregarlo a favoritos o de contactar con el vendedor</li>
+        <li>El mensaje se ha guardado correctamente y subido a la base de datos</li>
+        <li>Se mostrará el mensaje que hemos enviado con la hora y el contenido de ella</li>
       </ul>
     </td>
   </tr>
@@ -58,7 +77,8 @@
     <th>Secuencia alternativa</th>
     <td>
       <ul>
-        <li>Que no muestre ningún producto, ya que no hay productos con esas características que hemos filtrado</li>
+        <li>No se puedan enviar o recibir mensajes por problemas en el servidor</li>
+        <li>No se puede enviar un mensaje porque el producto por el que se está contactando</li>
       </ul>
     </td>
   </tr>

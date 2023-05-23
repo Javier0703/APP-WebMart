@@ -14,11 +14,11 @@
 <table>
   <tr>
     <th>Id</th>
-    <td>CU6</td>
+    <td>CU06</td>
   </tr>
   <tr>
     <th>Nombre</th>
-    <td>Chatear</td>
+    <td>Visualizar perfil</td>
   </tr>
   <tr>
     <th>Actores</th>
@@ -26,14 +26,15 @@
   </tr>
   <tr>
     <th>Descripción</th>
-    <td>En la aplicación podemos chatear con otro usuario para la compra de uno de los productos que tiene en venta</td>
+    <td>Los usuarios podrán visualizar sus perfiles para ver de una manera mucho más ordenada que productos tiene subidos, los productos que ha añadido a favoritos,
+    las reservas que tiene, los mensajes..</td>
   </tr>
   <tr>
     <th>Precondiciones</th>
     <td>
       <ul>
-        <li>Estar logueado en la aplicación</li>
-        <li>Que haya un producto de por medio para poder negociar, si no no se podrá</li>
+        <li>El usuario debe de estar registrado o con la sesión iniciada</li>
+        <li>Si el usuario es nuevo, muchos de los menús no contendrán nada de información (no hemos tenido actividad en la aplicación) </li>
       </ul>
     </td>
   </tr>
@@ -41,9 +42,8 @@
     <th>Secuencia normal</th>
     <td>
       <ol>
-        <li>Buscamos un producto que esté en venta en la app</li>
-        <li>Le damos al boton de "contactar"</li>
-        <li>Nos saltará a un chat para poder enviarle un mensaje a ese usuario</li>
+        <li>El usuario inicia sesión en la aplicación</li>
+        <li>El usuario se dirige a su perfil situado a la derecha del menu de navegación</li>
       </ol>
     </td>
   </tr>
@@ -51,8 +51,19 @@
     <th>Postcondiciones</th>
     <td>
       <ul>
-        <li>En la pantalla de los mensajes veran todos los chats que tienen con los usuarios.</li>
-        <li>AL entrar en un chat, se verán todos los mensjaes que se han realizado con su hora.</li>
+        <li>
+          El usuario verá los distintos menús:
+          <ol>
+            <li>Perfil con su información personal</li>
+            <li>Productos subidos y vendidos</li>
+            <li>Compras realizadas</li>
+            <li>Productos añadidos a favoritos</li>
+            <li>Opiniones realizadas</li>
+            <li>Opiniones recibidas</li>
+            <li>Productos reservados y solicitudes pendientes</li>
+            <li>Mensajes</li>
+          </ol>
+        </li>
       </ul>
     </td>
   </tr>
@@ -60,7 +71,8 @@
     <th>Secuencia alternativa</th>
     <td>
       <ul>
-        <li>No se puedan enviar o recibir mensajes por problemas en el servidor</li>
+        <li>No se ha mostrado nada porque no hemos tenido nada de impacto en la aplicación (somos nuevos y no hemos realizado ninguna accion)</li>
+        <li>Ha ocurrido un fallo al entrar al menú (caída del servidor, de internet)</li>
       </ul>
     </td>
   </tr>

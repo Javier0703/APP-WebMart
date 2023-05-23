@@ -18,7 +18,7 @@
   </tr>
   <tr>
     <th>Nombre</th>
-    <td>Vender un producto</td>
+    <td>Subir productos</td>
   </tr>
   <tr>
     <th>Actores</th>
@@ -26,14 +26,14 @@
   </tr>
   <tr>
     <th>Descripción</th>
-    <td>Los usuarios podrán vender los productos que tiene en la aplicación.</td>
+    <td>Explicación de como podemos subir artículos en la aplicación .</td>
   </tr>
   <tr>
     <th>Precondiciones</th>
     <td>
       <ul>
-        <li>Que tengamos un producto subido a la aplicación.</li>
-        <li>Que el artículo que se quiera comprar sea nuestro.</li>
+        <li>Debemos de estar registrados</li>
+        <li>No podemos superar el límite de productos subidos (100)</li>
       </ul>
     </td>
   </tr>
@@ -41,9 +41,15 @@
     <th>Secuencia normal</th>
     <td>
       <ol>
-        <li>Un usuario selecciona un producto nuestro que le sea de interés.</li>
-        <li>Ese usuario que quiere comprar un producto nuestro, le de al botón de comprar.</li>
-        <li>El vendedor debe aceptar o rechazar la compra, dependiendo de si es rentable (por motivos de desplazamiento u otros)</li>
+        <li>Vamos al menú de "Subir artículo"</li>
+        <li>Elegimos y subimos las características del producto:
+          <ul>
+            <li>Descripción del producto.</li>
+            <li>Elección de la categoría que es.</li>
+            <li>Imágenes del producto.</li>
+          </ul>
+        </li>
+        <li>Damos al botón de subir producto cuando hayamos terminado</li>
       </ol>
     </td>
   </tr>
@@ -51,7 +57,8 @@
     <th>Postcondiciones</th>
     <td>
       <ul>
-        <li>El producto será y aparecerá como vendido en la aplicación.</li>
+        <li>El producto se ha guardado en la Base de Datos correctamente.</li>
+        <li>Se mostrará en la aplicación, tanto en nuestro perfil como en la de todos los productos.</li>
       </ul>
     </td>
   </tr>
@@ -59,7 +66,7 @@
     <th>Secuencia alternativa</th>
     <td>
       <ul>
-        <li>Que no se le pueda vender a un usuario en concreto porque ese producto justo ha sido reservado para otra persona.</li>
+        <li>No se ha guardado el artículo correctamente porque superábamos el límite o porque ha habido un fallo por el servidor</li>
       </ul>
     </td>
   </tr>

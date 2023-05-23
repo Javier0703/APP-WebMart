@@ -14,11 +14,11 @@
 <table>
   <tr>
     <th>Id</th>
-    <td>CU4</td>
+    <td>CU17</td>
   </tr>
   <tr>
     <th>Nombre</th>
-    <td>Ver estadísticas</td>
+    <td>Eliminar una opinión</td>
   </tr>
   <tr>
     <th>Actores</th>
@@ -26,13 +26,14 @@
   </tr>
   <tr>
     <th>Descripción</th>
-    <td>Se podrán ver las estadísticas en la aplicación. (Tipo de articulos más vendido, los mejores valorado de la app, quien es el que más ha vendido / comprado...)</td>
+    <td>Los usuarios podrán borrar las opiniones que tienen sobre productos ya comprados</td>
   </tr>
   <tr>
     <th>Precondiciones</th>
     <td>
       <ul>
-        <li>El usuario debe de estar logueado en la app</li>
+        <li>La opinión debe de ser tuya, si nó, no se podrá borrar</li>
+        <li>La acción es irreversible, lo que hay que pensarlo bien</li>
       </ul>
     </td>
   </tr>
@@ -40,8 +41,9 @@
     <th>Secuencia normal</th>
     <td>
       <ol>
-        <li>El usuario clicará en el link "Estadísticas" del menú de arriba</li>
-        <li>Accederá a una página de las estadísticas</li>
+        <li>El usuario se dirige a mis opiniones de su perfil</li>
+        <li>Selecciona la opinión que desea borrar</li>
+        <li>Le da al botón de Eliminar en rojo</li>
       </ol>
     </td>
   </tr>
@@ -49,13 +51,8 @@
     <th>Postcondiciones</th>
     <td>
       <ul>
-        <li>
-          Una vez en la página de estadísticas, podrá ver:
-          <ol>
-            <li>Una gráfica con los usuarios con más productos vendidos y comprados.</li>
-            <li>Otra gráfica con estadísticas personales como el número de ventas, de compras, de opiniones, de mensajes enviados...</li>
-          </ol>
-        </li>
+        <li>La opinión será eliminada correctamente</li>
+        <li>En el perfil del usuario al que hemos borrado esa opinión sobre el producto, nos mostrará que podemos opinar sobre ese producto de vuelta si queremos</li>
       </ul>
     </td>
   </tr>
@@ -63,7 +60,7 @@
     <th>Secuencia alternativa</th>
     <td>
       <ul>
-        <li>Que no haya podido acceder a ese menú por un fallo en el servidor</li>
+        <li>No hemos podido borrar esa opinión porque no hemos dado al botón de eliminar</li>
       </ul>
     </td>
   </tr>

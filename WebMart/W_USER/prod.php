@@ -464,7 +464,7 @@ else{
         }
 
     }
-    $con->close();
+
     ?>
 </main>
 

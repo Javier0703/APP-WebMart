@@ -14,25 +14,26 @@
 <table>
   <tr>
     <th>Id</th>
-    <td>CU4</td>
+    <td>CU15</td>
   </tr>
   <tr>
     <th>Nombre</th>
-    <td>Ver estadísticas</td>
+    <td>Borrar usuarios</td>
   </tr>
   <tr>
     <th>Actores</th>
-    <td>Usuarios</td>
+    <td>Administradores</td>
   </tr>
   <tr>
     <th>Descripción</th>
-    <td>Se podrán ver las estadísticas en la aplicación. (Tipo de articulos más vendido, los mejores valorado de la app, quien es el que más ha vendido / comprado...)</td>
+    <td>Los administradores podrán borrar usuarios de la aplicación. La mayoría de estos son los que se han creado para hacer pruebas de testeo de la app.</td>
   </tr>
   <tr>
     <th>Precondiciones</th>
     <td>
       <ul>
-        <li>El usuario debe de estar logueado en la app</li>
+        <li>Tener permisos de administrador</li>
+        <li>Que el usuario que queramos eliminar no sea administrador (no se puede)</li>
       </ul>
     </td>
   </tr>
@@ -40,8 +41,9 @@
     <th>Secuencia normal</th>
     <td>
       <ol>
-        <li>El usuario clicará en el link "Estadísticas" del menú de arriba</li>
-        <li>Accederá a una página de las estadísticas</li>
+        <li>Buscamos el usuario que queramos eliminar</li>
+        <li>Entramos a su perfil y le damos al botón de "Borrar"</li>
+        <li>Confirmamos la acción, ya que es irreversible.</li>
       </ol>
     </td>
   </tr>
@@ -49,13 +51,7 @@
     <th>Postcondiciones</th>
     <td>
       <ul>
-        <li>
-          Una vez en la página de estadísticas, podrá ver:
-          <ol>
-            <li>Una gráfica con los usuarios con más productos vendidos y comprados.</li>
-            <li>Otra gráfica con estadísticas personales como el número de ventas, de compras, de opiniones, de mensajes enviados...</li>
-          </ol>
-        </li>
+        <li>El usuario ha sido borrado correctamente</li>
       </ul>
     </td>
   </tr>
@@ -63,7 +59,7 @@
     <th>Secuencia alternativa</th>
     <td>
       <ul>
-        <li>Que no haya podido acceder a ese menú por un fallo en el servidor</li>
+        <li>No podemos borrar un usuario por causas que se han comentado en las precondiciones ( permisos o que es administrador)</li>
       </ul>
     </td>
   </tr>

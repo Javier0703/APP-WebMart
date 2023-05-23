@@ -14,11 +14,11 @@
 <table>
   <tr>
     <th>Id</th>
-    <td>CU8</td>
+    <td>CU08</td>
   </tr>
   <tr>
     <th>Nombre</th>
-    <td>Subir productos</td>
+    <td>Recibir mensajes</td>
   </tr>
   <tr>
     <th>Actores</th>
@@ -26,14 +26,15 @@
   </tr>
   <tr>
     <th>Descripción</th>
-    <td>Explicación de como podemos subir artículos en la aplicación .</td>
+    <td>Los usuarios recibirán mensajes que otros usuarios a través de un producto por el que se esté dialogando su compra</td>
   </tr>
   <tr>
     <th>Precondiciones</th>
     <td>
       <ul>
-        <li>Debemos de estar registrados</li>
-        <li>No podemos superar el límite de productos subidos (100)</li>
+        <li>El usuario que recibe un mensaje debe de ser mediante un char con otro usuario, con un producto de por medio</li>
+        <li>Se pueden recibir más de 1 mensaje del mismo usuario</li>
+        <li>El mismo usuario nos puede enviar mensajes desde distintos chats</li>
       </ul>
     </td>
   </tr>
@@ -41,15 +42,8 @@
     <th>Secuencia normal</th>
     <td>
       <ol>
-        <li>Vamos al menú de "Subir artículo"</li>
-        <li>Elegimos y subimos las características del producto:
-          <ul>
-            <li>Descripción del producto.</li>
-            <li>Elección de la categoría que es.</li>
-            <li>Imágenes del producto.</li>
-          </ul>
-        </li>
-        <li>Damos al botón de subir producto cuando hayamos terminado</li>
+        <li>El usuario entra en su perfil, en el apartado de mensajes</li>
+        <li>Selecciona el chat al que quiere entrar, donde ha recibido un mensaje de un usuario</li>
       </ol>
     </td>
   </tr>
@@ -57,8 +51,7 @@
     <th>Postcondiciones</th>
     <td>
       <ul>
-        <li>El producto se ha guardado en la Base de Datos correctamente.</li>
-        <li>Se mostrará en la aplicación, tanto en nuestro perfil como en la de todos los productos.</li>
+        <li>El usuario entrará a ese chart y podrá leer el mensaje que le ha enviado otro usuario</li>
       </ul>
     </td>
   </tr>
@@ -66,7 +59,7 @@
     <th>Secuencia alternativa</th>
     <td>
       <ul>
-        <li>No se ha guardado el artículo correctamente porque superábamos el límite o porque ha habido un fallo por el servidor</li>
+        <li>El usuario puede no recibir ningún mensaje si no tiene ningún chat abierto, o no tiene productos por el que esos usuarios inicien un ciclo de mensajería.</li>
       </ul>
     </td>
   </tr>

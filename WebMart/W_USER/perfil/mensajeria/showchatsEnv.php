@@ -122,7 +122,7 @@ else{
                                            }
 
                                            else{
-                                               date('Y-m-d', $fila["HORA"]);
+                                               echo date('d/m', strtotime($fila["HORA"]));
                                            }
 
                                            ?>

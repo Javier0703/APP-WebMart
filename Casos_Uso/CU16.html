@@ -18,21 +18,22 @@
   </tr>
   <tr>
     <th>Nombre</th>
-    <td>Borrar productos</td>
+    <td>Modificar una opinión</td>
   </tr>
   <tr>
     <th>Actores</th>
-    <td>Administradores</td>
+    <td>Usuarios</td>
   </tr>
   <tr>
     <th>Descripción</th>
-    <td>Los administradores pueden borrar los productos de la aplicación si les parece que no son adecuados.</td>
+    <td>Un usuario podrá modificar una opinion las veces que quiera.</td>
   </tr>
   <tr>
     <th>Precondiciones</th>
     <td>
       <ul>
-        <li>Tengamos el rol de administrador para realizar esta acción.</li>
+        <li>Debe de existir una opinion previa</li>
+        <li>Esa opinión debe de ser verdadera (el usuario ha comprado ese producto)</li>
       </ul>
     </td>
   </tr>
@@ -40,9 +41,10 @@
     <th>Secuencia normal</th>
     <td>
       <ol>
-        <li>Buscamos los productos que queramos eliminar</li>
-        <li>Le seleccionamos y le damos al botón de "Eliminar"</li>
-        <li>Confirmamos la acción, ya que es irreversible</li>
+        <li>El usuario se dirige al apartado de mis opiniones</li>
+        <li>El usuario selecciona la opinion que desea modificar</li>
+        <li>Se redirige al usuario a una página con esa opinión para cambiarla</li>
+        <li>El usuario la modifica y la guarda mediante el botón de guardar que hay</li>
       </ol>
     </td>
   </tr>
@@ -50,7 +52,7 @@
     <th>Postcondiciones</th>
     <td>
       <ul>
-        <li>El producto ha sido eliminado correctamente de la aplicación</li>
+        <li>La opinión ha sido modificada correctamente y se mostrará a partir de ahora de esa manera</li>
       </ul>
     </td>
   </tr>
@@ -58,7 +60,7 @@
     <th>Secuencia alternativa</th>
     <td>
       <ul>
-        <li>No se ha borrado el producto porque no se ha confirmado después o porque no tiene el usuario permisos suficientes.</li>
+        <li>No hemos podido modificar la opinión por algún fallo de conexión o porque no se ha dado al botón de guardar</li>
       </ul>
     </td>
   </tr>
