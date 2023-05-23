@@ -14,11 +14,11 @@
 <table>
   <tr>
     <th>Id</th>
-    <td>CU15</td>
+    <td>CU22</td>
   </tr>
   <tr>
     <th>Nombre</th>
-    <td>Borrar usuarios</td>
+    <td>Vetar/eliminar veto a usuarios</td>
   </tr>
   <tr>
     <th>Actores</th>
@@ -26,14 +26,15 @@
   </tr>
   <tr>
     <th>Descripción</th>
-    <td>Los administradores podrán borrar usuarios de la aplicación. La mayoría de estos son los que se han creado para hacer pruebas de testeo de la app.</td>
+    <td>Los administradores podrán vetar a los usuarios que no tengan un comportamiento normal en la aplicación, o quitarles el veto</td>
   </tr>
   <tr>
     <th>Precondiciones</th>
     <td>
       <ul>
         <li>Tener permisos de administrador</li>
-        <li>Que el usuario que queramos eliminar no sea administrador (no se puede)</li>
+        <li>El usuario que queramos vetar no se encuentre vetado.</li>
+        <li>El usuario al que queremos quitarle el veto, debe de tenerlo</li>
       </ul>
     </td>
   </tr>
@@ -41,9 +42,9 @@
     <th>Secuencia normal</th>
     <td>
       <ol>
-        <li>Buscamos el usuario que queramos eliminar</li>
-        <li>Entramos a su perfil y le damos al botón de "Borrar"</li>
-        <li>Confirmamos la acción, ya que es irreversible.</li>
+        <li>Buscamos al usuario que queramos vetar.</li>
+        <li>Entramos en su perfil y le damos al botón de "vetar" o de "quitar veto" en función de su estado</li>
+        <li>Confirmaremos la acción.</li>
       </ol>
     </td>
   </tr>
@@ -51,7 +52,8 @@
     <th>Postcondiciones</th>
     <td>
       <ul>
-        <li>El usuario ha sido borrado correctamente</li>
+        <li>El usuario ha sido vetado o quitado el veto de la aplicación</li>
+        <li>Cuando quiera entrar ese usuario que ha sido vetado, le saldrá un mensaje de que su cuenta ha sido suspendida temporalmente</li>
       </ul>
     </td>
   </tr>
@@ -59,7 +61,7 @@
     <th>Secuencia alternativa</th>
     <td>
       <ul>
-        <li>No podemos borrar un usuario por causas que se han comentado en las precondiciones ( permisos o que es administrador)</li>
+        <li>No hayamos podido vetar al usuario por temas de permisos o de que ya estaba vetado anteriormente.</li>
       </ul>
     </td>
   </tr>

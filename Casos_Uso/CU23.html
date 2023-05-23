@@ -14,27 +14,26 @@
 <table>
   <tr>
     <th>Id</th>
-    <td>CU18</td>
+    <td>CU23</td>
   </tr>
   <tr>
     <th>Nombre</th>
-    <td>Reservar un producto</td>
+    <td>Borrar usuarios</td>
   </tr>
   <tr>
     <th>Actores</th>
-    <td>Usuarios</td>
+    <td>Administradores</td>
   </tr>
   <tr>
     <th>Descripción</th>
-    <td>Los usuarios podrán reservar cualquier producto de la aplicación</td>
+    <td>Los administradores podrán borrar usuarios de la aplicación. La mayoría de estos son los que se han creado para hacer pruebas de testeo de la app.</td>
   </tr>
   <tr>
     <th>Precondiciones</th>
     <td>
       <ul>
-        <li>Ese producto no es nuestro</li>
-        <li>Ese producto no tiene una reserva ya</li>
-        <li>Ese producto no ha sido vendido</li>
+        <li>Tener permisos de administrador</li>
+        <li>Que el usuario que queramos eliminar no sea administrador (no se puede)</li>
       </ul>
     </td>
   </tr>
@@ -42,8 +41,9 @@
     <th>Secuencia normal</th>
     <td>
       <ol>
-        <li>Buscamos un producto que nos guste, desde un perfil de un usuario, desde el menú principal...</li>
-        <li>En la página de ese producto daremos clic al botón de reservar producto</li>
+        <li>Buscamos el usuario que queramos eliminar</li>
+        <li>Entramos a su perfil y le damos al botón de "Borrar"</li>
+        <li>Confirmamos la acción, ya que es irreversible.</li>
       </ol>
     </td>
   </tr>
@@ -51,7 +51,7 @@
     <th>Postcondiciones</th>
     <td>
       <ul>
-        <li>Se enviará una solicitud de reserva al usuario de ese producto para que la acepte</li>
+        <li>El usuario ha sido borrado correctamente</li>
       </ul>
     </td>
   </tr>
@@ -59,7 +59,7 @@
     <th>Secuencia alternativa</th>
     <td>
       <ul>
-        <li>No se ha enviado la solicitud porque ese producto o es nuestro, o se ha vendido, o tiene ya una reserva</li>
+        <li>No podemos borrar un usuario por causas que se han comentado en las precondiciones ( permisos o que es administrador)</li>
       </ul>
     </td>
   </tr>

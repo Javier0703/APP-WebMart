@@ -14,25 +14,25 @@
 <table>
   <tr>
     <th>Id</th>
-    <td>CU</td>
+    <td>CU124</td>
   </tr>
   <tr>
     <th>Nombre</th>
-    <td></td>
+    <td>Borrar productos</td>
   </tr>
   <tr>
     <th>Actores</th>
-    <td></td>
+    <td>Administradores</td>
   </tr>
   <tr>
     <th>Descripción</th>
-    <td></td>
+    <td>Los administradores pueden borrar los productos de la aplicación si les parece que no son adecuados.</td>
   </tr>
   <tr>
     <th>Precondiciones</th>
     <td>
       <ul>
-        <li></li>
+        <li>Tengamos el rol de administrador para realizar esta acción.</li>
       </ul>
     </td>
   </tr>
@@ -40,7 +40,9 @@
     <th>Secuencia normal</th>
     <td>
       <ol>
-        <li></li>
+        <li>Buscamos los productos que queramos eliminar</li>
+        <li>Le seleccionamos y le damos al botón de "Eliminar"</li>
+        <li>Confirmamos la acción, ya que es irreversible</li>
       </ol>
     </td>
   </tr>
@@ -48,7 +50,7 @@
     <th>Postcondiciones</th>
     <td>
       <ul>
-        <li></li>
+        <li>El producto ha sido eliminado correctamente de la aplicación</li>
       </ul>
     </td>
   </tr>
@@ -56,7 +58,7 @@
     <th>Secuencia alternativa</th>
     <td>
       <ul>
-        <li></li>
+        <li>No se ha borrado el producto porque no se ha confirmado después o porque no tiene el usuario permisos suficientes.</li>
       </ul>
     </td>
   </tr>

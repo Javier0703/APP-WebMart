@@ -14,25 +14,27 @@
 <table>
   <tr>
     <th>Id</th>
-    <td>CU14</td>
+    <td>CU19</td>
   </tr>
   <tr>
     <th>Nombre</th>
-    <td>Vetar usuarios</td>
+    <td>Aceptar solicitud de reserva</td>
   </tr>
   <tr>
     <th>Actores</th>
-    <td>Administradores</td>
+    <td>Usuario</td>
   </tr>
   <tr>
     <th>Descripción</th>
-    <td>Los administradores podrán vetar a los usuarios que no tengan un comportamiento normal en la aplicación</td>
+    <td>Cuando un usuario reserva un producto, al dueño de este le lleva una solicitud para aceptar o no ese producto</td>
   </tr>
   <tr>
     <th>Precondiciones</th>
     <td>
       <ul>
-        <li>El usuario que queramos vetar no exista o ya este vetado.</li>
+        <li>Que exista esa solicitud</li>
+        <li>Puede haber más de 1 solicitud para el mismo producto</li>
+        <li>Podemos tener muchas solicitudes de muchos productos distintos</li>
       </ul>
     </td>
   </tr>
@@ -40,9 +42,10 @@
     <th>Secuencia normal</th>
     <td>
       <ol>
-        <li>Buscamos al usuario que queramos vetar.</li>
-        <li>Entramos en su perfil y le damos al botón de "vetar"</li>
-        <li>Confirmaremos la acción.</li>
+        <li>El usuario se dirige a la pestaña de reservas dentro de su perfil</li>
+        <li>Accede al panel de solicitudes</li>
+        <li>Se le mostrarán todas las solicitudes que tiene</li>
+        <li>Acepta las solicitudes que desee.</li>
       </ol>
     </td>
   </tr>
@@ -50,8 +53,8 @@
     <th>Postcondiciones</th>
     <td>
       <ul>
-        <li>El usuario ha sido vetado de la aplicación</li>
-        <li>Cuando quiera entrar ese usuario le saldrá un mensaje de que su cuenta ha sido suspendida temporalmente</li>
+        <li>El producto quedará reservado para la persona a la que se le ha aceptado la reserva</li>
+        <li>Todas las solicitudes que había para ese producto se eliminan</li>
       </ul>
     </td>
   </tr>
@@ -59,7 +62,7 @@
     <th>Secuencia alternativa</th>
     <td>
       <ul>
-        <li>No hayamos podido vetar al usuario por temas de permisos o de que ya estaba vetado anteriormente.</li>
+        <li></li>
       </ul>
     </td>
   </tr>
