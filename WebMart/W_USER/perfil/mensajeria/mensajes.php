@@ -85,7 +85,7 @@ else{
 
 </head>
 
-<body>
+<body id="bodyMSJS">
 
 <header>
 

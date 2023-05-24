@@ -3,12 +3,14 @@ include ("../../../conexDB.php");
 session_set_cookie_params(sesTime());
 session_start();
 
-if (isset($_GET["id_chat"])){
-
+if (isset($_GET["id_chat"]) && $_GET["id_chat"]>0 && strlen(trim($_GET["id_chat"]))>0){
+    if (!is_numeric($_GET["id_chat"])){
+        header("Location: mensajes.php");
+    }
 }
 
 else{
-    header("Location");
+    header("Location: mensajes.php");
 }
 
 if ((isset($_COOKIE["usu"]) && isset($_COOKIE["pass"])) || (isset($_SESSION["usu"]) && isset($_SESSION["pass"]))){
@@ -77,6 +79,19 @@ if ((isset($_COOKIE["usu"]) && isset($_COOKIE["pass"])) || (isset($_SESSION["usu
 else{
     header("Location: ../../../cierre.php");
 }
+
+//Buscamos si ese chat es suyo o no
+
+$con = conexUsu();
+$chat = $_GET["id_chat"];
+$idSes = IDUSU;
+$sql = "SELECT * FROM chats WHERE ID_CHAT=$chat AND (ID_USU=$idSes OR ID_PROD IN (SELECT p.ID_PROD FROM productos p WHERE p.ID_USU=$idSes))";
+$nR = $con->query($sql)->num_rows;
+$con->close();
+if ($nR == 0){
+    header("Location: mensajes.php");
+}
+
 ?>
 <!doctype html>
 <html lang="es">
@@ -250,7 +265,11 @@ else{
 
         <aside id="a2">
 
-            <section id="chatBox">
+            <section id="chatPrivado">
+
+               <section class="sChatMain">
+
+               </section>
 
             </section>
 
