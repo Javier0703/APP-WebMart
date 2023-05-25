@@ -394,7 +394,7 @@ else{
                 <input type="number" min="0" max="999999" id="precio" name="precio" value="<?=$fila["PRECIO"]?>"><br><br>
                 
                 <label for="desc">Descripción</label><br>
-                <textarea name="desc" id="desc" maxlength="500" rows="6"><?=$fila["DESCRIPCION"]?></textarea>
+                <textarea name="desc" id="desc" maxlength="500" rows="6" placeholder="Descripción del producto"><?=$fila["DESCRIPCION"]?></textarea>
 
                 <input type="hidden" name="id_prod" value="<?=$fila["ID_PROD"]?>">
 
