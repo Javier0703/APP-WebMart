@@ -63,6 +63,11 @@ if ((isset($_COOKIE["usu"]) && isset($_COOKIE["pass"])) || (isset($_SESSION["usu
                 define("PASS",$pass);
 
             }
+
+            else{
+                header("Location: ../cierre.php");
+            }
+
         }
 
         catch (mysqli_sql_exception $e){

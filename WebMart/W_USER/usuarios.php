@@ -52,7 +52,14 @@ if ((isset($_COOKIE["usu"]) && isset($_COOKIE["pass"])) || (isset($_SESSION["usu
                 define("PASS", $pass);
 
             }
-        } catch (mysqli_sql_exception $e) {
+
+            else{
+                header("Location: ../cierre.php");
+            }
+
+        }
+
+        catch (mysqli_sql_exception $e) {
             $cod = $e->getCode();
             $msgError = $e->getMessage();
             setcookie("error", "Error $cod, $msgError");
