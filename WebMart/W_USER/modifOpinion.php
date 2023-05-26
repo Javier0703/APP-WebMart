@@ -10,14 +10,17 @@ if (isset($_POST["id_prod"]) && isset($_POST["valoracion"]) && isset($_POST["des
 
     if (!is_numeric($p)){
         header("Location: opinion.php?id_prod=$p");
+        exit;
     }
 
     if (!is_numeric($_POST["valoracion"])){
         header("Location: opinion.php?id_prod=$p");
+        exit;
     }
 
-    if (!($_POST["valoracion"]>=1 &&$_POST["valoracion"]<=5)){
+    if ($_POST["valoracion"]<1 || $_POST["valoracion"]>5){
         header("Location: opinion.php?id_prod=$p");
+        exit;
     }
 
     $str = $_POST["descripcion"];
@@ -27,6 +30,7 @@ if (isset($_POST["id_prod"]) && isset($_POST["valoracion"]) && isset($_POST["des
 
     if (strlen($dec)>400 || strlen($dec)<=0){
         header("Location: opinion.php?id_prod=$p");
+        exit;
     }
 }
 
@@ -113,7 +117,9 @@ $res = $con->query($sql);
 $fila = $res->fetch_assoc();
 if (!$fila){
     $res->close();
-    header("Location: index.php");
+    setcookie("block", 1);
+    header("Location: block.php");
+    exit;
 }
 $res->close();
 

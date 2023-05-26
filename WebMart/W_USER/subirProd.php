@@ -30,6 +30,7 @@ if (isset($_POST["id_sub"]) && strlen(trim($_POST["id_sub"]))>0 && is_numeric($_
                 $st->close();
                 setcookie("block","true");
                 header("Location: block.php");
+                exit;
             }
             $st->close();
             $con->close();
@@ -40,6 +41,7 @@ if (isset($_POST["id_sub"]) && strlen(trim($_POST["id_sub"]))>0 && is_numeric($_
             $dec= strip_tags($html);
             if(strlen($dec)>50 || strlen($dec)<=0){
                 header("Location: publicar.php");
+                exit;
             }
 
             $str = $_POST["descripcion"];
@@ -48,6 +50,7 @@ if (isset($_POST["id_sub"]) && strlen(trim($_POST["id_sub"]))>0 && is_numeric($_
             $dec= strip_tags($html);
             if(strlen($dec)>400 || strlen($dec)<=0){
                 header("Location: publicar.php");
+                exit;
             }
 
             if (!preg_match('/^[0-9]+$/', $_POST["precio"])){
@@ -246,6 +249,7 @@ if (isset($_POST["id_sub"]) && strlen(trim($_POST["id_sub"]))>0 && is_numeric($_
             }
             $con->close();
             header("Location: perfil/productos.php");
+            exit;
         }
 
         catch (mysqli_sql_exception $e){
@@ -253,6 +257,7 @@ if (isset($_POST["id_sub"]) && strlen(trim($_POST["id_sub"]))>0 && is_numeric($_
             $msgError=$e->getMessage();
             setcookie("error","Error $cod, $msgError");
             header("Location: ../error.php");
+            exit;
         }
     }
 }

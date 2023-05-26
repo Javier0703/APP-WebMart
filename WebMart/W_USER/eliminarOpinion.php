@@ -97,9 +97,10 @@ $fila = $res->fetch_assoc();
 if (!$fila){
     $res->close();
     header("Location: perfil/misOpiniones.php");
+    exit;
 }
-$res->close();
 
+$res->close();
 $sql="DELETE FROM opiniones WHERE ID_USU=$idSes AND ID_PROD=$p";
 $res = $con->query($sql);
 $con->close();

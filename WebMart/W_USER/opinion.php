@@ -111,7 +111,6 @@ if (!$fila = $st->fetch()){
     <link rel="shortcut icon" href="../IMG/LOGOS_ERRORES/logo.png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,-25"/>
     <title>WebMart</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
     <link rel="stylesheet" href="../CSS/estilos.css">
 </head>
 
@@ -222,7 +221,6 @@ if (!$fila = $st->fetch()){
 
 </body>
 <script src="../JS_APP/header.js"></script>
-<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
 <script src="../JS_APP/user.js"></script>
 
 </html>
