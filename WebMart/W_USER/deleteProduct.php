@@ -13,6 +13,32 @@ else{
     header("Location: prod.php");
 }
 
+$p = $_POST["id_prod"];
+
+$con=conexUsu();
+$sql = "SELECT ID_PROD, ID_COMPRADOR FROM productos WHERE ID_PROD=$p";
+$res = $con->query($sql);
+$fila = $res->fetch_assoc();
+
+if ($fila){
+    echo "ESE PRODUCTO EXISTE <br>";
+    if ($fila["ID_COMPRADOR"]!=null){
+        echo "ESE PRODUCTO ESTA VENDIDO por".$fila["ID_COMPRADOR"];
+        setcookie("block","block");
+        $con->close();
+        header("Location: block.php");
+        exit;
+    }
+}
+
+else{
+    $con->close();
+    header("Location: prod.php?=$p");
+    exit;
+}
+
+
+
 
 if ((isset($_COOKIE["usu"]) && isset($_COOKIE["pass"])) || (isset($_SESSION["usu"]) && isset($_SESSION["pass"]))){
 
@@ -82,6 +108,7 @@ else{
     header("Location:../cierre.php");
 }
 
+
 $prod = $_POST["id_prod"];
 $idSes = IDUSU;
 
@@ -92,6 +119,8 @@ $res = $con->query($sql);
 $nR = $res->num_rows;
 $res->close();
 
+echo "<br>";
+echo $nR;
 
 if ($nR==1){
 
@@ -137,8 +166,8 @@ if ($nR==1){
 
 $con->close();
 
-setcookie("error","No hemos podido eliminar el producto porque ha habido un fallo en la conexión a la Base de Datos, lo sentimos :C ");
-header("Location: ../error.php");
+setcookie("block","No hemos podido eliminar el producto porque no es tuyo ");
+header("Location: block.php");
 
 
 
