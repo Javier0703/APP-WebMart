@@ -14,7 +14,7 @@ if (isset($_POST["id_prod"]) && strlen(trim($_POST["id_prod"]))>0 ){
 }
 
 else{
-    header("Location: usuarios.php");
+    header("Location: perfil/misOpiniones.php");
 }
 
 
@@ -92,7 +92,7 @@ $res = $con->query($sql);
 $fila = $res->fetch_assoc();
 if (!$fila){
     $res->close();
-    header("Location: index.php");
+    header("Location: perfil/misOpiniones.php");
 }
 $res->close();
 

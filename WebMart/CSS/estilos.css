@@ -2943,6 +2943,7 @@ form.formOpinar button{
     width: 1200px;
     max-width: 95%;
     height: calc(100vh - var(--altura-header) - var(--altura-footer) - 20px) !important;
+    min-height: 300px;
 }
 
 /* MEDIA QUERY */

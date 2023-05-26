@@ -125,9 +125,9 @@ else{
                 <section><a href="productos.php"><span class="material-symbols-outlined">sell</span><p>Productos</p></a></section>
                 <section><a href="compras.php"><span class="material-symbols-outlined">shopping_cart</span><p>Compras</p></a></section>
                 <section><a href="favoritos.php"><span class="material-symbols-outlined">favorite</span><p>Favoritos</p></a></section>
-                <section><a href="favoritos.php"><span class="material-symbols-outlined">rate_review</span><p>Mis Opiniones</p></a></section>
-                <section><a href="favoritos.php"><span class="material-symbols-outlined">edit_note</span><p>Opiniones</p></a></section>
-                <section><a href="favoritos.php"><span class="material-symbols-outlined">bookmarks</span><p>Reservas</p></a></section>
+                <section><a href="misOpiniones.php"><span class="material-symbols-outlined">rate_review</span><p>Mis Opiniones</p></a></section>
+                <section><a href="opiniones.php"><span class="material-symbols-outlined">edit_note</span><p>Opiniones</p></a></section>
+                <section><a href="reservas.php"><span class="material-symbols-outlined">bookmarks</span><p>Reservas</p></a></section>
                 <section><a href="mensajeria/mensajes.php"><span class="material-symbols-outlined">chat</span><p>Mensajes</p></a></section>
                 <section><a href="../../cierre.php"><span class="material-symbols-outlined">logout</span><p>Cerrar Sesión</p></a></section>
             </div>

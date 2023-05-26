@@ -5,15 +5,15 @@ session_start();
 
 if (isset($_GET["id_prod"])){
     if (strlen($_GET["id_prod"])===0){
-        header("Location: usuarios.php");
+        header("Location: perfil/misOpiniones.php");
     }
     if (!is_numeric($_GET["id_prod"]) || $_GET["id_prod"]<=0){
-        header("Location: .usuarios.php");
+        header("Location: perfil/misOpiniones.php");
     }
 }
 
 else{
-    header("Location: usuarios.php");
+    header("Location: perfil/misOpiniones.php");
 }
 
 if ((isset($_COOKIE["usu"]) && isset($_COOKIE["pass"])) || (isset($_SESSION["usu"]) && isset($_SESSION["pass"]))) {
@@ -91,7 +91,7 @@ $st->bind_result($idProd,$id_Comp);
 if (!$fila = $st->fetch()){
     $st->close();
     $con->close();
-    header("Location: usuarios.php");
+    header("Location: perfil/misOpiniones.php");
 }
 ?>
 

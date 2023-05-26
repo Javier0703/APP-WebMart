@@ -181,9 +181,9 @@ if (isset($_GET["order"]) && ($_GET["order"]>4 || $_GET["order"]<1)){
                 <section><a href="perfil/productos.php"><span class="material-symbols-outlined">sell</span><p>Productos</p></a></section>
                 <section><a href="perfil/compras.php"><span class="material-symbols-outlined">shopping_cart</span><p>Compras</p></a></section>
                 <section><a href="perfil/favoritos.php"><span class="material-symbols-outlined">favorite</span><p>Favoritos</p></a></section>
-                <section><a href="perfil/favoritos.php"><span class="material-symbols-outlined">rate_review</span><p>Mis Opiniones</p></a></section>
-                <section><a href="perfil/favoritos.php"><span class="material-symbols-outlined">edit_note</span><p>Opiniones</p></a></section>
-                <section><a href="perfil/favoritos.php"><span class="material-symbols-outlined">bookmarks</span><p>Reservas</p></a></section>
+                <section><a href="perfil/misOpiniones.php"><span class="material-symbols-outlined">rate_review</span><p>Mis Opiniones</p></a></section>
+                <section><a href="perfil/opiniones.php"><span class="material-symbols-outlined">edit_note</span><p>Opiniones</p></a></section>
+                <section><a href="perfil/reservas.php"><span class="material-symbols-outlined">bookmarks</span><p>Reservas</p></a></section>
                 <section><a href="perfil/mensajeria/mensajes.php"><span class="material-symbols-outlined">chat</span><p>Mensajes</p></a></section>
                 <section><a href="../cierre.php"><span class="material-symbols-outlined">logout</span><p>Cerrar Sesión</p></a></section>
             </div>
