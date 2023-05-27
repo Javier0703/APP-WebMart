@@ -2937,6 +2937,73 @@ form.formOpinar button{
     margin-top: 10px;
 }
 
+#formSellProd{
+    background: rgba(0, 0, 0, 0.2);
+    left: 0;
+    top: 0;
+    z-index: 5;
+    position: fixed;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+#formSellProd>article{
+    border-radius: 10px;
+    padding: 5px;
+    background: white;
+    max-width: 95%;
+}
+
+#formSellProd>article>section{
+    display: flex;
+}
+#formSellProd>article>section p{
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+}
+
+#formSellProd>article>section span{
+    cursor: pointer;
+}
+
+#formSellProd>article>p{
+    padding: 5px;
+    font-size: 14px;
+    text-align: center;
+}
+
+#formSellProd>article>div{
+    display: flex;
+}
+
+#formSellProd>article>div>div{
+    margin-left: auto;
+}
+
+#formSellProd>article>div>div>button{
+    cursor: pointer;
+    width: 80px;
+    max-width: 95%;
+    margin-left: 5px;
+    outline: none;
+    border: none;
+    height: 25px;
+    border-radius: 5px;
+    color: white;
+}
+
+#formSellProd>article>div>div>button#Eliminar{
+    background: red;
+}
+
+#formSellProd>article>div>div>button#noEliminar{
+    background: green;
+}
+
 #chatPrivado .sChatMain{
     position: relative;
     border-radius: 15px;
@@ -2991,21 +3058,28 @@ form.formOpinar button{
 }
 
 #chatPrivado .sChatMain .information .userYtitulo{
+    overflow: hidden;
     flex: 1;
 }
 
 #chatPrivado .sChatMain .information .userYtitulo div{
+    overflow: hidden;
     height: 35px;
     display: flex;
     align-items: center;
 }
-#chatPrivado .sChatMain .information .userYtitulo div>p{
-    color: grey;
-}
 
 #chatPrivado .sChatMain .information .userYtitulo div a{
+    overflow: hidden;
     color: black;
 }
+
+#chatPrivado .sChatMain .information .userYtitulo div a p{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 
 #chatPrivado .sChatMain .information .pTitulo p{
     font-size: 20px;
@@ -3037,7 +3111,7 @@ form.formOpinar button{
     align-items: center;
 }
 
-#chatPrivado .sChatMain .information .sellOrSold span{
+#chatPrivado .sChatMain .information .sellOrSold>span{
     padding: 5px;
     margin: 0 10px;
     background: rgba(211, 211, 211, 0.5);

@@ -152,7 +152,7 @@ if ($nR == 0){
 
         setInterval(function() {
             updateConexion();
-        }, 5000);
+        }, 3000);
 
     </script>
 
@@ -370,7 +370,33 @@ if ($nR == 0){
 
                 else{
                     //Quieres vender un producto
+                    if ($fila["ID_COMPRADOR"]==null){
+                        ?>
+
+                        <form action="venderProd.php" id="formSellProd" method="POST">
+
+                            <article>
+                                <section>
+                                    <p>Venta</p>
+                                    <span id="closeF" class="material-symbols-outlined">close</span>
+                                </section>
+                                <p>Estas a punto de vender el producto. ¿Estás seguro?</p>
+                                <div>
+                                    <div>
+                                        <button id="Eliminar">Si</button>
+                                        <button id="noEliminar">No</button>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="id_prod" value="<?=$fila["ID_PROD"]?>">
+                                <input type="hidden" name="id_comp" value="<?=$fila["ID_USU"]?>">
+                                <input type="hidden" name="id_chat" value="<?=$fila["ID_CHAT"]?>">
+                            </article>
+                        </form>
+
+                        <?php
+                    }
                     ?>
+
                     <section class="sChatMain">
 
                         <div class="information">
@@ -382,10 +408,10 @@ if ($nR == 0){
 
                             <div class="userYtitulo">
                                 <div>
-                                    <a href="../../prod.php?id_prod=<?=$fila["ID_PROD"]?>"><?=$fila["TITULO"]?></a>
+                                    <a href="../../prod.php?id_prod=<?=$fila["ID_PROD"]?>"><p><?=$fila["TITULO"]?></p></a>
                                 </div>
                                 <div>
-                                    <p>Comprador</p>:&nbsp<a href="../../user.php?id_usu=<?=$fila["ID_USU"]?>"> <?=$fila["SOLICITANTE"]?></a>
+                                    <a href="../../user.php?id_usu=<?=$fila["ID_USU"]?>"><p><?=$fila["SOLICITANTE"]?></p></a>
                                 </div>
                             </div>
 
@@ -394,6 +420,7 @@ if ($nR == 0){
                                 if ($fila["ID_COMPRADOR"]==null){
                                     ?>
                                     <span id="venderProducto"><p>Vender</p></span>
+
                                 <?php
                                 }
                                 else{
@@ -441,5 +468,6 @@ if ($nR == 0){
 
 </body>
 <script src="../../../JS_APP/header.js"></script>
+<script src="../../../JS_APP/PERFIL/vender.js"></script>
 
 </html>
