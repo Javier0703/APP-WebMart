@@ -9,7 +9,7 @@ if (isset($_COOKIE["block"])){
 }
 
 else{
-    header("Location: productos.php");
+    header("Location: index.php");
 }
 
 if ((isset($_COOKIE["usu"]) && isset($_COOKIE["pass"])) || (isset($_SESSION["usu"]) && isset($_SESSION["pass"]))){

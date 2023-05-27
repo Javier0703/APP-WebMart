@@ -78,7 +78,7 @@ else{
 <?php
 $con=conexUsu();
 $idSes = IDUSU;
-$sql = "SELECT f.FOTO, u.USUARIO, p.TITULO, c.ID_CHAT, c.ID_PROD, c.ID_USU, c.ULTIMA_CONEX_USU, m.ID_MENSAJE, m.MENSAJE, m.ID_ENVIADOR, m.HORA
+$sql = "SELECT f.FOTO, u.USUARIO, p.TITULO, c.ID_CHAT, c.ID_PROD, c.ID_USU, c.ULTIMA_CONEX_USU, c.ULTIMA_CONEX_PROD, m.ID_MENSAJE, m.MENSAJE, m.ID_ENVIADOR, m.HORA
                     FROM chats c LEFT JOIN mensajes m ON c.ID_CHAT = m.ID_CHAT JOIN productos p ON c.ID_PROD = p.ID_PROD JOIN fotos f ON p.ID_PROD = f.ID_PROD
                     join usuarios u on c.ID_USU = u.ID_USU
                     WHERE (m.ID_MENSAJE IN (SELECT MAX(ID_MENSAJE) from mensajes WHERE m.ID_CHAT=c.ID_CHAT GROUP BY ID_CHAT) OR m.ID_CHAT IS NULL)
@@ -133,12 +133,12 @@ if ($nR > 0){
                 </section>
 
                 <?php
-                if ($fila["ID_ENVIADOR"]!=$idSes && $fila["ULTIMA_CONEX_USU"]<=$fila["HORA"]){
+                if ($fila["ID_ENVIADOR"]!=$idSes && $fila["ULTIMA_CONEX_PROD"]<=$fila["HORA"]){
                     ?>
                     <p style="font-weight: bold"><?=$fila["MENSAJE"]?></p>
                     <?php
                 }
-                elseif ($fila["ID_ENVIADOR"]!=$idSes && $fila["ULTIMA_CONEX_USU"]>$fila["HORA"]){
+                elseif ($fila["ID_ENVIADOR"]!=$idSes && $fila["ULTIMA_CONEX_PROD"]>$fila["HORA"]){
                     ?>
                     <p><?=$fila["MENSAJE"]?></p>
                     <?php

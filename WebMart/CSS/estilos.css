@@ -2839,6 +2839,7 @@ form.formOpinar button{
     cursor: pointer;
 }
 
+
 /* Mensajes */
 
 #msj>section{
@@ -2917,7 +2918,6 @@ form.formOpinar button{
 #msj .sectionMSG a div:last-child section>span{
     margin-left: auto;
     padding: 0 5px;
-
     color: black;
     border-radius: 5px;
     font-weight: normal;
@@ -2931,19 +2931,197 @@ form.formOpinar button{
 }
 
 /* chat privado */
+
 #chatPrivado{
     min-height: calc(100vh - var(--altura-header) - var(--altura-footer) - 10px) !important;
     margin-top: 10px;
 }
 
 #chatPrivado .sChatMain{
+    position: relative;
     border-radius: 15px;
     background: white;
     margin: auto;
     width: 1200px;
     max-width: 95%;
     height: calc(100vh - var(--altura-header) - var(--altura-footer) - 20px) !important;
-    min-height: 300px;
+    min-height: 250px;
+}
+
+#chatPrivado .sChatMain .information{
+    border-bottom: 1px solid lightgrey;
+    display: flex;
+    height: 70px;
+}
+
+#chatPrivado .sChatMain .information .imagen{
+    color: black;
+    text-decoration: none;
+    display: flex;
+    padding: 0 10px;
+}
+
+#chatPrivado .sChatMain .information .imagen:hover{
+    background: rgba(211, 211, 211, 0.2);
+}
+
+#chatPrivado .sChatMain .information .imagen span{
+    padding-top: 23px;
+}
+
+#chatPrivado .sChatMain .information .imagen div{
+    border-radius: 25px;
+    height: 50px;
+    width: 50px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    margin-top: 10px;
+}
+
+#chatPrivado .sChatMain .information .pTitulo{
+    border-radius: 0 15px 0 0;
+    color: black;
+    padding: 0 2px;
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+#chatPrivado .sChatMain .information .userYtitulo{
+    flex: 1;
+}
+
+#chatPrivado .sChatMain .information .userYtitulo div{
+    height: 35px;
+    display: flex;
+    align-items: center;
+}
+#chatPrivado .sChatMain .information .userYtitulo div>p{
+    color: grey;
+}
+
+#chatPrivado .sChatMain .information .userYtitulo div a{
+    color: black;
+}
+
+#chatPrivado .sChatMain .information .pTitulo p{
+    font-size: 20px;
+}
+
+#chatPrivado .sChatMain .information .pTitulo span{
+    margin-left: auto;
+}
+
+#chatPrivado .sChatMain .information .pTitulo span p{
+    background: lightgrey;
+    padding: 5px 10px;
+    font-size: 12px;
+    margin-right: 10px;
+}
+
+#chatPrivado .sChatMain .information .pTitulo:hover{
+    background: rgba(211, 211, 211, 0.2);
+}
+
+#chatPrivado .sChatMain .information .pTitulo p{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#chatPrivado .sChatMain .information .sellOrSold{
+    display: flex;
+    align-items: center;
+}
+
+#chatPrivado .sChatMain .information .sellOrSold span{
+    padding: 5px;
+    margin: 0 10px;
+    background: rgba(211, 211, 211, 0.5);
+    border-radius: 10px;
+}
+
+#chatPrivado .sChatMain .information .sellOrSold span#venderProducto{
+    background: #94dc94;
+    color: white;
+    cursor: pointer;
+}
+
+/* div de los mensajes */
+#chatPrivado .sChatMain .messages{
+  height: calc(100% - 110px);
+    overflow: auto;
+}
+
+#chatPrivado .sChatMain .messages::-webkit-scrollbar {height: 6px; width: 6px}
+#chatPrivado .sChatMain .messages::-webkit-scrollbar-thumb {background-color: grey; border-radius: 3px;}
+#chatPrivado .sChatMain .messages::-webkit-scrollbar-thumb:hover {background-color: rgb(180, 180, 180);}
+
+#chatPrivado .sChatMain .messages>article{
+    display: flex;
+    margin: 5px 10px;
+}
+
+#chatPrivado .sChatMain .messages>article>div{
+    padding: 5px 12px;
+    display: inline-block;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+}
+
+#chatPrivado .sChatMain .messages>article>div>div{
+    display: flex;
+}
+
+#chatPrivado .sChatMain .messages>article>div>div span{
+    margin-left: auto;
+    color: grey;
+    font-size: 10px;
+}
+
+#chatPrivado .sChatMain .messages>article>div.miMSG{
+    margin-left: auto;
+    background: #9fef9f;
+}
+
+/* input de abajo */
+#chatPrivado .sChatMain .send{
+    border-top: 1px solid lightgrey;
+    padding: 0 10px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+#chatPrivado .sChatMain .send input{
+    font-size: 15px;
+    height: 30px;
+    outline: none;
+    border: 1px solid lightgrey;
+    border-radius: 15px;
+    padding: 0 5px;
+    width: 100%;
+    margin-left: 5px;
+}
+
+#chatPrivado .sChatMain .send button{
+    cursor: pointer;
+    border: none;
+    margin-left: auto;
+    background: none;
+    align-items: center;
+    place-content: center;
+    display: flex;
+    height: 30px;
+    width: 30px;
+    outline: none;
+}
+
+#chatPrivado .sChatMain .send button:hover{
+    color: #00adec;
 }
 
 /* MEDIA QUERY */

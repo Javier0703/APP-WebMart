@@ -4,13 +4,16 @@ session_set_cookie_params(sesTime());
 session_start();
 
 if (isset($_GET["id_chat"]) && $_GET["id_chat"]>0 && strlen(trim($_GET["id_chat"]))>0){
+
     if (!is_numeric($_GET["id_chat"])){
         header("Location: mensajes.php");
+        exit;
     }
 }
 
 else{
     header("Location: mensajes.php");
+    exit;
 }
 
 if ((isset($_COOKIE["usu"]) && isset($_COOKIE["pass"])) || (isset($_SESSION["usu"]) && isset($_SESSION["pass"]))){
@@ -86,16 +89,41 @@ else{
 }
 
 //Buscamos si ese chat es suyo o no
-
 $con = conexUsu();
 $chat = $_GET["id_chat"];
 $idSes = IDUSU;
-$sql = "SELECT * FROM chats WHERE ID_CHAT=$chat AND (ID_USU=$idSes OR ID_PROD IN (SELECT p.ID_PROD FROM productos p WHERE p.ID_USU=$idSes))";
+$sql = "SELECT ID_CHAT FROM chats WHERE ID_CHAT=$chat AND (ID_USU=$idSes OR ID_PROD IN (SELECT p.ID_PROD FROM productos p WHERE p.ID_USU=$idSes))";
 $nR = $con->query($sql)->num_rows;
 $con->close();
 if ($nR == 0){
     header("Location: mensajes.php");
+    exit;
 }
+
+//Modificamos la hora de ese usuario
+$con = conexUsu();
+$chat = $_GET["id_chat"];
+$idSes = IDUSU;
+$sql = "SELECT ID_USU FROM chats WHERE ID_CHAT=$chat AND (ID_USU=$idSes OR ID_PROD IN (SELECT p.ID_PROD FROM productos p WHERE p.ID_USU=$idSes))";
+date_default_timezone_set('Europe/Madrid');
+$date = date("Y-m-d H:i:s");
+$fila = $con->query($sql)->fetch_assoc();
+
+if ($fila["ID_USU"]==$idSes){
+    $update = "UPDATE chats SET ULTIMA_CONEX_USU=? WHERE ID_CHAT=$chat";
+    $st=$con->prepare($update);
+    $st->bind_param("s",$date);
+    $st->execute();
+}
+
+else{
+    $update = "UPDATE chats SET ULTIMA_CONEX_PROD=? WHERE ID_CHAT=$chat";
+    $st=$con->prepare($update);
+    $st->bind_param("s",$date);
+    $st->execute();
+}
+
+$con->close();
 
 ?>
 <!doctype html>
@@ -108,7 +136,26 @@ if ($nR == 0){
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,-25"/>
     <title>WebMart</title>
     <link rel="stylesheet" href="../../../CSS/estilos.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.2/jquery.min.js"></script>
+    <script>
+        function showMsgFromChat(){
+            let req = new XMLHttpRequest();
 
+            req.onreadystatechange = function () {
+                if (req.readyState === 4 && req.status === 200) {
+                    document.getElementById("allMSG").innerHTML = req.responseText;
+                }
+            }
+
+            req.open('GET', 'showMsgFromChat.php?id_chat=<?=$chat?>', true);
+            req.send();
+        }
+
+        setInterval(function() {
+            showMsgFromChat();
+        }, 1000);
+    </script>
+    <script src="../../../JS_APP/AJAX/addNewMsg.js"></script>
 
 </head>
 
@@ -271,10 +318,109 @@ if ($nR == 0){
         <aside id="a2">
 
             <section id="chatPrivado">
+                <?php
+                $con=conexUsu();
 
-               <section class="sChatMain">
+                $chat = $_GET["id_chat"];
+                $idSes = IDUSU;
 
-               </section>
+                $sql = "select f.FOTO, p.TITULO, c.ID_CHAT, u.USUARIO DUEÑO_PRODUCTO, c.ID_PROD, c.ULTIMA_CONEX_PROD, u2.USUARIO SOLICITANTE, c.ID_USU, c.ULTIMA_CONEX_USU, 
+                        p.ID_COMPRADOR FROM CHATS c JOIN productos p on c.ID_PROD=p.ID_PROD JOIN usuarios u on p.ID_USU=u.ID_USU 
+                        join usuarios u2 on c.ID_USU=u2.ID_USU JOIN fotos f on p.ID_PROD=f.ID_PROD WHERE ID_CHAT=$chat GROUP BY ID_CHAT";
+                $fila = $con->query($sql)->fetch_assoc();
+
+                //Linea divisoria, o eres propietario del producto o buscas comprarlo
+
+                if ($fila["ID_USU"]==$idSes){
+                    //Quieres comprar un producto
+                    ?>
+                    <section class="sChatMain">
+
+                        <div class="information">
+
+                            <a href="mensajes.php" class="imagen">
+                                <span class="material-symbols-outlined">arrow_back_ios</span>
+                                <div style="background-image: url('data:image/jpg;base64,<?=base64_encode($fila["FOTO"])?>')"></div>
+                            </a>
+
+                            <a class="pTitulo" href="../../prod.php?id_prod=<?=$fila["ID_PROD"]?>">
+                                <p><?=$fila["TITULO"]?></p>
+                                <?php
+                                if ($fila["ID_COMPRADOR"]!=null){
+                                    ?>
+                                    <span class="sold"><p>Producto vendido</p></span>
+                                    <?php
+                                }
+                                ?>
+                            </a>
+
+                        </div>
+
+                        <div class="messages" id="allMSG">
+
+                        </div>
+
+                        <div class="send">
+                            <input type="text" id="messageAJAX">
+                            <button onclick="addNewMsg(<?=$chat?>)"><span class="material-symbols-outlined">send</span></button>
+                        </div>
+
+                    </section>
+                <?php
+                }
+
+                else{
+                    //Quieres vender un producto
+                    ?>
+                    <section class="sChatMain">
+
+                        <div class="information">
+
+                            <a href="mensajes.php" class="imagen">
+                                <span class="material-symbols-outlined">arrow_back_ios</span>
+                                <div style="background-image: url('data:image/jpg;base64,<?=base64_encode($fila["FOTO"])?>')"></div>
+                            </a>
+
+                            <div class="userYtitulo">
+                                <div>
+                                    <a href="../../prod.php?id_prod=<?=$fila["ID_PROD"]?>"><?=$fila["TITULO"]?></a>
+                                </div>
+                                <div>
+                                    <p>Comprador</p>:&nbsp<a href="../../user.php?id_usu=<?=$fila["ID_USU"]?>"> <?=$fila["SOLICITANTE"]?></a>
+                                </div>
+                            </div>
+
+                            <div class="sellOrSold">
+                                <?php
+                                if ($fila["ID_COMPRADOR"]==null){
+                                    ?>
+                                    <span id="venderProducto"><p>Vender</p></span>
+                                <?php
+                                }
+                                else{
+                                    ?>
+                                    <span><p>Ya lo vendiste</p></span>
+                                <?php
+                                }
+                                ?>
+                            </div>
+
+                        </div>
+
+                        <div class="messages" id="allMSG">
+
+                        </div>
+
+                        <div class="send">
+                            <input type="text" id="messageAJAX">
+                            <button onclick="addNewMsg(<?=$chat?>)"><span class="material-symbols-outlined">send</span></button>
+                        </div>
+
+                    </section>
+                <?php
+                }
+                ?>
+
 
             </section>
 
@@ -296,4 +442,5 @@ if ($nR == 0){
 
 </body>
 <script src="../../../JS_APP/header.js"></script>
+
 </html>
