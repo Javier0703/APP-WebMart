@@ -25,7 +25,7 @@ if (isset($_POST["msg"]) && strlen(trim($_POST["msg"]))>0){
     $rpl = str_replace('&nbsp', '', $str);
     $html = htmlspecialchars_decode($rpl);
     $dec= strip_tags($html);
-    if(strlen($dec)>50 || strlen($dec)<=0){
+    if(strlen($dec)>400 || strlen($dec)<=0){
         header("Location: publicar.php");
         exit;
     }

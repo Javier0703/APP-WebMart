@@ -1,5 +1,5 @@
 <?php
-//error_reporting(0);
+error_reporting(0);
 $driver = new mysqli_driver();
 $driver->report_mode= MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT;
 function conexAdmin(){
