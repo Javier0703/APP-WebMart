@@ -100,31 +100,6 @@ if ($nR == 0){
     exit;
 }
 
-//Modificamos la hora de ese usuario
-$con = conexUsu();
-$chat = $_GET["id_chat"];
-$idSes = IDUSU;
-$sql = "SELECT ID_USU FROM chats WHERE ID_CHAT=$chat AND (ID_USU=$idSes OR ID_PROD IN (SELECT p.ID_PROD FROM productos p WHERE p.ID_USU=$idSes))";
-date_default_timezone_set('Europe/Madrid');
-$date = date("Y-m-d H:i:s");
-$fila = $con->query($sql)->fetch_assoc();
-
-if ($fila["ID_USU"]==$idSes){
-    $update = "UPDATE chats SET ULTIMA_CONEX_USU=? WHERE ID_CHAT=$chat";
-    $st=$con->prepare($update);
-    $st->bind_param("s",$date);
-    $st->execute();
-}
-
-else{
-    $update = "UPDATE chats SET ULTIMA_CONEX_PROD=? WHERE ID_CHAT=$chat";
-    $st=$con->prepare($update);
-    $st->bind_param("s",$date);
-    $st->execute();
-}
-
-$con->close();
-
 ?>
 <!doctype html>
 <html lang="es">
@@ -156,6 +131,30 @@ $con->close();
         }, 1000);
     </script>
     <script src="../../../JS_APP/AJAX/addNewMsg.js"></script>
+    <script>
+
+        function updateConexion(){
+
+            $.ajax({
+                url: 'reloadTime.php',
+                type: 'POST',
+                data: {
+                    id_chat: <?=$chat?>
+                },
+
+                error: function (e) {
+                    console.log("Ha habido un fallo. ¿Que has tocado ya? >.<");
+                }
+
+            });
+
+        }
+
+        setInterval(function() {
+            updateConexion();
+        }, 5000);
+
+    </script>
 
 </head>
 
