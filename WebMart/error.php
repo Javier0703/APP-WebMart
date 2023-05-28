@@ -1,8 +1,13 @@
 <?php
 if (!isset($_COOKIE["error"])){
     header("Location: index.php");
+    exit;
 }
 
+if (isset($_COOKIE["error"])) {
+    $error=$_COOKIE["error"];
+    setcookie("error", false);
+}
 ?>
 <!doctype html>
 <html lang="es">
@@ -16,23 +21,31 @@ if (!isset($_COOKIE["error"])){
 </head>
 <body>
 <header>
-    <a href="index.php"><img src="IMG/LOGOS_ERRORES/logoEntero.png" alt="Logo"></a>
+
+    <a id="logo" href="index.php"><img src="IMG/LOGOS_ERRORES/logo.png" alt="Logo"></a>
+    <a id="logoE" href="index.php"><img src="IMG/LOGOS_ERRORES/logoEntero.png" alt="Logo"></a>
+
     <nav>
         <ul>
-            <a href="index.php"><li>Inicio</li></a>
+            <a class="liActive" href="index.php">
+                <li>Inicio</li>
+            </a>
             <a href="información.html"><li>Información</li></a>
             <a href="contacto.php"><li>Contacto</li></a>
         </ul>
     </nav>
+
+    <img id="desplegable" class="desplegable" src="IMG/LOGOS_ERRORES/despleg.png" alt="Desplegable">
+
 </header>
 
 <main id="mError">
     <div>
         <img src="IMG/LOGOS_ERRORES/error.png" alt="Error"><br>
         <?php
-        if (isset($_COOKIE["error"])){
-            echo $_COOKIE["error"];
-            setcookie("error",false);
+        if ($error){
+            echo $error;
+            unset($error);
         }
         ?>
     </div>

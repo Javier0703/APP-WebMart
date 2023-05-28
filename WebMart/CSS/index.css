@@ -320,6 +320,10 @@ footer table td:first-child{
     margin: auto;
 }
 
+#mError>div img{
+    max-width: 95%;
+}
+
 /* Media query */
 
 @media (min-height: 250px){
