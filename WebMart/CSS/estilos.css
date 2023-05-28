@@ -3377,6 +3377,19 @@ form.formOpinar button{
     header a#logoE{
         display: none;
     }
+
+    .mProd .sProd1 form .ordenProd{
+        display: block;
+        text-align: center;
+    }
+
+    .mProd .sProd1 form .ordenProd>div:first-child{
+        place-content: center;
+    }
+
+    .mProd .sProd1 form .ordenProd #popupOrder #secOrder>div{
+        padding-right: 10px;
+    }
 }
 
 @media (max-width: 440px) {
