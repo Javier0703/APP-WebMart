@@ -324,6 +324,24 @@ footer table td:first-child{
     max-width: 95%;
 }
 
+/* Error */
+
+.e404{
+    display: flex;
+    align-items: center;
+}
+
+.e404>div{
+    text-align: center;
+    margin-top: 10px;
+}
+
+.e404>div img{
+    max-width: 95%;
+    width: 500px;
+}
+
+
 /* Media query */
 
 @media (min-height: 250px){
