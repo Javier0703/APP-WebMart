@@ -254,48 +254,57 @@ else{
 
                 <section id="opiniones">
                     <?php
-                    $iDdb=IDU;
-                    $con=conexUsu();
-                    $sql= "SELECT u.ICONO, u.USUARIO, p.TITULO, p.ID_PROD, VALORACION, MENSAJE FROM opiniones o JOIN productos p using (ID_PROD) JOIN usuarios u on u.ID_USU= o.ID_USU  WHERE P.ID_USU=$iDdb GROUP BY (p.ID_PROD)";
-                    $res = $con->query($sql);
+                    try {
+                        $iDdb=IDU;
+                        $con=conexUsu();
+                        $sql= "SELECT u.ICONO, u.USUARIO, p.TITULO, p.ID_PROD, o.VALORACION, o.MENSAJE FROM opiniones o JOIN productos p using (ID_PROD) JOIN usuarios u on u.ID_USU= o.ID_USU  WHERE p.ID_USU=$iDdb GROUP BY (p.ID_PROD)";
+                        $res = $con->query($sql);
 
-                    if (!$fila = $res->fetch_assoc()){
-                        ?>
-                        <div class="noResult">
-                            <p>Vaya... parece que no te han opinado todavía... :(</p>
-                            <img src="../../IMG/LOGOS_ERRORES/noOpinions.jpg" alt="noFound">
-                        </div>
-                        <?php
+                        if (!$fila = $res->fetch_assoc()){
+                            ?>
+                            <div class="noResult">
+                                <p>Vaya... parece que no te han opinado todavía... :(</p>
+                                <img src="../../IMG/LOGOS_ERRORES/noOpinions.jpg" alt="noFound">
+                            </div>
+                            <?php
+                        }
+
+                        else{
+                            while ($fila){
+                                ?>
+
+                                <a href="../prod.php?id_prod=<?=$fila["ID_PROD"]?>" id="opinionesRec">
+
+                                    <p><?=$fila["TITULO"]?></p>
+                                    <div>
+
+                                        <section>
+                                            <div>
+                                                <img src="data:image/jpg;base64,<?=base64_encode($fila["ICONO"])?>">
+                                                <p><?=$fila["USUARIO"]?></p>
+                                            </div>
+                                        </section>
+
+                                        <section>
+                                            <p> Val: <?=$fila["VALORACION"]?>/5</p>
+                                            <p><?=$fila["MENSAJE"]?></p>
+                                        </section>
+
+                                    </div>
+
+                                </a>
+
+                                <?php
+                                $fila= $res->fetch_assoc();
+                            }
+                        }
                     }
 
-                    else{
-                        while ($fila){
-                            ?>
-
-                            <a href="../prod.php?id_prod=<?=$fila["ID_PROD"]?>" id="opinionesRec">
-
-                                <p><?=$fila["TITULO"]?></p>
-                                <div>
-
-                                    <section>
-                                        <div>
-                                            <img src="data:image/jpg;base64,<?=base64_encode($fila["ICONO"])?>">
-                                            <p><?=$fila["USUARIO"]?></p>
-                                        </div>
-                                    </section>
-
-                                    <section>
-                                        <p> Val: <?=$fila["VALORACION"]?>/5</p>
-                                        <p><?=$fila["MENSAJE"]?></p>
-                                    </section>
-
-                                </div>
-
-                            </a>
-
-                            <?php
-                            $fila= $res->fetch_assoc();
-                        }
+                    catch (mysqli_sql_exception $e){
+                        $cod=$e ->getCode();
+                        $msgError=$e->getMessage();
+                        setcookie("error","Error $cod, $msgError");
+                        header("Location: ../../error.php");
                     }
                     ?>
                 </section>
@@ -325,4 +334,3 @@ else{
 
 
 </html>
-
