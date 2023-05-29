@@ -152,20 +152,30 @@ else{
             <canvas id="myChart"></canvas>
             <section class="datos">
                 <?php
-                $con=conexUsu();
-                $sql="SELECT USUARIO, count(ID_PROD) PRODUCTOS FROM usuarios u left outer join productos p USING (ID_USU) GROUP BY (ID_USU) ORDER BY PRODUCTOS DESC limit 3";
-                $res = $con->query($sql);
-                $fila = $res->fetch_assoc();
-                while ($fila){
-                    ?>
-                    <p>
-                        <span><?=$fila["USUARIO"]?></span>
-                        <span><?=$fila["PRODUCTOS"]?></span>
-                    </p>
-                <?php
-                    $fila=$res->fetch_assoc();
+                try{
+                    $con=conexUsu();
+                    $sql="SELECT USUARIO, count(ID_PROD) PRODUCTOS FROM usuarios u left outer join productos p USING (ID_USU) GROUP BY (ID_USU) ORDER BY PRODUCTOS DESC limit 3";
+                    $res = $con->query($sql);
+                    $fila = $res->fetch_assoc();
+                    while ($fila){
+                        ?>
+                        <p>
+                            <span><?=$fila["USUARIO"]?></span>
+                            <span><?=$fila["PRODUCTOS"]?></span>
+                        </p>
+                        <?php
+                        $fila=$res->fetch_assoc();
+                    }
+                    $con->close();
                 }
-                $con->close();
+
+                catch (mysqli_sql_exception $e){
+                    $cod=$e ->getCode();
+                    $msgError=$e->getMessage();
+                    setcookie("error","Error $cod, $msgError");
+                    header("Location: ../../error.php");
+                }
+
                 ?>
             </section>
         </div>
@@ -175,20 +185,29 @@ else{
             <canvas id="myChart2"></canvas>
             <section class="datos">
                 <?php
-                $con=conexUsu();
-                $sql="SELECT u.USUARIO, count(p.ID_USU) COMPRAS from productos p RIGHT OUTER JOIN usuarios u on p.ID_COMPRADOR = u.ID_USU GROUP BY (u.ID_USU) LIMIT 3";
-                $res = $con->query($sql);
-                $fila = $res->fetch_assoc();
-                while ($fila){
-                    ?>
-                    <p>
-                        <span><?=$fila["USUARIO"]?></span>
-                        <span><?=$fila["COMPRAS"]?></span>
-                    </p>
-                    <?php
-                    $fila=$res->fetch_assoc();
+                try {
+                    $con=conexUsu();
+                    $sql="SELECT u.USUARIO, count(p.ID_USU) COMPRAS from productos p RIGHT OUTER JOIN usuarios u on p.ID_COMPRADOR = u.ID_USU GROUP BY (u.ID_USU) LIMIT 3";
+                    $res = $con->query($sql);
+                    $fila = $res->fetch_assoc();
+                    while ($fila){
+                        ?>
+                        <p>
+                            <span><?=$fila["USUARIO"]?></span>
+                            <span><?=$fila["COMPRAS"]?></span>
+                        </p>
+                        <?php
+                        $fila=$res->fetch_assoc();
+                    }
+                    $con->close();
                 }
-                $con->close();
+
+                catch (mysqli_sql_exception $e){
+                    $cod=$e ->getCode();
+                    $msgError=$e->getMessage();
+                    setcookie("error","Error $cod, $msgError");
+                    header("Location: ../error.php");
+                }
                 ?>
             </section>
         </div>
@@ -231,41 +250,52 @@ else{
             <canvas id="myChart3"></canvas>
             <section class="datos" id="datosPersolanes">
                 <?php
-                $id=IDUSU;
-                $con= conexUsu();
-                $sql="SELECT COUNT(ID_PROD) NUM FROM productos WHERE ID_USU=$id";
-                $res= $con->query($sql);
-                $f = $con->query($sql)->fetch_assoc();
-                ?>
-                <span><?=$f["NUM"]?></span>
+                try{
+                    $id=IDUSU;
+                    $con= conexUsu();
+                    $sql="SELECT COUNT(ID_PROD) NUM FROM productos WHERE ID_USU=$id GROUP BY (ID_USU)";
+                    $res= $con->query($sql);
+                    $f = $con->query($sql)->fetch_assoc();
+                    ?>
+                    <span><?=$f["NUM"]?></span>
+                    <?php
+                    $res->close();
+                    $sql="SELECT COUNT(ID_PROD) NUM from productos where ID_COMPRADOR=$id GROUP BY (ID_COMPRADOR)";
+                    $res= $con->query($sql);
+                    $f = $con->query($sql)->fetch_assoc();
+                    ?>
+                    <span><?=$f["NUM"]?></span>
+                    <?php
+                    $res->close();
+                    $sql="SELECT COUNT(ID_PROD) NUM FROM productos p WHERE ID_USU=$id AND ID_COMPRADOR is NOT null GROUP BY (ID_USU)";
+                    $res= $con->query($sql);
+                    $f = $con->query($sql)->fetch_assoc();
+                    ?>
+                    <span><?=$f["NUM"]?></span>
+                    <?php
+                    $res->close();
+                    $sql="SELECT COUNT(ID_PROD) NUM FROM opiniones WHERE ID_USU=$id GROUP BY (ID_USU)";
+                    $res= $con->query($sql);
+                    $f = $con->query($sql)->fetch_assoc();
+                    ?>
+                    <span><?=$f["NUM"]?></span>
+                    <?php
+                    $res->close();
+                    $sql="SELECT COUNT(ID_MENSAJE) NUM FROM mensajes WHERE ID_ENVIADOR=$id GROUP BY (ID_ENVIADOR)";
+                    $res= $con->query($sql);
+                    $f = $con->query($sql)->fetch_assoc();
+                    ?>
+                    <span><?=$f["NUM"]?></span>
                 <?php
-                $res->close();
-                $sql="SELECT COUNT(ID_PROD) NUM from productos where ID_COMPRADOR=$id";
-                $res= $con->query($sql);
-                $f = $con->query($sql)->fetch_assoc();
+                }
+
+                catch (mysqli_sql_exception $e){
+                    $cod=$e ->getCode();
+                    $msgError=$e->getMessage();
+                    setcookie("error","Error $cod, $msgError");
+                    header("Location: ../error.php");
+                }
                 ?>
-                <span><?=$f["NUM"]?></span>
-                <?php
-                $res->close();
-                $sql="SELECT COUNT(ID_PROD) NUM FROM productos p WHERE ID_USU=$id AND ID_COMPRADOR is NOT null";
-                $res= $con->query($sql);
-                $f = $con->query($sql)->fetch_assoc();
-                ?>
-                <span><?=$f["NUM"]?></span>
-                <?php
-                $res->close();
-                $sql="SELECT COUNT(ID_PROD) NUM FROM opiniones WHERE ID_USU=$id";
-                $res= $con->query($sql);
-                $f = $con->query($sql)->fetch_assoc();
-                ?>
-                <span><?=$f["NUM"]?></span>
-                <?php
-                $res->close();
-                $sql="SELECT COUNT(ID_MENSAJE) NUM FROM mensajes WHERE ID_ENVIADOR=$id";
-                $res= $con->query($sql);
-                $f = $con->query($sql)->fetch_assoc();
-                ?>
-                <span><?=$f["NUM"]?></span>
             </section>
         </div>
     </section>

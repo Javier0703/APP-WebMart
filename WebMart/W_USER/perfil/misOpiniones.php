@@ -254,30 +254,40 @@ else{
 
                <section id="opiniones">
                    <?php
-                   $IDdb=IDU;
-                   $con=conexUsu();
-                   $sql= "select p.TITULO, p.ID_PROD, o.VALORACION, o.MENSAJE from productos p join opiniones o on p.ID_PROD = o.ID_PROD join usuarios u on o.ID_USU = u.ID_USU WHERE O.ID_USU=$IDdb GROUP BY (p.ID_PROD) ";
-                   $res = $con->query($sql);
+                   try{
+                       $IDdb=IDU;
+                       $con=conexUsu();
+                       $sql= "select p.TITULO, p.ID_PROD, o.VALORACION, o.MENSAJE from productos p join opiniones o on p.ID_PROD = o.ID_PROD join usuarios u on o.ID_USU = u.ID_USU WHERE O.ID_USU=$IDdb GROUP BY (p.ID_PROD)";
+                       $res = $con->query($sql);
 
-                   if (!$fila = $res->fetch_assoc()){
-                       ?>
-                       <div class="noResult">
-                           <p>Vaya... parece que no has opinado todavía... :(</p>
-                           <img src="../../IMG/LOGOS_ERRORES/noOpinions.jpg" alt="noFound">
-                       </div>
-                       <?php
-                   }
-
-                   else{
-                       while ($fila){
+                       if (!$fila = $res->fetch_assoc()){
                            ?>
+                           <div class="noResult">
+                               <p>Vaya... parece que no has opinado todavía... :(</p>
+                               <img src="../../IMG/LOGOS_ERRORES/noOpinions.jpg" alt="noFound">
+                           </div>
+                           <?php
+                       }
+
+                       else{
+                           while ($fila){
+                               ?>
                                <a href="../opinion.php?id_prod=<?=$fila["ID_PROD"]?>">
                                    <p><?=$fila["TITULO"]?></p>
                                </a>
-                   <?php
-                           $fila= $res->fetch_assoc();
+                               <?php
+                               $fila= $res->fetch_assoc();
+                           }
                        }
                    }
+
+                   catch (mysqli_sql_exception $e){
+                       $cod=$e ->getCode();
+                       $msgError=$e->getMessage();
+                       setcookie("error","Error $cod, $msgError");
+                       header("Location: ../../error.php");
+                   }
+
                    ?>
                </section>
 
