@@ -337,7 +337,124 @@ footer table td:first-child{
     width: 500px;
 }
 
+/* informacion y contacto  */
 
+#info, #mContacto{
+    position: relative;
+    background: #eaeaea;
+}
+
+#info>section, #mContacto>section{
+    margin: auto;
+    width: 1200px;
+    max-width: 95%;
+}
+
+#info>.sInfo1, .cSection1{
+    text-align: center;
+    padding: 25px 0 10px 0;
+    font-size: 22px;
+}
+
+#info>.box{
+    border-radius: 10px;
+    margin-top: 15px;
+    background: white;
+    padding: 10px;
+    max-width: calc(95% - 20px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+#info>.box p:first-child{
+    text-align: center;
+    padding: 5px 0;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#info>.sInfo2 p{
+    text-align: justify;
+}
+
+#info>.sInfo3{
+    position: relative;
+}
+
+#info>.sInfo3 img{
+    width: 100%;
+}
+
+.cSection2{
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.cSection3 p:first-child{
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 5px 0;
+}
+
+.cSection3 p.info{
+    text-align: center;
+}
+
+.cSection3{
+    border-radius: 10px;
+    padding: 10px 20px;
+    position: relative;
+    background: white;
+    max-width: calc(95% - 50px)!important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.cSection3 input{
+    outline: none;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    padding: 6px;
+    width: calc(100% - 12px);
+}
+
+.cSection3 textarea{
+    outline: none;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    padding: 10px;
+    resize: none;
+    width: calc(100% - 20px);
+}
+
+.cSection3 div{
+    text-align: center;
+}
+
+.cSection3 button{
+    cursor: pointer;
+    outline:none;
+    border: none;
+    color: white;
+    border-radius: 15px;
+    background: #00adec;
+    height: 30px;
+    width: 120px;
+    max-width: 95%;
+}
+
+.cSection3 button:hover{
+    transition: .25s;
+    background: #2e3094;
+    font-weight: bold;
+}
+
+.cSection3 input:focus-within, .cSection3 textarea:focus-within {
+    border: 1px solid #00adec;
+}
+
+.elementNull{
+    border: 1px solid red !important;
+}
 /* Media query */
 
 

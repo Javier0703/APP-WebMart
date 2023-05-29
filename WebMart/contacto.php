@@ -27,7 +27,28 @@
 
 </header>
 
-<main>
+<main id="mContacto">
+
+    <section class="cSection1">
+        <p>Contacto</p>
+    </section>
+
+    <section class="cSection2">
+        <p>Puedes ponerte en contacto para lo que sea mediante nuestro correo <b>appwebmart@gmail.com</b></p>
+    </section>
+
+    <section class="cSection3">
+        <p>Credenciales olvidadas</p>
+        <p class="info">Genera un correo con los máximos detalles posibles, para ver si podemos ayudarte</p><br>
+        <label for="titleEmail">Asunto</label><br>
+        <input type="text" id="titleEmail" placeholder="Asunto destacado"><br><br>
+        <label for="descEmail">Descripción</label><br>
+        <textarea id="descEmail" rows="10" placeholder="Detalla lo máximo posible..."></textarea>
+        <div>
+            <button id="generateEmail">Generar</button>
+        </div>
+    </section>
+
 </main>
 
 <footer>
@@ -43,4 +64,5 @@
 </footer>
 </body>
 <script src="JS/openMenu.js"></script>
+<script src="JS/generateEmail.js"></script>
 </html>

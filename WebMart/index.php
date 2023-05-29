@@ -80,7 +80,7 @@ if (isset($_COOKIE["msg"])) {
                         <input type="password" name="pass" id="pass">
                     </div>
                 </div>
-                <a href="#">¿No te acuerdas?</a><br>
+                <a href="contacto.php">¿No te acuerdas?</a><br>
                 <input type="checkbox" name="sesion" id="sesion"> Mantener la sesión iniciada. <br>
                 <section>
                     <button id="incSes">Iniciar Sesión</button>
