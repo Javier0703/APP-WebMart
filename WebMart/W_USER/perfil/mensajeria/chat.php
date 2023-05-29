@@ -325,7 +325,7 @@ if ($nR == 0){
 
                 $sql = "select f.FOTO, p.TITULO, c.ID_CHAT, u.USUARIO DUEÑO_PRODUCTO, c.ID_PROD, c.ULTIMA_CONEX_PROD, u2.USUARIO SOLICITANTE, c.ID_USU, c.ULTIMA_CONEX_USU, 
                         p.ID_COMPRADOR FROM chats c JOIN productos p on c.ID_PROD=p.ID_PROD JOIN usuarios u on p.ID_USU=u.ID_USU 
-                        join usuarios u2 on c.ID_USU=u2.ID_USU JOIN fotos f on p.ID_PROD=f.ID_PROD WHERE ID_CHAT=$chat GROUP BY ID_CHAT";
+                        join usuarios u2 on c.ID_USU=u2.ID_USU JOIN fotos f on p.ID_PROD=f.ID_PROD WHERE ID_CHAT=$chat GROUP BY (ID_CHAT)";
                 $fila = $con->query($sql)->fetch_assoc();
 
                 //Linea divisoria, o eres propietario del producto o buscas comprarlo

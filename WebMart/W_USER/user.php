@@ -287,7 +287,7 @@ if (!$f){
         <section>
             <?php
             $idUsu=$_GET["id_usu"];
-            $sql = "select f.FOTO, p.titulo, u.USUARIO, o.VALORACION, o.MENSAJE from fotos f join productos p on f.ID_PROD = p.ID_PROD join opiniones o on p.ID_PROD = o.ID_PROD join usuarios u on o.ID_USU = u.ID_USU WHERE p.ID_USU=$idUsu group by p.ID_PROD";
+            $sql = "select f.FOTO, p.titulo, u.USUARIO, o.VALORACION, o.MENSAJE from fotos f join productos p on f.ID_PROD = p.ID_PROD join opiniones o on p.ID_PROD = o.ID_PROD join usuarios u on o.ID_USU = u.ID_USU WHERE p.ID_USU=$idUsu GROUP BY (p.ID_PROD)";
             $res = $con->query($sql);
             if (!$fila = $res->fetch_assoc()){
                 ?>

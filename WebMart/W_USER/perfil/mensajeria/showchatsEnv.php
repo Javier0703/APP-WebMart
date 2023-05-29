@@ -81,8 +81,8 @@ else{
                     $idSes = IDUSU;
                     $sql = "SELECT f.FOTO, p.TITULO, c.ID_CHAT, c.ID_PROD, c.ID_USU, c.ULTIMA_CONEX_USU, c.ULTIMA_CONEX_PROD, m.ID_MENSAJE, m.MENSAJE, m.ID_ENVIADOR, m.HORA
                     FROM chats c LEFT JOIN mensajes m ON c.ID_CHAT = m.ID_CHAT JOIN productos p ON c.ID_PROD = p.ID_PROD JOIN fotos f ON p.ID_PROD = f.ID_PROD
-                    WHERE c.ID_USU = $idSes AND (m.ID_MENSAJE IN (SELECT MAX(ID_MENSAJE) from mensajes WHERE m.ID_CHAT=c.ID_CHAT GROUP BY ID_CHAT) OR m.ID_CHAT IS NULL)
-                    GROUP BY c.ID_CHAT
+                    WHERE c.ID_USU = $idSes AND (m.ID_MENSAJE IN (SELECT MAX(ID_MENSAJE) from mensajes WHERE m.ID_CHAT=c.ID_CHAT GROUP BY (ID_CHAT)) OR m.ID_CHAT IS NULL)
+                    GROUP BY (c.ID_CHAT)
                     ORDER BY m.HORA desc";
                     $res= $con->query($sql);
                     $nR = $res->num_rows;

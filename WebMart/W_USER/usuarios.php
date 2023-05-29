@@ -177,10 +177,10 @@ if (isset($_GET["usu"])){
                 $str= $_GET["usu"];
                 $char = str_split($str);
                 $regexp = implode(".*", $char);
-                $sql="SELECT ID_USU, ICONO, USUARIO, count(TITULO) PRODS FROM usuarios u left join productos p using (id_usu) where USUARIO REGEXP '$regexp' and USUARIO!='$usu' group by USUARIO";
+                $sql="SELECT ID_USU, ICONO, USUARIO, count(TITULO) PRODS FROM usuarios u left join productos p using (id_usu) where USUARIO REGEXP '$regexp' and USUARIO!='$usu' GROUP BY (USUARIO)";
             }
             else{
-                $sql="SELECT ID_USU, ICONO, USUARIO, count(TITULO) PRODS FROM usuarios u left join productos p using (id_usu) where USUARIO!='$usu' group by USUARIO";
+                $sql="SELECT ID_USU, ICONO, USUARIO, count(TITULO) PRODS FROM usuarios u left join productos p using (id_usu) where USUARIO!='$usu' GROUP BY (USUARIO)";
             }
             $res= $con->query($sql);
             $fila= $res->fetch_assoc();

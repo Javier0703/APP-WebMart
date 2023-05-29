@@ -174,7 +174,7 @@ if (!$fila = $st->fetch()){
     <section class="producto">
         <?php
         $con=conexUsu();
-        $sql="SELECT TITULO, FOTO FROM productos JOIN FOTOS USING (ID_PROD) WHERE ID_PROD=$prod GROUP BY ID_PROD";
+        $sql="SELECT TITULO, FOTO FROM productos JOIN FOTOS USING (ID_PROD) WHERE ID_PROD=$prod GROUP BY (ID_PROD)";
         $res= $con->query($sql);
         $fila = $res->fetch_assoc();
         echo '<div><img src="data:image/jpg;base64,'.base64_encode($fila["FOTO"]).'"></div>';

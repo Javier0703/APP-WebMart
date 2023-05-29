@@ -444,7 +444,7 @@ if (isset($_GET["order"]) && ($_GET["order"]>4 || $_GET["order"]<1)){
             $sql=$sql." AND ID_SUB=$p";
         }
 
-        $sql=$sql." GROUP BY ID_PROD";
+        $sql=$sql." GROUP BY (ID_PROD)";
 
         if (isset($_GET["order"]) && $_GET["order"]==1){
             $sql=$sql." ORDER BY FECHA_SUBIDA DESC";

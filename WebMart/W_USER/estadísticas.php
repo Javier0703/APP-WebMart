@@ -153,7 +153,7 @@ else{
             <section class="datos">
                 <?php
                 $con=conexUsu();
-                $sql="SELECT USUARIO, count(ID_PROD) PRODUCTOS FROM usuarios u left outer join productos p USING (ID_USU) GROUP BY ID_USU ORDER BY PRODUCTOS DESC limit 3";
+                $sql="SELECT USUARIO, count(ID_PROD) PRODUCTOS FROM usuarios u left outer join productos p USING (ID_USU) GROUP BY (ID_USU) ORDER BY PRODUCTOS DESC limit 3";
                 $res = $con->query($sql);
                 $fila = $res->fetch_assoc();
                 while ($fila){
@@ -176,7 +176,7 @@ else{
             <section class="datos">
                 <?php
                 $con=conexUsu();
-                $sql="SELECT u.USUARIO, count(p.ID_USU) COMPRAS from productos p RIGHT OUTER JOIN usuarios u on p.ID_COMPRADOR = u.ID_USU GROUP BY u.ID_USU LIMIT 3";
+                $sql="SELECT u.USUARIO, count(p.ID_USU) COMPRAS from productos p RIGHT OUTER JOIN usuarios u on p.ID_COMPRADOR = u.ID_USU GROUP BY (u.ID_USU) LIMIT 3";
                 $res = $con->query($sql);
                 $fila = $res->fetch_assoc();
                 while ($fila){

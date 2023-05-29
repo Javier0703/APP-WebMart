@@ -304,7 +304,7 @@ else{
                     <section class="solicitudes">
                         <?php
                         $idSes = IDUSU;
-                        $sql="SELECT f.FOTO, p.ID_USU USU_PROPIETARIO, p.TITULO, r.ID_PROD P_RES FROM reservas r join productos p using (ID_PROD) join fotos f on p.ID_PROD = f.ID_PROD WHERE p.ID_USU=$idSes GROUP BY p.ID_PROD;";
+                        $sql="SELECT f.FOTO, p.ID_USU USU_PROPIETARIO, p.TITULO, r.ID_PROD P_RES FROM reservas r join productos p using (ID_PROD) join fotos f on p.ID_PROD = f.ID_PROD WHERE p.ID_USU=$idSes GROUP BY (p.ID_PROD)";
                         $res = $con->query($sql);
                         if (!$fila = $res->fetch_assoc()){
                             ?>

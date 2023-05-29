@@ -256,7 +256,7 @@ else{
                     <?php
                     $iDdb=IDU;
                     $con=conexUsu();
-                    $sql= "SELECT u.ICONO, u.USUARIO, p.TITULO, p.ID_PROD, VALORACION, MENSAJE FROM opiniones o JOIN productos p using (ID_PROD) JOIN usuarios u on u.ID_USU= o.ID_USU  WHERE P.ID_USU=$iDdb group by p.ID_PROD";
+                    $sql= "SELECT u.ICONO, u.USUARIO, p.TITULO, p.ID_PROD, VALORACION, MENSAJE FROM opiniones o JOIN productos p using (ID_PROD) JOIN usuarios u on u.ID_USU= o.ID_USU  WHERE P.ID_USU=$iDdb GROUP BY (p.ID_PROD)";
                     $res = $con->query($sql);
 
                     if (!$fila = $res->fetch_assoc()){
