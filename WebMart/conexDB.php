@@ -7,7 +7,7 @@ function conexAdmin(){
     $host="localhost";
     $usu="WEBMARTADMIN";
     $pass="12345+WebMartAdmin";
-    $db="webmart";
+    $db="WEBMART";
 
     try{
         $con=new mysqli("$host","$usu","$pass","$db");
@@ -22,7 +22,7 @@ function conexUsu(){
     $host="localhost";
     $usu="WEBMARTUSER";
     $pass="12345+WebMartUser";
-    $db="webmart";
+    $db="WEBMART";
 
     try{
         $con=new mysqli("$host","$usu","$pass","$db");
