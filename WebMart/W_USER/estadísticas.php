@@ -154,7 +154,7 @@ else{
                 <?php
                 try{
                     $con=conexUsu();
-                    $sql="SELECT u.USUARIO, count(p.ID_PROD) AS PRODUCTOS FROM usuarios u left outer join productos p USING (ID_USU) GROUP BY (p.ID_USU) ORDER BY PRODUCTOS DESC limit 3";
+                    $sql="SELECT u.USUARIO, COUNT(p.ID_PROD) AS PRODUCTOS FROM usuarios u LEFT OUTER JOIN productos p USING (ID_USU) GROUP BY (p.ID_USU) ORDER BY PRODUCTOS DESC LIMIT 3";
                     $res = $con->query($sql);
                     $fila = $res->fetch_assoc();
                     while ($fila){
