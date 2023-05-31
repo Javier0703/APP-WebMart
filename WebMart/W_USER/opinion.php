@@ -100,6 +100,8 @@ if (!$fila = $st->fetch()){
     $con->close();
     header("Location: perfil/misOpiniones.php");
 }
+
+$con->close();
 ?>
 
 <!doctype html>
@@ -174,7 +176,7 @@ if (!$fila = $st->fetch()){
     <section class="producto">
         <?php
         $con=conexUsu();
-        $sql="SELECT TITULO, FOTO FROM productos JOIN FOTOS USING (ID_PROD) WHERE ID_PROD=$prod GROUP BY (ID_PROD)";
+        $sql="SELECT TITULO, FOTO FROM productos JOIN fotos USING (ID_PROD) WHERE ID_PROD=$prod GROUP BY (ID_PROD)";
         $res= $con->query($sql);
         $fila = $res->fetch_assoc();
         echo '<div><img src="data:image/jpg;base64,'.base64_encode($fila["FOTO"]).'"></div>';
@@ -185,7 +187,7 @@ if (!$fila = $st->fetch()){
     <section class="info">
         <form action="modifOpinion.php" method="POST">
             <?php
-            $sql="SELECT p.ID_PROD, VALORACION, MENSAJE  from productos p left outer join opiniones o using (ID_PROD) where p.ID_PROD=$prod";
+            $sql="SELECT p.ID_PROD, o.VALORACION, o.MENSAJE  from productos p left outer join opiniones o using (ID_PROD) where p.ID_PROD=$prod";
             $res = $con->query($sql);
             $fila = $res->fetch_assoc();
             ?>
