@@ -100,6 +100,8 @@ if (!$fila = $st->fetch()){
     $con->close();
     header("Location: perfil/misOpiniones.php");
 }
+
+$con->close();
 ?>
 
 <!doctype html>
@@ -153,9 +155,9 @@ if (!$fila = $st->fetch()){
                 <section><a href="perfil/productos.php"><span class="material-symbols-outlined">sell</span><p>Productos</p></a></section>
                 <section><a href="perfil/compras.php"><span class="material-symbols-outlined">shopping_cart</span><p>Compras</p></a></section>
                 <section><a href="perfil/favoritos.php"><span class="material-symbols-outlined">favorite</span><p>Favoritos</p></a></section>
-                <section><a href="perfil/favoritos.php"><span class="material-symbols-outlined">rate_review</span><p>Mis Opiniones</p></a></section>
-                <section><a href="perfil/favoritos.php"><span class="material-symbols-outlined">edit_note</span><p>Opiniones</p></a></section>
-                <section><a href="perfil/favoritos.php"><span class="material-symbols-outlined">bookmarks</span><p>Reservas</p></a></section>
+                <section><a href="perfil/misOpiniones.php"><span class="material-symbols-outlined">rate_review</span><p>Mis Opiniones</p></a></section>
+                <section><a href="perfil/opiniones.php"><span class="material-symbols-outlined">edit_note</span><p>Opiniones</p></a></section>
+                <section><a href="perfil/reservas.php"><span class="material-symbols-outlined">bookmarks</span><p>Reservas</p></a></section>
                 <section><a href="perfil/mensajeria/mensajes.php"><span class="material-symbols-outlined">chat</span><p>Mensajes</p></a></section>
                 <section><a href="../cierre.php"><span class="material-symbols-outlined">logout</span><p>Cerrar Sesión</p></a></section>
             </div>
@@ -174,7 +176,7 @@ if (!$fila = $st->fetch()){
     <section class="producto">
         <?php
         $con=conexUsu();
-        $sql="SELECT TITULO, FOTO FROM productos JOIN FOTOS USING (ID_PROD) WHERE ID_PROD=$prod GROUP BY (ID_PROD)";
+        $sql="SELECT TITULO, FOTO FROM productos JOIN fotos USING (ID_PROD) WHERE ID_PROD=$prod GROUP BY (ID_PROD)";
         $res= $con->query($sql);
         $fila = $res->fetch_assoc();
         echo '<div><img src="data:image/jpg;base64,'.base64_encode($fila["FOTO"]).'"></div>';
@@ -185,7 +187,7 @@ if (!$fila = $st->fetch()){
     <section class="info">
         <form action="modifOpinion.php" method="POST">
             <?php
-            $sql="SELECT p.ID_PROD, VALORACION, MENSAJE  from productos p left outer join opiniones o using (ID_PROD) where p.ID_PROD=$prod";
+            $sql="SELECT p.ID_PROD, o.VALORACION, o.MENSAJE  from productos p left outer join opiniones o using (ID_PROD) where p.ID_PROD=$prod";
             $res = $con->query($sql);
             $fila = $res->fetch_assoc();
             ?>

@@ -1,5 +1,12 @@
 window.addEventListener("DOMContentLoaded",function (e){
 
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+
     let secLog= document.getElementById("login");
     let secReg= document.getElementById("registro");
     let pReg = document.getElementById("pReg");
@@ -26,6 +33,7 @@ window.addEventListener("DOMContentLoaded",function (e){
             event.preventDefault();
             nuevaP.textContent="Contraseña vacía";
             pass.parentElement.classList.add("colorRed");
+            scrollToTop();
         }
 
         else{
@@ -34,6 +42,7 @@ window.addEventListener("DOMContentLoaded",function (e){
                 event.preventDefault();
                 nuevaP.textContent="La contraseña debe tener mayúsculas, minúsculas, y números (8 caracteres mínimo)";
                 pass.parentElement.classList.add("colorOrange");
+                scrollToTop();
             }
         }
 
@@ -41,6 +50,7 @@ window.addEventListener("DOMContentLoaded",function (e){
             event.preventDefault();
             usu.parentElement.classList.add("colorRed");
             nuevaP.textContent="Usuario se encuentra incompleto";
+            scrollToTop();
         }
 
         else{
@@ -55,6 +65,7 @@ window.addEventListener("DOMContentLoaded",function (e){
                 event.preventDefault();
                 usu.parentElement.classList.add("colorOrange");
                 nuevaP.textContent="Se permiten mayúsculas, minúsculas, números y _ (de 5 a 30 caracteres para el usuario) y el correo hasta 40 caracteres";
+                scrollToTop();
             }
         }
 
@@ -62,6 +73,7 @@ window.addEventListener("DOMContentLoaded",function (e){
             usu.parentElement.classList.add("colorRed");
             pass.parentElement.classList.add("colorRed");
             nuevaP.textContent="Usuario y contraseña incompletos";
+            scrollToTop();
         }
 
     });
@@ -76,6 +88,7 @@ window.addEventListener("DOMContentLoaded",function (e){
             passR.parentElement.classList.add("colorRed");
             passR2.parentElement.classList.add("colorRed");
             nuevaP.textContent="Alguna contraseña está incompleta";
+            scrollToTop();
         }
 
         else{
@@ -85,6 +98,7 @@ window.addEventListener("DOMContentLoaded",function (e){
                 passR.parentElement.classList.add("colorOrange");
                 passR2.parentElement.classList.add("colorOrange");
                 nuevaP.textContent="La contraseña debe tener mayúsculas, minúsculas, y números (8 caracteres mínimo)";
+                scrollToTop();
             }
         }
 
@@ -100,6 +114,7 @@ window.addEventListener("DOMContentLoaded",function (e){
                 event.preventDefault();
                 usuR.parentElement.classList.add("colorOrange");
                 nuevaP.textContent="El usuario solo puede tener mayúsculas, minúsculas, números y _ y de 5 a 30 caracteres";
+                scrollToTop();
 
             }
         }
@@ -110,6 +125,7 @@ window.addEventListener("DOMContentLoaded",function (e){
             passR.parentElement.classList.add("colorRed");
             passR2.parentElement.classList.add("colorRed");
             nuevaP.textContent="Las contraseñas son distintas";
+            scrollToTop();
         }
 
         if (usuR.value.trim().length === 0 && passR.value.trim().length === 0){
@@ -117,6 +133,7 @@ window.addEventListener("DOMContentLoaded",function (e){
             passR.parentElement.classList.add("colorRed");
             passR2.parentElement.classList.add("colorRed");
             nuevaP.textContent="Usuario y contraseña incompletos";
+            scrollToTop();
         }
 
     });
